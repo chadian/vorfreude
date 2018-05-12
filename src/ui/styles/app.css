@@ -1,8 +1,21 @@
+@font-face {
+  font-family: 'Questrial';
+  src: url('./fonts/Questrial-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'FredokaOne';
+  src: url('./fonts/FredokaOne-Regular.ttf') format('truetype');
+}
+
+
 html {
   background-color: #fff;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+
+  font-family: 'Questrial';
 }
 
 html, body, #app {
@@ -18,4 +31,5 @@ html, body, #app {
 .CountdownTimer {
   margin: auto;
   font-size: 4vw;
+  padding-bottom: 1em;
 }

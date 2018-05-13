@@ -3,7 +3,6 @@ import { DateTime, Interval } from 'luxon';
 
 const UPDATE_INTERVAL_IN_MS = 500;
 export default class CountdownTimer extends Component {
-
   @tracked
   time = ""
   _intervalId = null

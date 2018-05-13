@@ -3,7 +3,8 @@
 module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'vorfreude',
-    environment
+    environment,
+    FLICKR_API_KEY: process.env.FLICKR_API_KEY
   };
 
   return ENV;

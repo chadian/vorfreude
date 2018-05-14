@@ -1,2 +1,6 @@
-<CountdownTimer @end={{end}} />
-<WallpaperFetcher />
+{{#unless showSettings}}
+  <CountdownTimer @end={{end}} />
+  <WallpaperFetcher />
+{{else}}
+  <Settings />
+{{/unless}}

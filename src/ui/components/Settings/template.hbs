@@ -1,0 +1,58 @@
+<div class="Settings">
+  <div class="Settings__validiation">
+    {{#unless constructedDate.isValid}}
+      There's an issue with your date, please take a second look.
+    {{/unless}}
+  </div>
+  <form class="Settings__form" onsubmit={{action saveSettings}}>
+    <label>
+      <div class="Settings__heading">
+        Image search terms
+      </div>
+      <input type="text" onchange={{action setSettingFromEvent 'searchTerms'}} value={{settings.searchTerms}}/>
+    </label>
+
+    <label>
+      <div class="Settings__heading">
+        Countdown message
+      </div>
+      <input type="text" onchange={{action setSettingFromEvent 'countdownMessage'}} value={{settings.countdownMessage}}/>
+    </label>
+
+    <div class="Settings__heading">
+      Countdown to
+    </div>
+
+    <section class="Settings_date">
+      <div class="Settings_date-inputs">
+        <label>
+          <input type="number" max="31" onchange={{action setSettingFromEvent 'date.day'}} value={{settings.date.day}}/>
+          Day
+        </label>
+
+        <label>
+          <input type="number" max="12" onchange={{action setSettingFromEvent 'date.month'}} value={{settings.date.month}}/>
+          Month
+        </label>
+
+        <label>
+          <input type="number" max="2100" onchange={{action setSettingFromEvent 'date.year'}} value={{settings.date.year}}/>
+          Year
+        </label>
+
+        <label>
+          <input type="number" max="24" onchange={{action setSettingFromEvent 'date.hour'}} value={{settings.date.hour}}/>
+          Hour
+        </label>
+
+        <label>
+          <input type="number" max="59" onchange={{action setSettingFromEvent 'date.minute'}} value={{settings.date.minute}}/>
+          Minute
+        </label>
+      </div>
+      <em>Please use a 24-hour time format</em>
+    </section>
+
+    <button type="submit">Save</button>
+  </form>
+</div>

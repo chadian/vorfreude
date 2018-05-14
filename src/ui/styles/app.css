@@ -14,7 +14,7 @@ html {
 }
 
 /* keep everything at full width and height */
-html, body, #app, .WallpaperFetcher, .WallpaperFetcher__wallpaper {
+html, body, #app, .WallpaperFetcher {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -41,4 +41,49 @@ html, body, #app, .WallpaperFetcher, .WallpaperFetcher__wallpaper {
 
   position: absolute;
   z-index: -1;
+}
+
+.Settings {
+  font-family: 'Helvetica';
+  margin-left: auto;
+  margin-right: auto;
+  width: 75vw;
+  min-width: 750px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Settings__form > *:not(:first-child) {
+  display: block;
+  margin-top: 1rem;
+}
+
+.Settings input[type=text] {
+  display: block;
+  flex: none;
+  width: 100%;
+  max-width: 15rem;
+}
+
+.Settings__heading {
+  font-weight: bold;
+}
+
+.Settings_date {
+  display: block;
+}
+
+.Settings_date label {
+  display: inline-flex;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Settings_date input {
+  margin-bottom: 0.5rem;
+  width: 4em;
 }

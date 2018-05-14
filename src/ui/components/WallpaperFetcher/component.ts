@@ -8,7 +8,6 @@ const flickr = new Flickr(FLICKR_API_KEY);
 export default class WallpaperFetcher extends Component {
   didInsertElement() {
     this.fetchPhotoUrl().then(url => {
-      console.log(url);
       this.bounds.firstNode.style.backgroundImage = `url(${url})`;
     });
   }

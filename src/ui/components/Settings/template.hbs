@@ -19,11 +19,10 @@
       <input type="text" onchange={{action setSettingFromEvent 'countdownMessage'}} value={{settings.countdownMessage}}/>
     </label>
 
-    <div class="Settings__heading">
-      Countdown to
-    </div>
-
     <section class="Settings_date">
+      <div class="Settings__heading">
+        Countdown to
+      </div>
       <div class="Settings_date-inputs">
         <label>
           <input type="number" max="31" onchange={{action setSettingFromEvent 'date.day'}} value={{settings.date.day}}/>
@@ -42,7 +41,7 @@
 
         <label>
           <input type="number" max="24" onchange={{action setSettingFromEvent 'date.hour'}} value={{settings.date.hour}}/>
-          Hour
+          Hour*
         </label>
 
         <label>
@@ -50,7 +49,7 @@
           Minute
         </label>
       </div>
-      <em>Please use a 24-hour time format</em>
+      <em class="Settings__note">* Please use a 24-hour format</em>
     </section>
 
     <button type="submit">Save</button>

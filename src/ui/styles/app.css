@@ -69,10 +69,13 @@ html, body, #app, .WallpaperFetcher {
 
 .Settings__heading {
   font-weight: bold;
+  margin-bottom: 0.25rem;
 }
 
-.Settings_date {
+.Settings__note {
   display: block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
 }
 
 .Settings_date label {
@@ -81,6 +84,10 @@ html, body, #app, .WallpaperFetcher {
   margin-right: 1rem;
   flex-direction: column;
   align-items: center;
+}
+
+.Settings_date label:first-child {
+  margin-left: 0;
 }
 
 .Settings_date input {

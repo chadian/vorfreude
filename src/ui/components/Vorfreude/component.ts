@@ -1,4 +1,5 @@
 import Component, { tracked } from '@glimmer/component';
+import { load } from '../../../utils/lib/settings';
 
 const SETTINGS_URL_HASH = "#settings";
 export default class Vorfreude extends Component {
@@ -11,13 +12,12 @@ export default class Vorfreude extends Component {
   @tracked
   showSettings = false
 
-  end = {
-    day: 20,
-    month: 5,
-    year: 2018,
-    hour: 20,
-    minute: 20,
-    second: 20,
+  @tracked
+  settings = {}
+
+  didInsertElement() {
+    load()
+      .then(settings => this.settings = settings);
   }
 
   handleRouting() {

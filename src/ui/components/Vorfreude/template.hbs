@@ -1,6 +1,9 @@
 {{#unless showSettings}}
-  <CountdownTimer @end={{end}} />
-  <WallpaperFetcher />
+  {{#if settings.countdownMessage}}
+    <div class="Vorfreude__countdown-message">{{settings.countdownMessage}}</div>
+  {{/if}}
+  <CountdownTimer @end={{settings.date}} />
+  <WallpaperFetcher @searchTerms={{settings.searchTerms}} />
 {{else}}
   <Settings />
 {{/unless}}

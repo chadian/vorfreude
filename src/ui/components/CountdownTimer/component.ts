@@ -5,11 +5,13 @@ const UPDATE_INTERVAL_IN_MS = 500;
 export default class CountdownTimer extends Component {
   @tracked
   time = ""
+
   _intervalId = null
 
   static formatInterval(interval) {
     const formatted = interval.toDuration(['days', 'hours', 'minutes', 'seconds']).toObject();
     formatted.seconds = Math.floor(formatted.seconds);
+
     return formatted;
   }
 

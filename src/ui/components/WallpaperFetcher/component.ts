@@ -6,16 +6,24 @@ const { FLICKR_API_KEY } = env;
 const flickr = new Flickr(FLICKR_API_KEY);
 
 export default class WallpaperFetcher extends Component {
-  didInsertElement() {
-    this.fetchPhotoUrl().then(url => {
-      this.bounds.firstNode.style.backgroundImage = `url(${url})`;
-    });
+  // there is no `didReceieveAttrs` or `didReceiveArgs` hook
+  // so this hack will track changes to args and be called
+  @tracked("args")
+  get didReceiveArgs() {
+    const { searchTerms } = this.args;
+
+    if (searchTerms) {
+      this.fetchPhotoUrl(this.args.searchTerms)
+        .then(url => this.bounds.firstNode.style.backgroundImage = `url(${url})`);
+    }
+
+    return "";
   }
 
-  fetchPhotoUrl = async function() {
+  fetchPhotoUrl = async function(searchTerms) {
     const result = await flickr.photos.search({
       safe_search: "1",
-      text: "Canadian Rockies",
+      text: searchTerms,
       privacy_filter: "1",
       sort: "interestingness-desc",
       per_page: "500",

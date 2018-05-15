@@ -16,17 +16,19 @@ export default class CountdownTimer extends Component {
   }
 
   didInsertElement() {
-    const { formatInterval } = CountdownTimer;
-
-    this._intervalId = setInterval(
-      () => this.time = formatInterval(this.currentInterval())
-      , UPDATE_INTERVAL_IN_MS
-    );
+    this._intervalId = setInterval(() => this.updateTime(), UPDATE_INTERVAL_IN_MS);
+    this.updateTime();
   }
 
-  currentInterval() {
-    const end = DateTime.fromObject(this.args.end);
-    return Interval.fromDateTimes(DateTime.local(), end);
+  updateTime() {
+    const { formatInterval } = CountdownTimer;
+    let endValue = this.args.end;
+
+    if (endValue) {
+      const end = DateTime.fromObject(endValue);
+      const interval = Interval.fromDateTimes(DateTime.local(), end);
+      this.time = formatInterval(interval);
+    }
   }
 
   willDestroy() {

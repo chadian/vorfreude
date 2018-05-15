@@ -15,9 +15,14 @@ export default class Vorfreude extends Component {
   @tracked
   settings = {}
 
+  _refreshWallpaper = null
+
+  refreshWallpaperPassback = (refreshWallpaper) => {
+    this._refreshWallpaper = refreshWallpaper;
+  }
+
   didInsertElement() {
-    load()
-      .then(settings => this.settings = settings);
+    load().then(settings => this.settings = settings);
   }
 
   handleRouting() {
@@ -26,6 +31,12 @@ export default class Vorfreude extends Component {
       this.showSettings = true;
     } else {
       this.showSettings = false;
+    }
+  }
+
+  refreshWallpaper() {
+    if (typeof this._refreshWallpaper === "function") {
+      this._refreshWallpaper();
     }
   }
 }

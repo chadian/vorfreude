@@ -67,6 +67,49 @@ html, body, #app, .WallpaperFetcher {
   align-items: center;
 }
 
+.Vorfreude__refresh-wallpaper,
+.Settings__close,
+.Vorfreude__show-settings {
+  /* INITIAL OPACITY */
+  opacity: 0.3;
+
+  display: block;
+  position: fixed;
+  height: 2em;
+  line-height: 2em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+
+.Vorfreude__refresh-wallpaper {
+  top: 3vw;
+  left: 3vw;
+}
+
+.Settings__close,
+.Vorfreude__show-settings {
+  top: 3vw;
+  right: 3vw;
+}
+.Vorfreude__refresh-wallpaper:hover,
+.Settings__close:hover,
+.Vorfreude__show-settings:hover {
+  /* HOVER OPACITY */
+  opacity: 0.9;
+}
+
+.Vorfreude__refresh-wallpaper-symbol,
+.Settings__close-symbol,
+.Vorfreude__show-settings-symbol {
+  position: relative;
+  bottom: -2px;
+}
+
 .Settings__form > *:not(:first-child) {
   display: block;
   margin-top: 1rem;

@@ -1,5 +1,6 @@
 import Component, { tracked } from "@glimmer/component";
 import Flickr from "flickr-sdk/flickr-sdk";
+import { take } from "ramda";
 import env from "../../../../config/environment";
 
 const { FLICKR_API_KEY } = env;
@@ -10,14 +11,18 @@ export default class WallpaperFetcher extends Component {
   // so this hack will track changes to args and be called
   @tracked("args")
   get didReceiveArgs() {
-    const { searchTerms } = this.args;
-
-    if (searchTerms) {
-      this.fetchPhotoUrl(this.args.searchTerms)
-        .then(url => this.bounds.firstNode.style.backgroundImage = `url(${url})`);
-    }
+    const { refreshPassback } = this.args;
+    refreshPassback(() => this.setWallpaper());
+    this.setWallpaper();
 
     return "";
+  }
+
+  setWallpaper() {
+    const { searchTerms } = this.args;
+    if (searchTerms) {
+      this.fetchPhotoUrl(this.args.searchTerms).then(url => (this.bounds.firstNode.style.backgroundImage = `url(${url})`));
+    }
   }
 
   fetchPhotoUrl = async function(searchTerms) {
@@ -32,11 +37,25 @@ export default class WallpaperFetcher extends Component {
 
     const photos = result.body.photos.photo || [];
 
-    return result.body.photos.photo
+    const photoUrls = result.body.photos.photo
       .map(photo => {
         const { farm, server, id, secret } = photo;
         return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_b.jpg`;
-      })
-      .pop();
+      });
+
+    return take(50, shuffle(photoUrls)).pop();
   }
+}
+
+const shuffle = function(list) {
+  var idx = -1;
+  var len = list.length;
+  var position;
+  var result = [];
+  while (++idx < len) {
+    position = Math.floor((idx + 1) * Math.random());
+    result[idx] = result[position];
+    result[position] = list[idx];
+  }
+  return result;
 }

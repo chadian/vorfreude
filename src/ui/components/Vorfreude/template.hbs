@@ -1,9 +1,18 @@
 {{#unless showSettings}}
+  <div class="Vorfreude__refresh-wallpaper" onclick={{action refreshWallpaper}}>
+    <span class="Vorfreude__refresh-wallpaper-symbol">🆕 Refresh Photo</span>
+  </div>
+  <a class="Vorfreude__show-settings" href="#settings">
+    <span class="Vorfreude__show-settings-symbol">🔧</span>
+    Settings
+    </a>
+
   {{#if settings.countdownMessage}}
     <div class="Vorfreude__countdown-message">{{settings.countdownMessage}}</div>
   {{/if}}
+
   <CountdownTimer @end={{settings.date}} />
-  <WallpaperFetcher @searchTerms={{settings.searchTerms}} />
+  <WallpaperFetcher @searchTerms={{settings.searchTerms}} @refreshPassback={{refreshWallpaperPassback}} />
 {{else}}
   <Settings />
 {{/unless}}

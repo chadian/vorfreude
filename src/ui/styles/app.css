@@ -122,6 +122,44 @@ html, body, #app, .WallpaperFetcher {
   max-width: 15rem;
 }
 
+@keyframes notification-in {
+  from {
+    top: -2em;
+  }
+
+  to {
+    top: 1.5em;
+  }
+}
+
+@keyframes notification-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+#Settings__notification {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px;
+  padding: 0.5em;
+  text-align: center;
+  border-radius: 2em;
+  border: 1px solid #3f777d;
+  color: #3f777d;
+  animation-name: notification-in, notification-out;
+  animation-delay: 0ms, 3500ms;
+  animation-duration: 250ms, 150ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.375);
+}
+
 .Settings__heading {
   font-weight: bold;
   margin-bottom: 0.25rem;

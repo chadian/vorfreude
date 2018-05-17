@@ -20,6 +20,9 @@ export default class Settings extends Component {
   @tracked
   settings = { date: {} }
 
+  @tracked
+  settingsNotification = ""
+
   @tracked('settings')
   get constructedDate() {
     return DateTime.fromObject(this.settings.date);
@@ -39,6 +42,18 @@ export default class Settings extends Component {
   }
 
   saveSettings() {
-    save(this.settings);
+    this.settingsNotification = "Your settings have been saved.";
+
+    save(this.settings)
+      .then(() => setTimeout(
+        () => document.querySelector("#Settings__notification").addEventListener(
+          "animationend",
+          (e : AnimationEvent) => {
+            if (e.animationName === 'notification-out') this.settingsNotification = "";
+          },
+          false
+        ),
+        10
+      ))
   }
 }

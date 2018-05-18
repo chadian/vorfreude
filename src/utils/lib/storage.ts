@@ -3,6 +3,10 @@ interface StorageAdapter {
   set(key:String, value:any):Promise<any>;
 }
 
+export const getEnvironmentStorage = () => chrome.storage ?
+    new ChromeStorageAdapter()
+  : new LocalStorageAdapter();
+
 export class LocalStorageAdapter implements StorageAdapter {
   get(key) {
     return new Promise((resolve, reject) => {

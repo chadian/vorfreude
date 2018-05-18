@@ -10,15 +10,14 @@ export const actions = {
 const INTERNAL_STORE = {};
 let updateHandler;
 
-export function dispatch(actionObj, finished) {
+export function dispatch(actionObj) {
   let { action: actionKey } = actionObj;
   let action = actions[actionKey];
 
   if (action === actions.SAVE_SETTINGS) {
     let { settings } = actionObj;
       return storage()
-        .set(SETTINGS_STORAGE_KEY, settings)
-        .then(finished);
+        .set(SETTINGS_STORAGE_KEY, settings);
   }
 
   if (typeof updateHandler === "function") {

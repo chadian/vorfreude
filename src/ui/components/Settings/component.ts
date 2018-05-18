@@ -1,6 +1,10 @@
 import Component, { tracked } from "@glimmer/component";
 import { DateTime } from 'luxon';
-import { save, load } from '../../../utils/lib/settings';
+import { load } from '../../../utils/lib/settings';
+import { dispatch, actions } from '../../../utils/lib/store';
+
+const { SAVE_SETTINGS } = actions;
+
 import {
   lensPath,
   set,
@@ -44,16 +48,24 @@ export default class Settings extends Component {
   saveSettings() {
     this.settingsNotification = "Your settings have been saved.";
 
-    save(this.settings)
-      .then(() => setTimeout(
-        () => document.querySelector("#Settings__notification").addEventListener(
-          "animationend",
-          (e : AnimationEvent) => {
-            if (e.animationName === 'notification-out') this.settingsNotification = "";
-          },
-          false
-        ),
+    dispatch({
+      action: SAVE_SETTINGS,
+      settings: this.settings
+    }).then(() =>
+      setTimeout(
+        () =>
+          document
+            .querySelector("#Settings__notification")
+            .addEventListener(
+              "animationend",
+              (e: AnimationEvent) => {
+                if (e.animationName === "notification-out")
+                  this.settingsNotification = "";
+              },
+              false
+            ),
         10
-      ))
+      )
+    );
   }
 }

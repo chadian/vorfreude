@@ -31,17 +31,15 @@ export default class WallpaperFetcher extends Component {
       text: searchTerms,
       privacy_filter: "1",
       sort: "interestingness-desc",
-      per_page: "500",
-      extras: "original_format"
+      per_page: "100",
+      extras: "url_o"
     });
 
     const photos = result.body.photos.photo || [];
 
     const photoUrls = result.body.photos.photo
-      .map(photo => {
-        const { farm, server, id, secret } = photo;
-        return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_b.jpg`;
-      });
+      .filter(({ url_o, url_l }) => url_o || url_l)
+      .map(({ url_o, url_l }) => url_o || url_l);
 
     return take(50, shuffle(photoUrls)).pop();
   }

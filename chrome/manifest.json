@@ -1,6 +1,6 @@
 {
   "name": "vorfreude",
-  "description": "A brand new Glimmer app.",
+  "description": "A countdown with a fresh wallpapered tab on every new tab",
   "version": "0.0.0",
   "manifest_version": 2,
   "chrome_url_overrides": {

@@ -1,7 +1,7 @@
 {
   "name": "vorfreude",
   "version": "0.0.0",
-  "description": "A brand new Glimmer app.",
+  "description": "A countdown with a fresh wallpapered tab on every new tab",
   "directories": {
     "doc": "doc",
     "test": "tests"

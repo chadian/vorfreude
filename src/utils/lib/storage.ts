@@ -27,3 +27,21 @@ export class LocalStorageAdapter implements StorageAdapter {
     });
   }
 }
+
+export class ChromeStorageAdapter implements StorageAdapter {
+  get(key) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(key, result => {
+        resolve(result[key]);
+      });
+    });
+  }
+
+  set(key, value) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.set({ [key] : value }, (result) => {
+        result ? resolve(value) : undefined;
+      });
+    });
+  }
+}

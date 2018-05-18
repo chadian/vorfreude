@@ -1,4 +1,4 @@
-import { LocalStorageAdapter } from "./storage";
+import { LocalStorageAdapter, ChromeStorageAdapter } from "./storage";
 
 const SETTINGS_STORAGE_KEY = 'vorfreude-settings';
 
@@ -10,5 +10,7 @@ export function load() {
   const { get } = storage();
   return get(SETTINGS_STORAGE_KEY);
 }
-// TODO: Add Chrome Storage Adapter
-const storage = () => new LocalStorageAdapter();
+
+const storage = () => chrome.storage ?
+    new ChromeStorageAdapter()
+  : new LocalStorageAdapter();

@@ -22,7 +22,9 @@ export default class Vorfreude extends Component {
   }
 
   didInsertElement() {
-    load().then(settings => this.settings = settings);
+    load()
+      .then(settings => this.settings = settings)
+      .catch(console.error);
   }
 
   handleRouting() {

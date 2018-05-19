@@ -7,8 +7,20 @@ export const actions = {
   'SAVE_SETTINGS': 'SAVE_SETTINGS'
 };
 
-const INTERNAL_STORE = {};
+const INTERNAL_STORE = { settings: {} };
 let updateHandler;
+
+storage().get(SETTINGS_STORAGE_KEY).then(settings => {
+  INTERNAL_STORE.settings = settings;
+  refresh();
+});
+
+function refresh() {
+  if (typeof updateHandler === "function") {
+    console.log(mergeDeepRight({}, INTERNAL_STORE));
+    updateHandler(mergeDeepRight({}, INTERNAL_STORE));
+  }
+}
 
 export function dispatch(actionObj) {
   let { action: actionKey } = actionObj;
@@ -20,13 +32,12 @@ export function dispatch(actionObj) {
         .set(SETTINGS_STORAGE_KEY, settings);
   }
 
-  if (typeof updateHandler === "function") {
-    updateHandler(mergeDeepRight({}, INTERNAL_STORE));
-  }
+  refresh();
 }
 
 export function setUpdateHandler(handler) {
   if (typeof handler === 'function') {
     updateHandler = handler;
+    refresh();
   }
 }

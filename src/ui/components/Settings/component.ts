@@ -1,6 +1,5 @@
 import Component, { tracked } from "@glimmer/component";
 import { DateTime } from 'luxon';
-import { load } from '../../../utils/lib/settings';
 import { dispatch, actions } from '../../../utils/lib/store';
 
 const { SAVE_SETTINGS } = actions;
@@ -12,17 +11,19 @@ import {
 } from 'ramda';
 
 export default class Settings extends Component {
-  didInsertElement() {
-    load().then(settings => {
-      this.settings = {
-        ...this.settings,
-        ...settings
-      };
-    });
-  }
+  _settings = {}
 
-  @tracked
-  settings = { date: {} }
+  @tracked("args", "_settings")
+  get settings() {
+    return {
+      date: {},
+      ...this.args.settings,
+      ...this._settings
+    };
+  }
+  set settings(value) {
+    this._settings = value;
+  }
 
   @tracked
   settingsNotification = ""
@@ -32,7 +33,7 @@ export default class Settings extends Component {
     return DateTime.fromObject(this.settings.date);
   }
 
-  setSettingFromEvent(settingsKey, e) {
+  setSettingByChangeEvent(settingsKey, e) {
     let value = e.target.value;
     const propPath = settingsKey.split(".");
 
@@ -50,7 +51,7 @@ export default class Settings extends Component {
 
     dispatch({
       action: SAVE_SETTINGS,
-      settings: this.settings
+      settings: this.settings,
     }).then(() =>
       setTimeout(
         () =>

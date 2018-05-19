@@ -14,5 +14,7 @@
   <CountdownTimer @end={{settings.date}} />
   <WallpaperFetcher @searchTerms={{settings.searchTerms}} @refreshPassback={{refreshWallpaperPassback}} />
 {{else}}
-  <Settings />
+  <Store as |store|>
+    <Settings @settings={{store.settings}} />
+  </Store>
 {{/unless}}

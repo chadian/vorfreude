@@ -1,4 +1,4 @@
-import { mergeDeepRight } from "ramda";
+import { merge, clone } from "ramda";
 import { getEnvironmentStorage as storage } from "./storage";
 
 const SETTINGS_STORAGE_KEY = "vorfreude-settings";
@@ -17,7 +17,7 @@ storage().get(SETTINGS_STORAGE_KEY).then(settings => {
 
 function refresh() {
   if (typeof updateHandler === "function") {
-    updateHandler(mergeDeepRight({}, INTERNAL_STORE));
+    updateHandler(clone(INTERNAL_STORE));
   }
 }
 
@@ -30,7 +30,7 @@ export function dispatch(actionObj) {
       return storage()
         .set(SETTINGS_STORAGE_KEY, settings)
         .then(freshSettings => {
-          INTERNAL_STORE.settings = mergeDeepRight(INTERNAL_STORE.settings, freshSettings);
+          INTERNAL_STORE.settings = merge(clone(INTERNAL_STORE.settings), freshSettings);
           refresh();
         });
   }

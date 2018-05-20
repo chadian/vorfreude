@@ -1,5 +1,4 @@
 import Component, { tracked } from '@glimmer/component';
-import { load } from '../../../utils/lib/settings';
 
 const SETTINGS_URL_HASH = "#settings";
 export default class Vorfreude extends Component {
@@ -18,13 +17,8 @@ export default class Vorfreude extends Component {
   _refreshWallpaper = null
 
   refreshWallpaperPassback = (refreshWallpaper) => {
+    refreshWallpaper();
     this._refreshWallpaper = refreshWallpaper;
-  }
-
-  didInsertElement() {
-    load()
-      .then(settings => this.settings = settings)
-      .catch(console.error);
   }
 
   handleRouting() {

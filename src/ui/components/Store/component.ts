@@ -1,9 +1,9 @@
 import Component, { tracked } from "@glimmer/component";
-import { setUpdateHandler } from "../../../utils/lib/store";
+import { initStore } from "../../../utils/lib/store";
 
 export default class Settings extends Component {
   didInsertElement() {
-    setUpdateHandler(store =>  this.store = { ...store });
+    initStore(store => this.store = store);
   }
 
   @tracked

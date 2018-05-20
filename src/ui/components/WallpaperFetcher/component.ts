@@ -7,18 +7,14 @@ const { FLICKR_API_KEY } = env;
 const flickr = new Flickr(FLICKR_API_KEY);
 
 export default class WallpaperFetcher extends Component {
-  // there is no `didReceieveAttrs` or `didReceiveArgs` hook
-  // so this hack will track changes to args and be called
-  @tracked("args")
-  get didReceiveArgs() {
+  didInsertElement() {
+    this.setWallpaper();
+  }
+
+  didUpdate() {
     const { refreshPassback } = this.args;
     refreshPassback(() => this.setWallpaper());
-
-    if (this.bounds) {
-      this.setWallpaper();
-    }
-
-    return "";
+    this.setWallpaper();
   }
 
   setWallpaper() {
@@ -26,8 +22,6 @@ export default class WallpaperFetcher extends Component {
       searchTerms,
       shouldBlur
     } = this.args;
-
-    console.log('>>>', searchTerms);
 
     const wallpaperElement = this.bounds.firstNode;
 

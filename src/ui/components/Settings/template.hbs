@@ -2,61 +2,63 @@
   <div id="Settings__notification">{{settingsNotification}}</div>
 {{/if}}
 
-<a class="Settings__close" href="#"><span class="Settings__close-symbol">❌</span> Close</a>
+<a class="Settings__close Button" href="#"><span class="Settings__close-symbol">❌</span> Close</a>
 <div class="Settings">
-  <div class="Settings__validiation">
-    {{#unless constructedDate.isValid}}
-      There's an issue with your date, please take a second look.
-    {{/unless}}
-  </div>
+  {{#unless constructedDate.isValid}}
+    <div class="Settings__validiation">
+        There's an issue with your date. You'll need to fix it before you can save.
+    </div>
+  {{/unless}}
   <form class="Settings__form" onsubmit={{action saveSettings}}>
-    <label>
-      <div class="Settings__heading">
-        Image search terms
+
+    <label class="Settings__row">
+      <div class="Settings__input-wrapper">
+        <input type="text" onchange={{action setSettingByChangeEvent 'searchTerms'}} value={{settings.searchTerms}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">Image search terms</div>
       </div>
-      <input type="text" onchange={{action setSettingByChangeEvent 'searchTerms'}} value={{settings.searchTerms}}/>
     </label>
 
-    <label>
-      <div class="Settings__heading">
-        Countdown message
+    <label class="Settings__row">
+      <div class="Settings__input-wrapper">
+        <input type="text" onchange={{action setSettingByChangeEvent 'countdownMessage'}} value={{settings.countdownMessage}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">Countdown Message</div>
       </div>
-      <input type="text" onchange={{action setSettingByChangeEvent 'countdownMessage'}} value={{settings.countdownMessage}}/>
     </label>
 
-    <section class="Settings_date">
-      <div class="Settings__heading">
-        Countdown to
-      </div>
-      <div class="Settings_date-inputs">
-        <label>
-          <input type="number" max="31" onchange={{action setSettingByChangeEvent 'date.day'}} value={{settings.date.day}}/>
-          Day
-        </label>
+    <div class="Settings__row">
+      <label class="Settings__input-wrapper Settings__input-wrapper--date">
+        <input type="number" min="1" max="31" onchange={{action setSettingByChangeEvent 'date.day'}} value={{pad-int settings.date.day 2}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">Day (DD)</div>
+      </label>
 
-        <label>
-          <input type="number" max="12" onchange={{action setSettingByChangeEvent 'date.month'}} value={{settings.date.month}}/>
-          Month
-        </label>
+      <label class="Settings__input-wrapper Settings__input-wrapper--date">
+        <input type="number" min="1" max="12" onchange={{action setSettingByChangeEvent 'date.month'}} value={{pad-int settings.date.month 2}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">Month (MM)</div>
+      </label>
 
-        <label>
-          <input type="number" max="2100" onchange={{action setSettingByChangeEvent 'date.year'}} value={{settings.date.year}}/>
-          Year
-        </label>
+      <label class="Settings__input-wrapper Settings__input-wrapper--date">
+        <input type="number" min="1" max="2100" onchange={{action setSettingByChangeEvent 'date.year'}} value={{pad-int settings.date.year 2}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">Year (YYYY)</div>
+      </label>
 
-        <label>
-          <input type="number" max="24" onchange={{action setSettingByChangeEvent 'date.hour'}} value={{settings.date.hour}}/>
-          Hour*
-        </label>
+      <label class="Settings__input-wrapper Settings__input-wrapper--date">
+        <input type="number" min="0" max="23" onchange={{action setSettingByChangeEvent 'date.hour'}} value={{pad-int settings.date.hour 2}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">Hour (HH)</div>
+      </label>
 
-        <label>
-          <input type="number" max="59" onchange={{action setSettingByChangeEvent 'date.minute'}} value={{settings.date.minute}}/>
-          Minute
-        </label>
-      </div>
-      <em class="Settings__note">* Please use a 24-hour format</em>
-    </section>
+      <label class="Settings__input-wrapper Settings__input-wrapper--date">
+        <input type="number" min="0" max="59" onchange={{action setSettingByChangeEvent 'date.minute'}} value={{pad-int settings.date.minute 2}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">Minute (MM)</div>
+      </label>
+    </div>
 
-    <button type="submit">Save</button>
+    <button class="Button" type="submit">Save</button>
   </form>
 </div>

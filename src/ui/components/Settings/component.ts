@@ -34,12 +34,16 @@ export default class Settings extends Component {
   }
 
   setSettingByChangeEvent(settingsKey, e) {
-    let value = e.target.value;
+    let target = e.target;
+    let { value } = target;
     const propPath = settingsKey.split(".");
 
-    // make sure all the date data values are numbers
     if (propPath[0] === 'date') {
+      let minValue = target.getAttribute("min");
+      let maxValue = target.getAttribute("max");
       value = Number(value);
+      value = capAtMax(value, maxValue);
+      value = capAtMin(value, minValue);
     }
 
     const settings = set(lensPath(propPath), value, clone(this.settings));
@@ -69,4 +73,16 @@ export default class Settings extends Component {
       )
     );
   }
+}
+
+function capAtMax(number, max) {
+  number = Number(number);
+  max = Number(max);
+  return number > max ? max : number;
+}
+
+function capAtMin(number, min) {
+  number = Number(number);
+  min = Number(min);
+  return number < min ? min : number;
 }

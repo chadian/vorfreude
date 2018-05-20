@@ -13,16 +13,38 @@ export default class WallpaperFetcher extends Component {
   get didReceiveArgs() {
     const { refreshPassback } = this.args;
     refreshPassback(() => this.setWallpaper());
-    this.setWallpaper();
+
+    if (this.bounds) {
+      this.setWallpaper();
+    }
 
     return "";
   }
 
   setWallpaper() {
-    const { searchTerms } = this.args;
+    const {
+      searchTerms,
+      shouldBlur
+    } = this.args;
+
+    console.log('>>>', searchTerms);
+
+    const wallpaperElement = this.bounds.firstNode;
+
     if (searchTerms) {
-      this.fetchPhotoUrl(this.args.searchTerms).then(url => (this.bounds.firstNode.style.backgroundImage = `url(${url})`));
+      this.fetchPhotoUrl(this.args.searchTerms)
+        .then(url => requestAnimationFrame(() =>
+          wallpaperElement.style.backgroundImage = `url(${url})`
+        ));
     }
+
+    requestAnimationFrame(() => {
+      if (shouldBlur === true) {
+        wallpaperElement.classList.add("WallpaperFetcher__blurred");
+      } else {
+        wallpaperElement.classList.remove("WallpaperFetcher__blurred");
+      }
+    });
   }
 
   fetchPhotoUrl = async function(searchTerms) {

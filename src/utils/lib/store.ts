@@ -17,7 +17,6 @@ storage().get(SETTINGS_STORAGE_KEY).then(settings => {
 
 function refresh() {
   if (typeof updateHandler === "function") {
-    console.log(mergeDeepRight({}, INTERNAL_STORE));
     updateHandler(mergeDeepRight({}, INTERNAL_STORE));
   }
 }
@@ -29,7 +28,11 @@ export function dispatch(actionObj) {
   if (action === actions.SAVE_SETTINGS) {
     let { settings } = actionObj;
       return storage()
-        .set(SETTINGS_STORAGE_KEY, settings);
+        .set(SETTINGS_STORAGE_KEY, settings)
+        .then(freshSettings => {
+          INTERNAL_STORE.settings = mergeDeepRight(INTERNAL_STORE.settings, freshSettings);
+          refresh();
+        });
   }
 
   refresh();

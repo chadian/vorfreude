@@ -1,7 +1,6 @@
 <Store as |store|>
-  <WallpaperFetcher
-    @searchTerms={{store.settings.searchTerms}}
-    @refreshPassback={{refreshWallpaperPassback}}
+  <Wallpaper
+    @photoUrl={{store.photoUrl}}
     @shouldBlur={{showSettings}}
   />
 

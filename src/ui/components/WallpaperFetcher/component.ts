@@ -1,5 +1,5 @@
 import Component, { tracked } from "@glimmer/component";
-import rawFetch from "../../../utils/lib/rawFetch";
+import Manager from '../../../utils/lib/manager';
 
 export default class WallpaperFetcher extends Component {
   didInsertElement() {
@@ -21,10 +21,13 @@ export default class WallpaperFetcher extends Component {
     const wallpaperElement = this.bounds.firstNode;
 
     if (searchTerms) {
-      rawFetch(this.args.searchTerms)
-        .then(url => requestAnimationFrame(() =>
-          wallpaperElement.style.backgroundImage = `url(${url})`
-        ));
+      new Manager()
+        .getPhoto(searchTerms)
+        .then(url =>
+          requestAnimationFrame(
+            () => (wallpaperElement.style.backgroundImage = `url(${url})`)
+          )
+        );
     }
 
     requestAnimationFrame(() => {

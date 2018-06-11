@@ -124,4 +124,22 @@ export class SimpleIndexedDbAdapter implements StorageAdapter {
       .then(db => dbWrite(db))
       .then(() => savedFormat);
   }
+
+  getAll() {
+    let dbGetAll = db => new Promise((resolve, reject) => {
+      let transaction = db.transaction(this.tableName, "readwrite");
+
+      transaction.onerror = reject;
+      transaction.onabort = reject;
+      transaction.oncomplete = event => {
+        resolve(request.result);
+      };
+
+      let request = transaction.objectStore(this.tableName).getAll();
+    });
+
+    return this.db
+      .then(db => dbGetAll(db))
+      .then();
+  }
 }

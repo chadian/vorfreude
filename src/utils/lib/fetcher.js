@@ -22,7 +22,15 @@ function fetchPhotos(photos) {
   );
 }
 
-function storePhoto(photo) {
+export function retrieveAllPhotos() {
+  return indexStorage.getAll();
+}
+
+export function retrievePhoto(photoId) {
+  return indexStorage.get(photoId);
+}
+
+export function storePhoto(photo) {
   return indexStorage.set(photo.id, photo);
 }
 

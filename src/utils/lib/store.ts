@@ -4,29 +4,25 @@ import { getEnvironmentStorage as storage } from "./storage";
 const SETTINGS_STORAGE_KEY = "vorfreude-settings";
 
 export const actions = {
-  'SAVE_SETTINGS': 'SAVE_SETTINGS'
+  'SAVE_SETTINGS': 'SAVE_SETTINGS',
+  'SET_WALLPAPER_PHOTO_URL': 'SET_WALLPAPER_PHOTO_URL'
 };
 
-const INTERNAL_STORE = { settings: {} };
-let updateHandler;
+const INTERNAL_STORE = {
+  settings: {},
+  photoUrl: ''
+};
+let storeUpdateHandlers = [];
 
 function refresh() {
-  if (typeof updateHandler === "function") {
-    updateHandler(clone(INTERNAL_STORE));
-  }
+  storeUpdateHandlers.forEach(
+    handler => handler(clone(INTERNAL_STORE))
+  );
 }
 
-export function initStore(handler) {
-  if (typeof handler === 'function') {
-    updateHandler = handler;
-  }
-
-  storage()
-    .get(SETTINGS_STORAGE_KEY)
-    .then(settings => {
-      INTERNAL_STORE.settings = settings;
-      refresh();
-    });
+export function addStoreUpdateHandler(handler) {
+  storeUpdateHandlers.push(handler);
+  refresh();
 }
 
 export function dispatch(actionObj) {
@@ -42,9 +38,27 @@ export function dispatch(actionObj) {
           clone(INTERNAL_STORE.settings),
           freshSettings
         );
+
         refresh();
       });
   }
 
+  if (action === actions.SET_WALLPAPER_PHOTO_URL) {
+    let { photoUrl } = actionObj;
+
+    INTERNAL_STORE.photoUrl = photoUrl;
+  }
+
   refresh();
 }
+
+function initStore() {
+  storage()
+    .get(SETTINGS_STORAGE_KEY)
+    .then(settings => {
+      INTERNAL_STORE.settings = settings;
+      refresh();
+    });
+}
+
+initStore();

@@ -1,25 +1,26 @@
 import Component, { tracked } from '@glimmer/component';
+import { addStoreUpdateHandler } from "../../../utils/lib/store";
+import { actions, dispatch } from '../../../utils/lib/store';
+import Manager from '../../../utils/lib/manager';
+
+
+const { SET_WALLPAPER_PHOTO_URL } = actions;
 
 const SETTINGS_URL_HASH = "#settings";
 export default class Vorfreude extends Component {
   constructor() {
     super(...arguments);
+
     this.handleRouting();
     window.onhashchange = () => this.handleRouting();
+
+    addStoreUpdateHandler(store => this.handleStore(store));
   }
 
   @tracked
   showSettings = false
 
-  @tracked
-  settings = {}
-
-  _refreshWallpaper = null
-
-  refreshWallpaperPassback = (refreshWallpaper) => {
-    refreshWallpaper();
-    this._refreshWallpaper = refreshWallpaper;
-  }
+  searchTerms = ""
 
   handleRouting() {
     const { hash } = document.location;
@@ -30,9 +31,25 @@ export default class Vorfreude extends Component {
     }
   }
 
-  refreshWallpaper() {
-    if (typeof this._refreshWallpaper === "function") {
-      this._refreshWallpaper();
+  handleStore(store) {
+    if (this.searchTerms !== store.settings.searchTerms) {
+      this.searchTerms = store.settings.searchTerms;
+      this.setFreshPhoto();
     }
+  }
+
+  async setFreshPhoto() {
+    if (this.searchTerms) {
+      let url = await new Manager().getPhoto(this.searchTerms);
+
+      dispatch({
+        action: SET_WALLPAPER_PHOTO_URL,
+        photoUrl: url
+      });
+    }
+  }
+
+  refreshWallpaper() {
+    this.setFreshPhoto();
   }
 }

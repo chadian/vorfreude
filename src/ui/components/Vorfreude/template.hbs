@@ -13,8 +13,8 @@
       Settings
       </a>
 
-    {{#if settings.countdownMessage}}
-      <div class="Vorfreude__countdown-message">{{settings.countdownMessage}}</div>
+    {{#if store.settings.countdownMessage}}
+      <div class="Vorfreude__countdown-message">{{store.settings.countdownMessage}}</div>
     {{/if}}
 
     <CountdownTimer @end={{store.settings.date}} />

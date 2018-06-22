@@ -9,7 +9,7 @@ const flickr = new Flickr(env.FLICKR_API_KEY);
 const highQualityImageUrlForPhoto = photo => photo.url_o || photo.url_l;
 let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
 
-function fetchPhotos(photos) {
+export function fetchPhotos(photos) {
   photos = clone(photos);
 
   return Promise.all(

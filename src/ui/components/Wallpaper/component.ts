@@ -1,5 +1,4 @@
 import Component, { tracked } from "@glimmer/component";
-import Manager from '../../../utils/lib/manager';
 
 export default class Wallpaper extends Component {
   didUpdate() {
@@ -13,9 +12,17 @@ export default class Wallpaper extends Component {
     } = this.args;
 
     const wallpaperElement = this.bounds.firstNode;
+    let nextImage = `url(${ photoUrl })`;
 
     requestAnimationFrame(() => {
-      wallpaperElement.style.backgroundImage = `url(${photoUrl})`;
+      let currentImage = wallpaperElement.style.backgroundImage.split(',').reverse().pop();
+
+      // layer the current background image with the existing
+      // to avoid nasty flashes.
+      let backgroundImage = [nextImage, currentImage]
+        .filter(Boolean).join(',');
+
+      wallpaperElement.style.backgroundImage = backgroundImage;
 
       if (shouldBlur === true) {
         wallpaperElement.classList.add("Wallpaper__blurred");

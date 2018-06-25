@@ -1,11 +1,9 @@
-import Flickr from "flickr-sdk/flickr-sdk";
 import env from "../../../config/environment";
 import { take, clone } from "ramda";
 import shuffle from './shuffle';
 import { SimpleIndexedDbAdapter } from "./storage";
 
-const flickr = new Flickr(env.FLICKR_API_KEY);
-
+const { IMAGE_ENDPOINT_URL } = env;
 const highQualityImageUrlForPhoto = photo => photo.url_o || photo.url_l;
 let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
 
@@ -16,7 +14,7 @@ export function fetchPhotos(photos) {
     photos.map(photo => {
       let url = highQualityImageUrlForPhoto(photo);
       return fetch(url)
-        .then(response => response.blob())
+        .then(response => response.blob && response.blob())
         .then(blob => ((photo.blob = blob), photo));
     })
   );
@@ -35,16 +33,12 @@ export function storePhoto(photo) {
 }
 
 export async function query(searchTerms) {
-  let result = await flickr.photos.search({
-    safe_search: "1",
-    text: searchTerms,
-    privacy_filter: "1",
-    sort: "interestingness-desc",
-    per_page: "500",
-    extras: "url_o"
-  });
+  var url = new URL(IMAGE_ENDPOINT_URL);
+  url.searchParams.append('searchTerms', searchTerms);
 
-  let photos = result.body.photos.photo || [];
+  let result = await window.fetch(url);
+  let photos = (await result.json()).photos.photo;
+
   return photos
     .filter(highQualityImageUrlForPhoto)
     .map(photo => (photo.searchTerms = searchTerms, photo));

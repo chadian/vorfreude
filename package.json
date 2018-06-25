@@ -41,7 +41,6 @@
   },
   "private": true,
   "dependencies": {
-    "flickr-sdk": "^3.7.0",
     "luxon": "^1.2.0",
     "ramda": "^0.25.0"
   }

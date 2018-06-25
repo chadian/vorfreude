@@ -4,7 +4,8 @@ import shuffle from './shuffle';
 import { SimpleIndexedDbAdapter } from "./storage";
 
 const { IMAGE_ENDPOINT_URL } = env;
-const highQualityImageUrlForPhoto = photo => photo.url_o || photo.url_l;
+const highQualityImageUrlForPhoto = photo => photo.url_o;
+
 let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
 
 export function fetchPhotos(photos) {

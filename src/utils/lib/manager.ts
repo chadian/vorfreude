@@ -45,13 +45,17 @@ export default class Manager {
       this.markPhotoAsSeen(photo);
 
       return Manager.urlForBlob(photo.blob);
-    } else {
+    }
+
+    if (photos.length > 0) {
       let blob = shuffle(
         Manager.filterForDownloadedPhotos(photos)
       ).pop().blob;
 
       return Manager.urlForBlob(blob);
     }
+
+    return fetchPopularPhotoUrl(this.searchTerms);
   }
 
   markPhotoAsSeen(photo) {

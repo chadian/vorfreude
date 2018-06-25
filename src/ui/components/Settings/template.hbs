@@ -21,6 +21,14 @@
 
     <label class="Settings__row">
       <div class="Settings__input-wrapper">
+        <input type="text" onchange={{action setSettingByChangeEvent 'allDoneMessage'}} value={{settings.allDoneMessage}}/>
+        <div class="Settings__input-line"></div>
+        <div class="Settings__input-under-label">All Done! Message</div>
+      </div>
+    </label>
+
+    <label class="Settings__row">
+      <div class="Settings__input-wrapper">
         <input type="text" onchange={{action setSettingByChangeEvent 'searchTerms'}} value={{settings.searchTerms}}/>
         <div class="Settings__input-line"></div>
         <div class="Settings__input-under-label">Image search terms</div>

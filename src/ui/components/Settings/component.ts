@@ -1,14 +1,13 @@
 import Component, { tracked } from "@glimmer/component";
 import { DateTime } from 'luxon';
 import { dispatch, actions } from '../../../utils/lib/store';
-
-const { SAVE_SETTINGS } = actions;
-
 import {
   lensPath,
   set,
   clone
 } from 'ramda';
+
+const { SAVE_SETTINGS } = actions;
 
 export default class Settings extends Component {
   _settings = {}

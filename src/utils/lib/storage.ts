@@ -1,14 +1,16 @@
+import isExtensionEnv from './isExtensionEnv';
+
 interface StorageAdapter {
-  get(key: String):Promise<any>;
+  get(key: string):Promise<any>;
   set(key:String, value:any):Promise<any>;
 }
 
-export const getEnvironmentStorage = (storeName) => chrome.storage ?
+export const getEnvironmentStorage = (storeName) => isExtensionEnv() ?
     new ChromeStorageAdapter(storeName)
   : new LocalStorageAdapter(storeName);
 
 export class LocalStorageAdapter implements StorageAdapter {
-  constructor(storeName) {
+  constructor(storeName: string) {
     this.storeName = storeName;
   }
 
@@ -39,7 +41,7 @@ export class LocalStorageAdapter implements StorageAdapter {
 }
 
 export class ChromeStorageAdapter implements StorageAdapter {
-  constructor(storeName) {
+  constructor(storeName: string) {
     this.storeName = storeName;
   }
 
@@ -48,7 +50,7 @@ export class ChromeStorageAdapter implements StorageAdapter {
   get(key) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(this.storeName, result => {
-        resolve((result && result[key]) || null);
+        resolve((result && result[this.storeName][key]) || null);
       });
     });
   }
@@ -57,16 +59,14 @@ export class ChromeStorageAdapter implements StorageAdapter {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(this.storeName, (store) => {
         store = store || {};
-        chrome.storage.local.set({ [this.storeName] : { ...store, [key]: value } }, (result) => {
-          result ? resolve(value) : undefined;
-        });
+        chrome.storage.local.set({ [this.storeName] : { ...store, [key]: value } }, resolve);
       });
     });
   }
 }
 
 export class SimpleIndexedDbAdapter implements StorageAdapter {
-  constructor(tableName) {
+  constructor(tableName: string) {
     this.tableName = tableName;
 
     let request = indexedDB.open(SimpleIndexedDbAdapter.DB_KEY);

@@ -1,6 +1,7 @@
 import { merge, clone } from "ramda";
 import { getEnvironmentStorage as storage } from "./storage";
 
+const VORFRUEDE_STORE_NAME = "vorfreude";
 const SETTINGS_STORAGE_KEY = "vorfreude-settings";
 
 export const actions = {
@@ -31,7 +32,7 @@ export function dispatch(actionObj) {
 
   if (action === actions.SAVE_SETTINGS) {
     let { settings } = actionObj;
-    return storage()
+    return storage(VORFRUEDE_STORE_NAME)
       .set(SETTINGS_STORAGE_KEY, settings)
       .then(freshSettings => {
         INTERNAL_STORE.settings = merge(
@@ -53,11 +54,13 @@ export function dispatch(actionObj) {
 }
 
 function initStore() {
-  storage()
+  storage(VORFRUEDE_STORE_NAME)
     .get(SETTINGS_STORAGE_KEY)
     .then(settings => {
-      INTERNAL_STORE.settings = settings;
-      refresh();
+      if (settings) {
+        INTERNAL_STORE.settings = settings;
+        refresh();
+      }
     });
 }
 

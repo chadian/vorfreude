@@ -45,8 +45,16 @@ export async function query(searchTerms) {
     .map(photo => (photo.searchTerms = searchTerms, photo));
 };
 
-export async function fetchPopularPhotoUrl(searchTerm) {
-  let photos = await query(searchTerm)
+export async function replenish(searchTerms, downloadBatchSize) {
+  return query(searchTerms)
+    .then(shuffle)
+    .then(take(downloadBatchSize))
+    .then(fetchPhotos)
+    .then(photos => photos.forEach(storePhoto));
+}
+
+export async function fetchPopularPhotoUrl(searchTerms) {
+  let photos = await query(searchTerms)
   let photoUrls = photos.map(highQualityImageUrlForPhoto);
 
   return take(50, shuffle(photoUrls)).pop();

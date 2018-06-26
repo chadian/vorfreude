@@ -1,11 +1,14 @@
 
 import shuffle from "./shuffle";
 import { take } from "ramda";
+import isExtensionEnv from "./isExtensionEnv";
+
 import {
   query,
   fetchPhotos,
   fetchPopularPhotoUrl,
   storePhoto,
+  replenish,
   retrieveAllPhotos
 } from "./fetcher";
 
@@ -64,10 +67,14 @@ export default class Manager {
   }
 
   replenishBacklog() {
-    query(this.searchTerms)
-      .then(shuffle)
-      .then(take(FETCH_PHOTO_BATCH_SIZE))
-      .then(fetchPhotos)
-      .then(photos => photos.forEach(storePhoto));
+    if (isExtensionEnv()) {
+      chrome.runtime.sendMessage({
+        operation: "replenishBacklog",
+        searchTerms: this.searchTerms,
+        downloadBatchSize: FETCH_PHOTO_BATCH_SIZE
+      });
+    } else {
+      replenish(this.searchTerms, FETCH_PHOTO_BATCH_SIZE);
+    }
   }
 }

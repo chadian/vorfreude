@@ -1,0 +1,6 @@
+# background.js is built an artifact by rollup in this directory
+background.js
+
+# rollup typescript plugin build
+.rpt2_cache/
+.rollup.config.js.swp

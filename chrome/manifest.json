@@ -6,6 +6,10 @@
   "chrome_url_overrides": {
     "newtab": "window.html"
   },
+  "background": {
+    "scripts": [ "background.js" ],
+    "persistent": false
+  },
   "permissions": [
     "storage",
     "unlimitedStorage"

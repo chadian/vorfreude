@@ -15,6 +15,9 @@ html {
 
 body {
   background: linear-gradient(to top, #5d4157, #a8caba);
+
+  /* no scrollbars! */
+  overflow: hidden;
 }
 
 /* keep everything at full width and height */

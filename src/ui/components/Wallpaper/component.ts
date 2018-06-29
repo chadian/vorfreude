@@ -11,7 +11,7 @@ export default class Wallpaper extends Component {
       shouldBlur
     } = this.args;
 
-    const wallpaperElement = this.bounds.firstNode;
+    const wallpaperElement = this.bounds.firstNode as HTMLElement;
     let nextImage = `url(${ photoUrl })`;
 
     requestAnimationFrame(() => {

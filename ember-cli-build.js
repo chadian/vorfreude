@@ -14,6 +14,9 @@ module.exports = function(defaults) {
         commonjs(),
         json()
       ]
+    },
+    fingerprint: {
+      enabled: false
     }
   });
 

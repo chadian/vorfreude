@@ -3,7 +3,18 @@ import { take, clone } from "ramda";
 import shuffle from './shuffle';
 import { SimpleIndexedDbAdapter } from "./storage";
 
-const { IMAGE_ENDPOINT_URL } = env;
+// `typeof env === 'function'`
+// this is an unfortunate hack of this file being used for two builds:
+//
+// 1. Glimmer App - it resolves the env for correct ember build environment
+//
+// 2. /chrome build via rollup - the build of background.js via roll up includes
+// this file for background fetching. The import of 'env' is then unresolved and
+// still a function that requires a string of the environment to retrieve the
+// configuration. In this type of build the environment should be assumed to be
+// production.
+const { IMAGE_ENDPOINT_URL } = typeof env === 'function' ?  env('production') : env;
+
 const highQualityImageUrlForPhoto = photo => photo.url_o;
 
 let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');

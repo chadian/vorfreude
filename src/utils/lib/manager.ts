@@ -13,7 +13,6 @@ import {
 } from "./fetcher";
 
 const FRESH_PHOTO_THRESHOLD = 5;
-const FETCH_PHOTO_BATCH_SIZE = 3;
 
 export default class Manager {
   constructor(searchTerms) {
@@ -70,11 +69,10 @@ export default class Manager {
     if (isExtensionEnv()) {
       chrome.runtime.sendMessage({
         operation: "replenishBacklog",
-        searchTerms: this.searchTerms,
-        downloadBatchSize: FETCH_PHOTO_BATCH_SIZE
+        searchTerms: this.searchTerms
       });
     } else {
-      replenish(this.searchTerms, FETCH_PHOTO_BATCH_SIZE);
+      replenish(this.searchTerms);
     }
   }
 }

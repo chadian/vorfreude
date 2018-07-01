@@ -56,13 +56,27 @@ export async function query(searchTerms) {
     .map(photo => (photo.searchTerms = searchTerms, photo));
 };
 
-export async function replenish(searchTerms, downloadBatchSize) {
-  return query(searchTerms)
-    .then(shuffle)
-    .then(take(downloadBatchSize))
-    .then(fetchPhotos)
-    .then(photos => photos.forEach(storePhoto));
-}
+export let replenish = ((outstandingBatches = 0) =>
+  async function (searchTerms, downloadBatchSize = 3, maxDownloadBatches = 1) {
+    let adjustOutstanding = (adjustment) => (_) => (outstandingBatches = outstandingBatches + adjustment, _);
+
+    let capBatchDownlods = function(_) {
+      if (outstandingBatches > maxDownloadBatches) throw 'max batches reached';
+      else return _;
+    };
+
+    return query(searchTerms)
+      .then(adjustOutstanding(1))
+      .then(capBatchDownlods)
+      .then(shuffle)
+      .then(take(downloadBatchSize))
+      .then(fetchPhotos)
+      .then(photos => photos.forEach(storePhoto))
+      .then(adjustOutstanding(-1))
+      .catch(adjustOutstanding(-1))
+      .then(console.error)
+  }
+)();
 
 export async function fetchPopularPhotoUrl(searchTerms) {
   let photos = await query(searchTerms)

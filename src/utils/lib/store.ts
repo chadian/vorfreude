@@ -1,5 +1,6 @@
 import { merge, clone } from "ramda";
 import { getEnvironmentStorage as storage } from "./storage";
+import { DateTime } from "luxon";
 
 const VORFRUEDE_STORE_NAME = "vorfreude";
 const SETTINGS_STORAGE_KEY = "vorfreude-settings";
@@ -9,10 +10,11 @@ export const actions = {
   'SET_WALLPAPER_PHOTO_URL': 'SET_WALLPAPER_PHOTO_URL'
 };
 
-const INTERNAL_STORE = {
+let INTERNAL_STORE = {
   settings: {},
   photoUrl: ''
 };
+
 let storeUpdateHandlers = [];
 
 function refresh() {
@@ -54,14 +56,59 @@ export function dispatch(actionObj) {
 }
 
 function initStore() {
-  storage(VORFRUEDE_STORE_NAME)
-    .get(SETTINGS_STORAGE_KEY)
-    .then(settings => {
-      if (settings) {
-        INTERNAL_STORE.settings = settings;
-        refresh();
-      }
-    });
+  const initializers = [
+    loadSettingsFromStorage,
+    setDefaultSettings,
+    setStore,
+    () => refresh()
+  ];
+
+  initializers.reduce(
+    (store, initializer) => store.then(initializer),
+    Promise.resolve(INTERNAL_STORE)
+  );
 }
 
 initStore();
+
+function loadSettingsFromStorage(store) {
+  return storage(VORFRUEDE_STORE_NAME)
+    .get(SETTINGS_STORAGE_KEY)
+    .then(settings => {
+      if (settings) {
+        store.settings = settings;
+      }
+
+      return store;
+    });
+}
+
+function setDefaultSettings(store) {
+  let settings = store.settings || {};
+  let currentYear = new Date().getFullYear();
+
+  let defaultDay = {
+    day: 19,
+    month: 9,
+    year: currentYear,
+    hour: 0,
+    minute: 0,
+  };
+
+  if (DateTime.fromObject(defaultDay).diffNow() < 0) {
+    defaultDay.year = currentYear + 1;
+  }
+
+  settings = {
+    date: defaultDay,
+    countdownMessage: 'Vorfreude',
+    searchTerms: 'new york city in the fall',
+    ...settings
+  }
+
+  return { ...store, settings };
+}
+
+function setStore(store) {
+  INTERNAL_STORE = store;
+}

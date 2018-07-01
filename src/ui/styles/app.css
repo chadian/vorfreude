@@ -40,8 +40,7 @@ html, body, #app, .Wallpaper {
   cursor: pointer;
   padding: 0rem 1rem;
   text-decoration: none;
-  height: 1.75rem;
-  line-height: 1.75rem;
+  padding: 0.5rem 0.75rem;
 }
 
 #app {
@@ -105,35 +104,28 @@ html, body, #app, .Wallpaper {
   flex-direction: column;
 }
 
-.Vorfreude__refresh-wallpaper,
 .Settings__close,
 .Vorfreude__show-settings {
   /* INITIAL OPACITY */
-  opacity: 0.75;
+  opacity: 0.5;
 
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
   display: block;
   position: fixed;
 }
 
-.Vorfreude__refresh-wallpaper {
-  top: 3vw;
-  left: 3vw;
-}
-
 .Settings__close,
 .Vorfreude__show-settings {
-  top: 3vw;
-  right: 3vw;
+  top: 1.2rem;
+  right: 1.2rem;
 }
-.Vorfreude__refresh-wallpaper:hover,
+
 .Settings__close:hover,
 .Vorfreude__show-settings:hover {
   /* HOVER OPACITY */
   opacity: 1;
 }
 
-.Vorfreude__refresh-wallpaper-symbol,
 .Settings__close-symbol,
 .Vorfreude__show-settings-symbol {
   position: relative;

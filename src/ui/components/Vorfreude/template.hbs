@@ -5,13 +5,10 @@
   />
 
   {{#unless showSettings}}
-    <div class="Vorfreude__refresh-wallpaper Button" onclick={{action refreshWallpaper}}>
-      <span class="Vorfreude__refresh-wallpaper-symbol">🆕 Refresh Photo</span>
-    </div>
     <a class="Vorfreude__show-settings Button" href="#settings">
-      <span class="Vorfreude__show-settings-symbol">🔧</span>
+      <span class="Vorfreude__show-settings-symbol">⚙️</span>
       Settings
-      </a>
+    </a>
 
     {{#if (is-time-up store.settings.date)}}
       <div class="Vorfreude__all-done-message">

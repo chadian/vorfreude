@@ -29,6 +29,11 @@ html, body, #app, .Wallpaper {
 
 * {
   user-select: none;
+
+  /* add a generic transition to everything */
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0, 0.9, 0.36, 0.99);
 }
 
 .Button {
@@ -48,6 +53,13 @@ html, body, #app, .Wallpaper {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  opacity: 0;
+  animation-name: show;
+  animation-delay: 300ms;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.175, 0,4, 0.885);
 }
 
 .Vorfreude__countdown-message,
@@ -58,6 +70,13 @@ html, body, #app, .Wallpaper {
   text-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px, rgba(0, 0, 0, 0.25) 0px 6px 20px;
   padding-left: 2vw;
   padding-right: 2vw;
+
+  opacity: 0;
+  animation-name: show, small-slide-up;
+  animation-delay: 500ms;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.175, 0,4, 0.885);
 }
 
 .Vorfreude__countdown-message {
@@ -78,10 +97,13 @@ html, body, #app, .Wallpaper {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: transform 450ms cubic-bezier(0, 0.9, 0.36, 0.99);
-  transform: scale(1.02);
-  position: absolute;
   z-index: -1;
+  position: absolute;
+
+  transition-duration: 375ms, 325ms;
+  transition-property: transform, filter;
+  transition-timing-function: cubic-bezier(0.35, 0.25, 0.21, 0.96);
+  transform: scale(1.02);
 }
 
 .Wallpaper__blurred {
@@ -136,26 +158,6 @@ html, body, #app, .Wallpaper {
   margin-top: 2rem;
 }
 
-@keyframes notification-in {
-  from {
-    top: -2em;
-  }
-
-  to {
-    top: 1.5em;
-  }
-}
-
-@keyframes notification-out {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
 #Settings__notification {
   position: fixed;
   display: flex;
@@ -168,7 +170,7 @@ html, body, #app, .Wallpaper {
   font-size: 1.25rem;
   border-radius: 2rem;
   color: #fff;
-  animation-name: notification-in, notification-out;
+  animation-name: notification-in, hide;
   animation-delay: 0ms, 3500ms;
   animation-duration: 250ms, 150ms;
   animation-fill-mode: forwards;
@@ -242,4 +244,44 @@ html, body, #app, .Wallpaper {
 
 .LoveCanada__image {
   max-width: 100%;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes notification-in {
+  from {
+    top: -2em;
+  }
+
+  to {
+    top: 1.5em;
+  }
+}
+
+@keyframes small-slide-up {
+  from {
+    transform: translateY(2rem);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }

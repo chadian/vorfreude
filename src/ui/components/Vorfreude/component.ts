@@ -9,7 +9,7 @@ const { SET_WALLPAPER_PHOTO_URL } = actions;
 const SETTINGS_URL_HASH = "#settings";
 export default class Vorfreude extends Component {
   constructor() {
-    super(...arguments);
+    super(arguments[0]);
 
     this.handleRouting();
     window.onhashchange = () => this.handleRouting();

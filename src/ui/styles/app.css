@@ -233,3 +233,13 @@ html, body, #app, .Wallpaper {
   padding-left: 0.75rem;
   font-weight: bold;
 }
+
+.LoveCanada {
+  width: 4rem;
+  bottom: 2rem;
+  position: fixed;
+}
+
+.LoveCanada__image {
+  max-width: 100%;
+}

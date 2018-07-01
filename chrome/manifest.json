@@ -1,8 +1,16 @@
 {
   "name": "vorfreude",
-  "description": "A countdown with a fresh wallpapered tab on every new tab",
-  "version": "0.0.0",
+  "description": "When you can't wait but have to",
+  "version": "0.1.0",
   "manifest_version": 2,
+  "browser_action" : {
+    "default_icon": {
+      "32": "images/icon32.png"
+    }
+  },
+  "icons": {
+    "128": "images/icon128.png"
+  },
   "options_ui": {
     "page": "window.html#settings",
     "open_in_tab": true
@@ -17,6 +25,5 @@
   "permissions": [
     "storage",
     "unlimitedStorage"
-  ],
-  "icons": {}
+  ]
 }

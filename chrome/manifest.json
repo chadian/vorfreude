@@ -3,6 +3,10 @@
   "description": "A countdown with a fresh wallpapered tab on every new tab",
   "version": "0.0.0",
   "manifest_version": 2,
+  "options_ui": {
+    "page": "window.html#settings",
+    "open_in_tab": true
+  },
   "chrome_url_overrides": {
     "newtab": "window.html"
   },

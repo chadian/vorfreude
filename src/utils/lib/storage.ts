@@ -49,18 +49,26 @@ export class ChromeStorageAdapter implements StorageAdapter {
 
   get(key) {
     return new Promise((resolve, reject) => {
-      chrome.storage.local.get(this.storeName, result => {
-        resolve((result && result[this.storeName][key]) || null);
-      });
+      try {
+        chrome.storage.local.get(this.storeName, (result) => {
+          resolve((result && result[this.storeName][key]) || null);
+        });
+      } catch (e) {
+          reject(e);
+      }
     });
   }
 
   set(key, value) {
     return new Promise((resolve, reject) => {
-      chrome.storage.local.get(this.storeName, (store) => {
-        store = store || {};
-        chrome.storage.local.set({ [this.storeName] : { ...store, [key]: value } }, resolve);
-      });
+      try {
+        chrome.storage.local.get(this.storeName, (store) => {
+          store = store || {};
+          chrome.storage.local.set({ [this.storeName] : { ...store, [key]: value } }, resolve);
+        });
+      } catch (e) {
+        reject(e);
+      }
     });
   }
 }

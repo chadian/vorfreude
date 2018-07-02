@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "manifest_version": 2,
   "browser_action" : {
+    "default_title": "vorfreude",
     "default_icon": {
       "32": "images/icon32.png"
     }

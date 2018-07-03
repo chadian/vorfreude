@@ -104,6 +104,7 @@ html, body, #app, .Wallpaper {
   transition-property: transform, filter;
   transition-timing-function: cubic-bezier(0.35, 0.25, 0.21, 0.96);
   transform: scale(1.02);
+  will-change: transform, filter;
 }
 
 .Wallpaper__blurred {

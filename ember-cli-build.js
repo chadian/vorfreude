@@ -7,7 +7,7 @@ const json = require("rollup-plugin-json");
 
 module.exports = function(defaults) {
   let app = new GlimmerApp(defaults, {
-    storeConfigInMeta: true,
+    storeConfigInMeta: false,
     rollup: {
       plugins: [
         resolve({ jsnext: true, module: true, main: true }),

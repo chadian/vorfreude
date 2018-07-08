@@ -1,25 +1,25 @@
-import { merge, clone } from "ramda";
-import { getEnvironmentStorage as storage } from "./storage";
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon';
+import { clone, merge } from 'ramda';
+import { getEnvironmentStorage as storage } from './storage';
 
-const VORFRUEDE_STORE_NAME = "vorfreude";
-const SETTINGS_STORAGE_KEY = "vorfreude-settings";
+const VORFRUEDE_STORE_NAME = 'vorfreude';
+const SETTINGS_STORAGE_KEY = 'vorfreude-settings';
 
 export const actions = {
-  'SAVE_SETTINGS': 'SAVE_SETTINGS',
-  'SET_WALLPAPER_PHOTO_URL': 'SET_WALLPAPER_PHOTO_URL'
+  SAVE_SETTINGS: 'SAVE_SETTINGS',
+  SET_WALLPAPER_PHOTO_URL: 'SET_WALLPAPER_PHOTO_URL'
 };
 
 let INTERNAL_STORE = {
-  settings: {},
-  photoUrl: ''
+  photoUrl: '',
+  settings: {}
 };
 
 let storeUpdateHandlers = [];
 
 function refresh() {
   storeUpdateHandlers.forEach(
-    handler => handler(clone(INTERNAL_STORE))
+    (handler) => handler(clone(INTERNAL_STORE))
   );
 }
 
@@ -36,7 +36,7 @@ export function dispatch(actionObj) {
     let { settings } = actionObj;
     return storage(VORFRUEDE_STORE_NAME)
       .set(SETTINGS_STORAGE_KEY, settings)
-      .then(freshSettings => {
+      .then((freshSettings) => {
         INTERNAL_STORE.settings = merge(
           clone(INTERNAL_STORE.settings),
           freshSettings
@@ -74,7 +74,7 @@ initStore();
 function loadSettingsFromStorage(store) {
   return storage(VORFRUEDE_STORE_NAME)
     .get(SETTINGS_STORAGE_KEY)
-    .then(settings => {
+    .then((settings) => {
       if (settings) {
         store.settings = settings;
       }
@@ -89,10 +89,10 @@ function setDefaultSettings(store) {
 
   let defaultDay = {
     day: 19,
-    month: 9,
-    year: currentYear,
     hour: 0,
     minute: 0,
+    month: 9,
+    year: currentYear
   };
 
   if (DateTime.fromObject(defaultDay).diffNow() < 0) {
@@ -100,11 +100,11 @@ function setDefaultSettings(store) {
   }
 
   settings = {
-    date: defaultDay,
     countdownMessage: 'Vorfreude',
+    date: defaultDay,
     searchTerms: 'new york city in the fall',
     ...settings
-  }
+  };
 
   return { ...store, settings };
 }

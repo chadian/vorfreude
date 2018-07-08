@@ -1,26 +1,26 @@
-import Component, { tracked } from "@glimmer/component";
+import Component, { tracked } from '@glimmer/component';
 import { DateTime, Interval } from 'luxon';
 
 const UPDATE_INTERVAL_IN_MS = 500;
 export default class CountdownTimer extends Component {
-  @tracked
-  time = ""
-
-  _intervalId = null
-
-  static formatInterval(interval) {
+  public static formatInterval(interval) {
     const formatted = interval.toDuration(['days', 'hours', 'minutes', 'seconds']).toObject();
     formatted.seconds = Math.floor(formatted.seconds);
 
     return formatted;
   }
 
-  didInsertElement() {
-    this._intervalId = setInterval(() => this.updateTime(), UPDATE_INTERVAL_IN_MS);
+  @tracked
+  public time = '';
+
+  private intervalId = null;
+
+  public didInsertElement() {
+    this.intervalId = setInterval(() => this.updateTime(), UPDATE_INTERVAL_IN_MS);
     this.updateTime();
   }
 
-  updateTime() {
+  public updateTime() {
     const { formatInterval } = CountdownTimer;
     let endValue = this.args.end;
 
@@ -31,7 +31,7 @@ export default class CountdownTimer extends Component {
     }
   }
 
-  willDestroy() {
-    clearInterval(this._intervalId);
+  public willDestroy() {
+    clearInterval(this.intervalId);
   }
 }

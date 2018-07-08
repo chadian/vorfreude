@@ -1,6 +1,6 @@
 import { replenish } from '../src/utils/lib/fetcher';
 
-chrome.runtime.onMessage.addListener(function (message, callback) {
+chrome.runtime.onMessage.addListener(function(message, callback) {
   if (message.operation == 'replenishBacklog') {
     let { searchTerms, downloadBatchSize } = message;
 

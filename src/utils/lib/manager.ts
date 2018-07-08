@@ -1,20 +1,30 @@
 
-import shuffle from "./shuffle";
-import { take } from "ramda";
-import isExtensionEnv from "./isExtensionEnv";
+import { take } from 'ramda';
+import isExtensionEnv from './isExtensionEnv';
+import shuffle from './shuffle';
 
 import {
-  query,
   fetchPhotos,
   fetchPopularPhotoUrl,
-  storePhoto,
+  query,
   replenish,
-  retrieveAllPhotos
-} from "./fetcher";
+  retrieveAllPhotos,
+  storePhoto
+} from './fetcher';
 
 const FRESH_PHOTO_THRESHOLD = 5;
 
 export default class Manager {
+  public static filterFreshPhotos = (photos) => photos.filter((photo) => photo.seen !== true);
+  public static filterForDownloadedPhotos = (photos) => photos.filter((photo) => Boolean(photo.blob));
+  public static filterForSearchTerms = (photos, searchTerms) => photos.filter(
+    (photo) => photo.searchTerms === searchTerms
+  )
+  public static urlForBlob = (blob) => URL.createObjectURL(blob);
+
+  public searchTerms = '';
+  public photos = Promise.resolve([]);
+
   constructor(searchTerms) {
     this.searchTerms = searchTerms;
 
@@ -24,17 +34,7 @@ export default class Manager {
     });
   }
 
-  static filterFreshPhotos = photos => photos.filter(photo => photo.seen !== true)
-  static filterForDownloadedPhotos = photos => photos.filter(photo => Boolean(photo.blob))
-  static filterForSearchTerms = (photos, searchTerms) => photos.filter(
-    photo => photo.searchTerms === searchTerms
-  )
-  static urlForBlob = blob => URL.createObjectURL(blob);
-
-  searchTerms = ""
-  photos = Promise.resolve([])
-
-  async getPhoto() {
+  public async getPhoto() {
     let photos = await this.photos;
     let freshPhotos = shuffle(Manager.filterFreshPhotos(photos));
 
@@ -60,15 +60,15 @@ export default class Manager {
     return fetchPopularPhotoUrl(this.searchTerms);
   }
 
-  markPhotoAsSeen(photo) {
+  public markPhotoAsSeen(photo) {
     photo.seen = true;
     storePhoto(photo);
   }
 
-  replenishBacklog() {
+  public replenishBacklog() {
     if (isExtensionEnv()) {
       chrome.runtime.sendMessage({
-        operation: "replenishBacklog",
+        operation: 'replenishBacklog',
         searchTerms: this.searchTerms
       });
     } else {

@@ -1,11 +1,11 @@
-import Component, { tracked } from "@glimmer/component";
+import Component, { tracked } from '@glimmer/component';
 
 export default class Wallpaper extends Component {
-  didUpdate() {
+  public didUpdate() {
     this.setWallpaper();
   }
 
-  setWallpaper() {
+  public setWallpaper() {
     const {
       photoUrl,
       shouldBlur
@@ -25,9 +25,9 @@ export default class Wallpaper extends Component {
       wallpaperElement.style.backgroundImage = backgroundImage;
 
       if (shouldBlur === true) {
-        wallpaperElement.classList.add("Wallpaper__blurred");
+        wallpaperElement.classList.add('Wallpaper__blurred');
       } else {
-        wallpaperElement.classList.remove("Wallpaper__blurred");
+        wallpaperElement.classList.remove('Wallpaper__blurred');
       }
     });
   }

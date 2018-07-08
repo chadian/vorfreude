@@ -1,45 +1,45 @@
-import Component, { tracked } from "@glimmer/component";
+import Component, { tracked } from '@glimmer/component';
 import { DateTime } from 'luxon';
-import { dispatch, actions } from '../../../utils/lib/store';
 import {
+  clone,
   lensPath,
-  set,
-  clone
+  set
 } from 'ramda';
+import { actions, dispatch } from '../../../utils/lib/store';
 
 const { SAVE_SETTINGS } = actions;
 
 export default class Settings extends Component {
-  _settings = {}
-
-  @tracked("args", "_settings")
+  @tracked('args', 'internalSettings')
   get settings() {
     return {
       date: {},
       ...this.args.settings,
-      ...this._settings
+      ...this.internalSettings
     };
   }
   set settings(value) {
-    this._settings = value;
+    this.internalSettings = value;
   }
 
   @tracked
-  settingsNotification = ""
+  public settingsNotification = '';
 
   @tracked('settings')
   get constructedDate() {
     return DateTime.fromObject(this.settings.date);
   }
 
-  setSettingByChangeEvent(settingsKey, e) {
+  private internalSettings = {};
+
+  public setSettingByChangeEvent(settingsKey, e) {
     let target = e.target;
     let { value } = target;
-    const propPath = settingsKey.split(".");
+    const propPath = settingsKey.split('.');
 
     if (propPath[0] === 'date') {
-      let minValue = target.getAttribute("min");
-      let maxValue = target.getAttribute("max");
+      let minValue = target.getAttribute('min');
+      let maxValue = target.getAttribute('max');
       value = Number(value);
       value = capAtMax(value, maxValue);
       value = capAtMin(value, minValue);
@@ -49,8 +49,8 @@ export default class Settings extends Component {
     this.settings = settings;
   }
 
-  saveSettings() {
-    this.settingsNotification = "Your settings have been saved.";
+  public saveSettings() {
+    this.settingsNotification = 'Your settings have been saved.';
 
     dispatch({
       action: SAVE_SETTINGS,
@@ -59,12 +59,13 @@ export default class Settings extends Component {
       setTimeout(
         () =>
           document
-            .querySelector("#Settings__notification")
+            .querySelector('#Settings__notification')
             .addEventListener(
-              "animationend",
+              'animationend',
               (e: AnimationEvent) => {
-                if (e.animationName === "notification-out")
-                  this.settingsNotification = "";
+                if (e.animationName === 'notification-out') {
+                  this.settingsNotification = '';
+                }
               },
               false
             ),
@@ -74,14 +75,14 @@ export default class Settings extends Component {
   }
 }
 
-function capAtMax(number, max) {
-  number = Number(number);
+function capAtMax(num, max) {
+  num = Number(num);
   max = Number(max);
-  return number > max ? max : number;
+  return num > max ? max : num;
 }
 
-function capAtMin(number, min) {
-  number = Number(number);
+function capAtMin(num, min) {
+  num = Number(num);
   min = Number(min);
-  return number < min ? min : number;
+  return num < min ? min : num;
 }

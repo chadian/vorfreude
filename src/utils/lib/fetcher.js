@@ -1,6 +1,6 @@
 import { take, clone } from "ramda";
 import shuffle from './shuffle';
-import { SimpleIndexedDbAdapter } from "./storage";
+import { SimpleIndexedDbAdapter } from "./storage/SimpleIndexedDbAdapter";
 
 const IMAGE_ENDPOINT_URL = 'https://vorfreude.now.sh/';
 

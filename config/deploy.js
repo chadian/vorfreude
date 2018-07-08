@@ -3,7 +3,9 @@
 
 module.exports = function(deployTarget) {
   let ENV = {
-    'chrome-app': {},
+    'chrome-app': {
+      extensionId: 'hllelhahjaghbadpkfbnadckchakmlfh'
+    },
     'build': {}
   };
 

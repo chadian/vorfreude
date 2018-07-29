@@ -11,7 +11,7 @@ export default class LocalStorageAdapter implements IStorageAdapter {
     return new Promise((resolve, reject) => {
       try {
         let store = JSON.parse(window.localStorage.getItem(this.storeName));
-        resolve((store && store[key]) || null);
+        resolve((store && store[key]) || undefined);
       } catch (e) {
         reject(e);
       }

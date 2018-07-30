@@ -1,8 +1,8 @@
 <div class="CountdownTimer">
   {{#if time}}
-    {{time.days}} days
-    {{time.hours}} hours
-    {{time.minutes}} minutes
-    {{time.seconds}} seconds
+    {{time.days}} {{plural-rules time.days 'days'}}
+    {{time.hours}} {{plural-rules time.hours 'hours'}}
+    {{time.minutes}} {{plural-rules time.minutes 'minutes'}}
+    {{time.seconds}} {{plural-rules time.seconds 'seconds'}}
   {{/if}}
 </div>

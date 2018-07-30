@@ -3,11 +3,35 @@ import { DateTime, Interval } from 'luxon';
 
 const UPDATE_INTERVAL_IN_MS = 500;
 export default class CountdownTimer extends Component {
+
   public static formatInterval(interval) {
-    const formatted = interval.toDuration(['days', 'hours', 'minutes', 'seconds']).toObject();
+    let { skimDeadTime } = CountdownTimer;
+    let formatted = interval.toDuration(['days', 'hours', 'minutes', 'seconds']).toObject();
     formatted.seconds = Math.floor(formatted.seconds);
 
-    return formatted;
+    return skimDeadTime({
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      ...formatted
+    });
+  }
+
+  public static skimDeadTime(interval, skimWith=['days', 'hours', 'minutes', 'seconds']) {
+    let { skimDeadTime } = CountdownTimer;
+
+    if (skimWith.length === 0) {
+      return interval;
+    }
+
+    if (interval[skimWith[0]] > 0) {
+      return interval;
+    }
+
+    interval = { ...interval };
+    delete interval[skimWith.shift()];
+    return skimDeadTime(interval, skimWith);
   }
 
   @tracked

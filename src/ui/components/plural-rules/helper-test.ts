@@ -2,7 +2,7 @@ import pluralRules from './helper';
 
 const { module, test } = QUnit;
 
-module('Helper: plural-rules', function(hooks) {
+module('Helper: plural-rules', function() {
   test('it computes plural rules for days', function(assert) {
     assert.equal(pluralRules([0, 'days']), 'days');
     assert.equal(pluralRules([1, 'days']), 'day');

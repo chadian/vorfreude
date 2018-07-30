@@ -173,7 +173,7 @@ html, body, #app, .Wallpaper {
   color: #fff;
   animation-name: notification-in, hide;
   animation-delay: 0ms, 3500ms;
-  animation-duration: 250ms, 150ms;
+  animation-duration: 350ms, 150ms;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.375);
 }

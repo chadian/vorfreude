@@ -50,26 +50,16 @@ export default class Settings extends Component {
   }
 
   public saveSettings() {
-    this.settingsNotification = 'Your settings have been saved.';
+    if (this.settingsNotification) {
+      this.settingsNotification = '';
+    }
 
     dispatch({
       action: SAVE_SETTINGS,
       settings: this.settings,
     }).then(() =>
-      setTimeout(
-        () =>
-          document
-            .querySelector('#Settings__notification')
-            .addEventListener(
-              'animationend',
-              (e: AnimationEvent) => {
-                if (e.animationName === 'notification-out') {
-                  this.settingsNotification = '';
-                }
-              },
-              false
-            ),
-        10
+      window.requestAnimationFrame(
+        () => this.settingsNotification = 'Your settings have been saved.'
       )
     );
   }

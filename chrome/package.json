@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Chad Carbert",
   "license": "MIT",
+  "scripts": {
+    "build": "rollup -c rollup.config.js"
+  },
   "dependencies": {
     "@types/chrome": "^0.0.69",
     "rollup": "^0.62.0",

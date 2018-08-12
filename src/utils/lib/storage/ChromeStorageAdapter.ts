@@ -11,7 +11,7 @@ export default class ChromeStorageAdapter implements IStorageAdapter {
     return new Promise((resolve, reject) => {
       try {
         chrome.storage.local.get(this.storeName, (result) => {
-          resolve((result && result[this.storeName] && result[this.storeName][key]) || undefined);
+          resolve((result && result[this.storeName] && result[this.storeName][key]) || null);
         });
       } catch (e) {
         reject(e);

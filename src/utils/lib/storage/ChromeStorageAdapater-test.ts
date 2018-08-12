@@ -2,6 +2,10 @@ const { module, test } = QUnit;
 import Adapter from './ChromeStorageAdapter';
 
 module('ChromeStorageAdapter', function(hooks) {
+  hooks.beforeEach(() => {
+    window.chrome = window.chrome || {};
+  });
+
   test('it sets storeName through the constructor', function(assert) {
     let adapter = new Adapter('test-store-name');
     assert.equal(
@@ -12,7 +16,7 @@ module('ChromeStorageAdapter', function(hooks) {
   });
 
   test('requesting an invalid key returns null', async function(assert) {
-    chrome.storage = {
+    window.chrome.storage = {
       local: {
         get(key, cb) {
           // requests for store
@@ -26,9 +30,9 @@ module('ChromeStorageAdapter', function(hooks) {
 
     let adapter = new Adapter('test-store-name');
     let result = await adapter.get('this-key-does-not-exist');
-    assert.deepEqual(result, undefined, '`get` returns null for non-existent key');
+    assert.deepEqual(result, null, '`get` returns null for non-existent key');
 
     // clean up
-    delete chrome.storage;
+    delete window.chrome.storage;
   });
 });

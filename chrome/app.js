@@ -1,1 +1,1 @@
-../tmp/deploy-dist/app.js
+../dist/app.js

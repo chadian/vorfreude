@@ -18,7 +18,7 @@ export default class CountdownTimer extends Component {
     });
   }
 
-  public static skimDeadTime(interval, skimWith=['days', 'hours', 'minutes', 'seconds']) {
+  public static skimDeadTime(interval, skimWith= ['days', 'hours', 'minutes', 'seconds']) {
     let { skimDeadTime } = CountdownTimer;
 
     if (skimWith.length === 0) {

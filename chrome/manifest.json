@@ -1,9 +1,9 @@
 {
   "name": "Vorfreude",
   "description": "When you can't wait but have to",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "manifest_version": 2,
-  "browser_action" : {
+  "browser_action": {
     "default_title": "vorfreude",
     "default_icon": {
       "32": "images/icon32.png"
@@ -20,7 +20,9 @@
     "newtab": "window.html"
   },
   "background": {
-    "scripts": [ "background.js" ],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
   "permissions": [

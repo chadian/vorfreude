@@ -1,6 +1,6 @@
 {
   "name": "vorfreude-chrome",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "additional chrome-specific builds",
   "main": "index.js",
   "author": "Chad Carbert",

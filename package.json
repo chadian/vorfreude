@@ -1,15 +1,10 @@
 {
   "name": "vorfreude",
-  "version": "0.1.0",
   "description": "A countdown with a fresh wallpapered tab on every new tab",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
-  "scripts": {
-    "build": "ember build -prod && cd chrome && yarn build",
-    "start": "ember server",
-    "test": "ember test"
+  "version": "0.1.0",
+  "dependencies": {
+    "luxon": "^1.2.0",
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "@glimmer/application": "^0.9.1",
@@ -19,8 +14,11 @@
     "@glimmer/inline-precompile": "^1.0.0",
     "@glimmer/resolver": "^0.4.1",
     "@glimmer/test-helpers": "^0.30.3",
+    "@types/chrome": "^0.0.69",
     "@types/qunit": "^2.0.31",
     "broccoli-asset-rev": "^2.5.0",
+    "bumped": "^0.10.10",
+    "bumped-terminal": "^0.7.5",
     "ember-cli": "^2.14.0",
     "ember-cli-dependency-checker": "^2.0.1",
     "ember-cli-inject-live-reload": "^1.6.1",
@@ -35,10 +33,12 @@
   "engines": {
     "node": ">= 4.0"
   },
-  "private": true,
-  "dependencies": {
-    "@types/chrome": "^0.0.69",
-    "luxon": "^1.2.0",
-    "ramda": "^0.25.0"
-  }
+  "scripts": {
+    "build": "ember build -prod && cd chrome && yarn build",
+    "package": "cd chrome && yarn package",
+    "release": "bumped release",
+    "start": "ember server",
+    "test": "ember test"
+  },
+  "private": true
 }

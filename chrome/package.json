@@ -7,15 +7,15 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "package": "jszip -o vorfreude.zip app.css app.js background.js manifest.json fonts images window.html"
+    "package": "bestzip vorfreude.zip app.css app.js background.js manifest.json fonts images window.html"
   },
   "dependencies": {
     "@types/chrome": "^0.0.69",
+    "bestzip": "^1.1.4",
     "rollup": "^0.62.0",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-terser": "^1.0.1",
-    "rollup-plugin-typescript2": "^0.15.1",
-    "jszip-cli": "^1.4.24"
+    "rollup-plugin-typescript2": "^0.15.1"
   }
 }

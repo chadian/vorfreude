@@ -59,7 +59,7 @@ export default class Settings extends Component {
       settings: this.settings,
     }).then(() =>
       window.requestAnimationFrame(
-        () => this.settingsNotification = 'Your settings have been saved.'
+        () => this.settingsNotification = 'Your settings have been saved'
       )
     );
   }

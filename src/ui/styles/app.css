@@ -20,6 +20,10 @@ body {
   overflow: hidden;
 }
 
+body *:focus {
+  outline-color: rgb(145, 147, 255);
+}
+
 /* keep everything at full width and height */
 html, body, #app, .Wallpaper {
   width: 100%;
@@ -46,6 +50,15 @@ html, body, #app, .Wallpaper {
   padding: 0rem 1rem;
   text-decoration: none;
   padding: 0.5rem 0.75rem;
+}
+
+.Button:hover {
+  transform: scale(1.10);
+  transform-origin: center;
+}
+
+.Button:active {
+  transform: scale(1.05);
 }
 
 #app {

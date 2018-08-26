@@ -63,6 +63,21 @@ export default class Settings extends Component {
       )
     );
   }
+
+  public handleKeyDown(event) {
+    // on escape go back to main route
+    if (event.keyCode === 27) {
+      document.location.href = '#';
+    }
+  }
+
+  private didInsertElement() {
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  private willDestroy() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
 }
 
 function capAtMax(num, max) {

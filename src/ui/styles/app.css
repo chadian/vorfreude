@@ -1,3 +1,9 @@
+:root {
+  --neutral-font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  --wacky-font-family: 'FredokaOne';
+  --clean-font-family: 'Questrial';
+}
+
 @font-face {
   font-family: 'Questrial';
   src: url('./fonts/Questrial-Regular.ttf') format('truetype');
@@ -10,7 +16,7 @@
 
 
 html {
-  font-family: 'Questrial';
+  font-family: var(--clean-font-family);
 }
 
 body {
@@ -126,7 +132,7 @@ html, body, #app, .Wallpaper {
 }
 
 .Settings, .Settings input {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: var(--neutral-font-family);
   letter-spacing: 0.085rem;
 }
 
@@ -180,6 +186,7 @@ html, body, #app, .Wallpaper {
   padding: 0.5em 0.75rem;
   text-align: center;
   border: 1px solid #fff;
+  font-family: var(--neutral-font-family);
   font-size: 1.25rem;
   border-radius: 2rem;
   color: #fff;

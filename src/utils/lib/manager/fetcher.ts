@@ -2,7 +2,7 @@ import { clone, take } from 'ramda';
 import shuffle from '../shuffle';
 import { SimpleIndexedDbAdapter } from '../storage/SimpleIndexedDbAdapter';
 import {
-  filterForDownloadedPhotos,
+  filterForPreviousDownloadedPhotos,
   highQualityImageUrlForPhoto
 } from './photos';
 
@@ -47,10 +47,11 @@ export async function query(searchTerms) {
     .map((photo) => (photo.searchTerms = searchTerms, photo));
 }
 
-export async function filterOutAlreadyDownloadedPhotos(freshPhotos, sourcePhotos) {
-  let alreadyDownloadedPhotoIds = filterForDownloadedPhotos(sourcePhotos).map((photo) => photo.id);
+export async function filterOutPreviouslyDownloadedPhotos(freshPhotos, sourcePhotos) {
+  let previouslyDownloadedPhotos = filterForPreviousDownloadedPhotos(sourcePhotos)
+    .map((photo) => photo.id);
 
-  return freshPhotos.filter((photo) => !alreadyDownloadedPhotoIds.includes(photo.id));
+  return freshPhotos.filter((photo) => !previouslyDownloadedPhotos.includes(photo.id));
 }
 
 export let replenish = ((outstandingBatches = 0) =>
@@ -69,7 +70,7 @@ export let replenish = ((outstandingBatches = 0) =>
       .then(adjustOutstanding(1))
       .then(capBatchDownlods)
       .then(async (photos) =>
-        filterOutAlreadyDownloadedPhotos(photos, await retrieveAllPhotos())
+        filterOutPreviouslyDownloadedPhotos(photos, await retrieveAllPhotos())
       )
       .then(shuffle)
       .then(take(downloadBatchSize))

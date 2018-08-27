@@ -3,6 +3,9 @@ const ALLOWABLE_STALE_PERCENTAGE = 85;
 const TOTAL_DOWNLOADED = 20;
 
 export let filterForDownloadedPhotos = (photos) =>
+  photos.filter((photo) => Boolean(photo.blob));
+
+export let filterForPreviousDownloadedPhotos = (photos) =>
   photos.filter((photo) => 'blob' in photo);
 
 export let filterStalePhotos = (photos) =>

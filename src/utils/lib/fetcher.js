@@ -1,10 +1,12 @@
-import { take, clone } from "ramda";
+import { take, clone } from 'ramda';
 import shuffle from './shuffle';
 import { SimpleIndexedDbAdapter } from "./storage/SimpleIndexedDbAdapter";
+import {
+  filterForDownloadedPhotos,
+  highQualityImageUrlForPhoto
+} from "./photos";
 
 const IMAGE_ENDPOINT_URL = 'https://vorfreude.now.sh/';
-
-const highQualityImageUrlForPhoto = photo => photo.url_o;
 
 let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
 
@@ -45,31 +47,33 @@ export async function query(searchTerms) {
     .map(photo => (photo.searchTerms = searchTerms, photo));
 };
 
-function filterDownloadedPhotos(photos) {
-  let allPhotoIds = retrieveAllPhotos().map(photo => photo.id);
-  return photos.filter(photo => allPhotoIds.includes(photo.id));
+export async function filterOutAlreadyDownloadedPhotos(freshPhotos, sourcePhotos) {
+  let alreadyDownloadedPhotoIds = filterForDownloadedPhotos(sourcePhotos).map(photo => photo.id);
+
+  return freshPhotos.filter(photo => !alreadyDownloadedPhotoIds.includes(photo.id));
 }
 
 export let replenish = ((outstandingBatches = 0) =>
-  async function (searchTerms, downloadBatchSize = 3, maxDownloadBatches = 1) {
+  async function innerReplenish(searchTerms, downloadBatchSize = 3, maxDownloadBatches = 1) {
     let adjustOutstanding = (adjustment) => (_) => (outstandingBatches = outstandingBatches + adjustment, _);
 
     let capBatchDownlods = _ => {
-      if (outstandingBatches > maxDownloadBatches) throw 'max batches reached';
+      if (outstandingBatches > maxDownloadBatches) throw `max batches of ${maxDownloadBatches} reached`;
       else return _;
     };
 
     return query(searchTerms)
       .then(adjustOutstanding(1))
       .then(capBatchDownlods)
-      .then(filterDownloadedPhotos)
+      .then(async photos =>
+        filterOutAlreadyDownloadedPhotos(photos, await retrieveAllPhotos())
+      )
       .then(shuffle)
       .then(take(downloadBatchSize))
       .then(fetchPhotos)
-      .then(photos => photos.forEach(storePhoto))
+      .then(photos => photos.forEach(storePhoto) || photos)
       .then(adjustOutstanding(-1))
-      .catch(adjustOutstanding(-1))
-      .then(console.error)
+      .catch(e => adjustOutstanding(-1) || console.error(e));
   }
 )();
 

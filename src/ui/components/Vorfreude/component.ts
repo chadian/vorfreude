@@ -39,7 +39,11 @@ export default class Vorfreude extends Component {
 
   public async setFreshPhoto() {
     if (this.searchTerms) {
-      let url = await new Manager(this.searchTerms).getPhoto();
+      let manager = new Manager(this.searchTerms);
+      manager.checkBacklog();
+      manager.cleanBacklog();
+
+      let url = await manager.getPhoto();
 
       dispatch({
         action: SET_WALLPAPER_PHOTO_URL,

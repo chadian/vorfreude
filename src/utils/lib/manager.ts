@@ -1,25 +1,27 @@
-
 import { take } from 'ramda';
 import isExtensionEnv from './isExtensionEnv';
+import {
+  filterForDownloadedPhotos,
+  filterPhotosForSearchTerms,
+  filterStalePhotos,
+  markPhotoAsSeen,
+  shouldDownloadPhotos,
+} from './photos';
+
+import { cleanDownloadFromPhoto } from './cleaner';
+
 import shuffle from './shuffle';
 
 import {
-  fetchPhotos,
   fetchPopularPhotoUrl,
-  query,
   replenish,
   retrieveAllPhotos,
   storePhoto
 } from './fetcher';
 
-const FRESH_PHOTO_THRESHOLD = 5;
+const BATCH_SIZE = 3;
 
 export default class Manager {
-  public static filterFreshPhotos = (photos) => photos.filter((photo) => photo.seen !== true);
-  public static filterForDownloadedPhotos = (photos) => photos.filter((photo) => Boolean(photo.blob));
-  public static filterForSearchTerms = (photos, searchTerms) => photos.filter(
-    (photo) => photo.searchTerms === searchTerms
-  )
   public static urlForBlob = (blob) => URL.createObjectURL(blob);
 
   public searchTerms = '';
@@ -30,44 +32,48 @@ export default class Manager {
 
     this.photos = this.photos.then(async () => {
       let photos = await retrieveAllPhotos();
-      return Manager.filterForSearchTerms(photos, this.searchTerms);
+      return filterPhotosForSearchTerms(photos, this.searchTerms);
     });
   }
 
   public async getPhoto() {
-    let photos = await this.photos;
-    let freshPhotos = shuffle(Manager.filterFreshPhotos(photos));
+    let downloadedPhotos = filterForDownloadedPhotos(await this.photos);
 
-    if (freshPhotos.length <= FRESH_PHOTO_THRESHOLD) {
-      this.replenishBacklog();
-    }
-
-    if (freshPhotos.length > 0) {
-      let photo = freshPhotos.pop();
+    if (downloadedPhotos.length > 0) {
+      let photo = shuffle(downloadedPhotos).pop();
       this.markPhotoAsSeen(photo);
-
       return Manager.urlForBlob(photo.blob);
-    }
-
-    if (photos.length > 0) {
-      let blob = shuffle(
-        Manager.filterForDownloadedPhotos(photos)
-      ).pop().blob;
-
-      return Manager.urlForBlob(blob);
     }
 
     return fetchPopularPhotoUrl(this.searchTerms);
   }
 
-  public markPhotoAsSeen(photo) {
-    photo.seen = true;
-    storePhoto(photo);
+  public async checkBacklog() {
+    let photos = await this.photos;
+    if (shouldDownloadPhotos(photos)) {
+      this.replenishBacklog();
+    }
   }
 
-  public replenishBacklog() {
+  public async cleanBacklog() {
+    let photos = await this.photos;
+
+    // only clean when we shouldn't be getting more photos
+    if (shouldDownloadPhotos(photos)) {
+      return;
+    }
+
+    take(BATCH_SIZE, filterStalePhotos(photos)).forEach(cleanDownloadFromPhoto);
+  }
+
+  private markPhotoAsSeen(photo) {
+    storePhoto(markPhotoAsSeen(photo));
+  }
+
+  private replenishBacklog() {
     if (isExtensionEnv()) {
       chrome.runtime.sendMessage({
+        downloadBatchSize: BATCH_SIZE,
         operation: 'replenishBacklog',
         searchTerms: this.searchTerms
       });

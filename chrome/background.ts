@@ -1,4 +1,4 @@
-import { replenish } from '../src/utils/lib/fetcher';
+import { replenish } from '../src/utils/lib/manager/fetcher';
 
 chrome.runtime.onMessage.addListener(function(message) {
   if (message.operation === 'replenishBacklog') {

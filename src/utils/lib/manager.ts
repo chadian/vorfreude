@@ -6,9 +6,9 @@ import {
   filterStalePhotos,
   markPhotoAsSeen,
   shouldDownloadPhotos,
-} from './photos';
+} from './manager/photos';
 
-import { cleanDownloadFromPhoto } from './cleaner';
+import { cleanDownloadFromPhoto } from './manager/cleaner';
 
 import shuffle from './shuffle';
 
@@ -17,7 +17,7 @@ import {
   replenish,
   retrieveAllPhotos,
   storePhoto
-} from './fetcher';
+} from './manager/fetcher';
 
 const BATCH_SIZE = 3;
 

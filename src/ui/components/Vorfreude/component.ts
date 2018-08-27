@@ -34,15 +34,13 @@ export default class Vorfreude extends Component {
     if (this.searchTerms !== store.settings.searchTerms) {
       this.searchTerms = store.settings.searchTerms;
       this.setFreshPhoto();
+      this.doManagerHousekeeping();
     }
   }
 
   public async setFreshPhoto() {
     if (this.searchTerms) {
       let manager = new Manager(this.searchTerms);
-      manager.checkBacklog();
-      manager.cleanBacklog();
-
       let url = await manager.getPhoto();
 
       dispatch({
@@ -54,5 +52,14 @@ export default class Vorfreude extends Component {
 
   public refreshWallpaper() {
     this.setFreshPhoto();
+  }
+
+  private doManagerHousekeeping() {
+    if (this.searchTerms) {
+      let manager = new Manager(this.searchTerms);
+      manager.checkBacklog();
+      manager.cleanBacklog();
+      manager.cleanPhotosFromPreviousSearchTerms();
+    }
   }
 }

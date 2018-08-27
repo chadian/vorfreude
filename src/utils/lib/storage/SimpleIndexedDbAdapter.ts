@@ -1,6 +1,6 @@
-import IStorageAdapter from './IStorageAdapter';
+import IStorageAdapterInterface from './IStorageAdapterInterface';
 
-export class SimpleIndexedDbAdapter implements IStorageAdapter {
+export class SimpleIndexedDbAdapter implements IStorageAdapterInterface {
   public static DB_KEY = '__VORFREUDE';
   public db = null;
   public table = null;
@@ -31,7 +31,7 @@ export class SimpleIndexedDbAdapter implements IStorageAdapter {
 
       transaction.onerror = reject;
       transaction.onabort = reject;
-      transaction.oncomplete = (event) => {
+      transaction.oncomplete = () => {
         resolve(request.result);
       };
 
@@ -49,7 +49,7 @@ export class SimpleIndexedDbAdapter implements IStorageAdapter {
 
       transaction.onerror = reject;
       transaction.onabort = reject;
-      transaction.oncomplete = (event) => resolve(key);
+      transaction.oncomplete = () => resolve(key);
 
       transaction.objectStore(this.tableName).put(savedFormat);
     });
@@ -59,21 +59,37 @@ export class SimpleIndexedDbAdapter implements IStorageAdapter {
       .then(() => savedFormat);
   }
 
+  public remove(key) {
+    let remove = (db) => new Promise((resolve, reject) => {
+      let transaction = db.transaction(this.tableName, 'readwrite');
+
+      transaction.onerror = reject;
+      transaction.onabort = reject;
+      transaction.oncomplete = () => {
+        resolve(request.result);
+      };
+
+      let request = transaction.objectStore(this.tableName).delete(key);
+    });
+
+    return this.db.then(remove);
+  }
+
   public getAll() {
     let dbGetAll = (db) => new Promise((resolve, reject) => {
       let transaction = db.transaction(this.tableName, 'readwrite');
 
       transaction.onerror = reject;
       transaction.onabort = reject;
-      transaction.oncomplete = (event) => {
+      transaction.oncomplete = () => {
         resolve(request.result);
       };
 
       let request = transaction.objectStore(this.tableName).getAll();
     });
 
-    return this.db
-      .then((db) => dbGetAll(db))
-      .then();
+    return this.db.then(dbGetAll);
   }
+
+
 }

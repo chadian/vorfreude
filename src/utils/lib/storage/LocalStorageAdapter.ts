@@ -1,6 +1,6 @@
-import IStorageAdapter from './IStorageAdapter';
+import IStorageAdapterInterface from './IStorageAdapterInterface';
 
-export default class LocalStorageAdapter implements IStorageAdapter {
+export default class LocalStorageAdapter implements IStorageAdapterInterface {
   public storeName = '';
 
   constructor(storeName: string) {

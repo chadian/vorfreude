@@ -1,6 +1,6 @@
-import IStorageAdapter from './IStorageAdapter';
+import IStorageAdapterInterface from "./IStorageAdapterInterface";
 
-export default class ChromeStorageAdapter implements IStorageAdapter {
+export default class ChromeStorageAdapter implements IStorageAdapterInterface {
   public storeName = '';
 
   constructor(storeName: string) {

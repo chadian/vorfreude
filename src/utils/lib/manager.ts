@@ -8,7 +8,10 @@ import {
   shouldDownloadPhotos,
 } from './manager/photos';
 
-import { cleanDownloadFromPhoto } from './manager/cleaner';
+import {
+  cleanDownloadFromPhoto,
+  cleanPhotosWithoutGivenSearchTerms
+} from './manager/cleaner';
 
 import shuffle from './shuffle';
 
@@ -53,6 +56,10 @@ export default class Manager {
     if (shouldDownloadPhotos(photos)) {
       this.replenishBacklog();
     }
+  }
+
+  public cleanPhotosFromPreviousSearchTerms() {
+    cleanPhotosWithoutGivenSearchTerms(this.searchTerms);
   }
 
   public async cleanBacklog() {

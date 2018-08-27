@@ -35,6 +35,10 @@ export function storePhoto(photo) {
   return indexStorage.set(photo.id, photo);
 }
 
+export function removePhoto(photo) {
+  indexStorage.remove(photo.id);
+}
+
 export async function query(searchTerms) {
   let url = new URL(IMAGE_ENDPOINT_URL);
   url.searchParams.append('searchTerms', searchTerms);

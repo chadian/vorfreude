@@ -90,6 +90,4 @@ export class SimpleIndexedDbAdapter implements IStorageAdapterInterface {
 
     return this.db.then(dbGetAll);
   }
-
-
 }

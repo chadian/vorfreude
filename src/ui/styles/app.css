@@ -122,8 +122,8 @@ html, body, #app, .Wallpaper {
   transition-duration: 375ms, 325ms;
   transition-property: transform, filter;
   transition-timing-function: cubic-bezier(0.35, 0.25, 0.21, 0.96);
-  transform: scale(1.02);
-  will-change: transform, filter;
+  transform: translateZ(0) scale(1.02);
+
 }
 
 .Wallpaper__blurred {

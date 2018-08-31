@@ -35,4 +35,32 @@ module('ChromeStorageAdapter', function(hooks) {
     // clean up
     delete window.chrome.storage;
   });
+
+  test('promise resolves with set value', async function(assert) {
+    window.chrome.storage = {
+      local: {
+        // mock `get` that is used to get the store
+        // before set is called with new setted value
+        get(_, cb) {
+          let emptyStore = {};
+          cb(emptyStore);
+        },
+
+        set(obj, cb) {
+          // requests for store
+          assert.deepEqual(obj, { 'test-store-name': { meow: 'hello' }});
+
+          // call callback that should trigger promise resolution
+          cb();
+        }
+      }
+    };
+
+    let adapter = new Adapter('test-store-name');
+    let result = await adapter.set('meow', 'hello');
+    assert.deepEqual(result, 'hello', '`set` resolves with set value');
+
+    // clean up
+    delete window.chrome.storage;
+  });
 });

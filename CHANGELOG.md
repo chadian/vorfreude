@@ -1,3 +1,12 @@
+## <small>0.2.1 (2018-09-01)</small>
+
+* Add built zip package to .gitignore ([4315ea9](https://github.com/chadian/vorfreude/commit/4315ea9))
+* Add changelog generation to release process ([8d0a7d5](https://github.com/chadian/vorfreude/commit/8d0a7d5))
+* Fix `set` bug in ChromeStorageAdapter with resolved value ([c9b6c3a](https://github.com/chadian/vorfreude/commit/c9b6c3a))
+* Improve background image performance and clean up setting image ([ee8a339](https://github.com/chadian/vorfreude/commit/ee8a339))
+
+
+
 ## 0.2.0 (2018-08-29)
 
 * Add .DS_Store to gitignore ([3880a34](https://github.com/chadian/vorfreude/commit/3880a34))

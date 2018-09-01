@@ -8,9 +8,12 @@ plugins:
       plugin: bumped-terminal
       command: 'npm test'
   postrelease:
+    Generate CHANGELOG:
+      plugin: 'bumped-terminal'
+      command: 'node_modules/.bin/conventional-changelog -i CHANGELOG.md -s'
     Committing new version:
       plugin: bumped-terminal
-      command: 'git add package.json chrome && git commit -m "Release $newVersion"'
+      command: 'git add package.json CHANGELOG.md chrome && git commit -m "Release $newVersion"'
     Tag new version:
       plugin: 'bumped-terminal'
       command: 'git tag $newVersion'

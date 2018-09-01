@@ -1,7 +1,9 @@
-# Vorfreude
+![Vorfreude](/marketing/logo.png?raw=true)
 
-This README outlines the details of collaborating on this Glimmer application.
-A short introduction of this app could easily go here.
+## Download
+
+* [Chrome Extension 💾](https://chrome.google.com/webstore/detail/vorfreude/cfdbnmfofkfhbjlabopaepkfdbeajabd)
+* [Firefox Add-on 💾](https://addons.mozilla.org/en-US/firefox/addon/vorfreude/?src=search)
 
 ## Prerequisites
 

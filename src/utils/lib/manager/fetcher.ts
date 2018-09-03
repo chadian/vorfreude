@@ -5,6 +5,7 @@ import {
   filterForPreviousDownloadedPhotos,
   highQualityImageUrlForPhoto
 } from './photos';
+import resizePhotoBlob from './resizePhoto';
 
 const IMAGE_ENDPOINT_URL = 'https://vorfreude.now.sh/';
 
@@ -37,6 +38,11 @@ export function storePhoto(photo) {
 
 export function removePhoto(photo) {
   indexStorage.remove(photo.id);
+}
+
+export async function resizePhoto(photo) {
+  photo.blob = await resizePhotoBlob(photo.blob, 2600);
+  return photo;
 }
 
 export async function query(searchTerms) {
@@ -79,6 +85,7 @@ export let replenish = ((outstandingBatches = 0) =>
       .then(shuffle)
       .then(take(downloadBatchSize))
       .then(fetchPhotos)
+      .then((photos) => Promise.all(photos.map(resizePhoto)))
       .then((photos) => photos.forEach(storePhoto) || photos)
       .then(adjustOutstanding(-1))
       .catch((e) => adjustOutstanding(-1));

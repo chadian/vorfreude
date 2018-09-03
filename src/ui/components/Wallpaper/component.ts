@@ -12,14 +12,16 @@ export default class Wallpaper extends Component {
     } = this.args;
 
     const wallpaperElement = this.bounds.firstNode as HTMLElement;
+    let animationClass = navigator.userAgent.includes('Firefox') ? 'no-animation' : 'animation';
+    let blurredWallpaperClass = 'Wallpaper__blurred';
 
     requestAnimationFrame(() => {
       wallpaperElement.style.backgroundImage = `url(${photoUrl})`;
 
       if (shouldBlur === true) {
-        wallpaperElement.classList.add('Wallpaper__blurred');
+        wallpaperElement.classList.add(blurredWallpaperClass, animationClass);
       } else {
-        wallpaperElement.classList.remove('Wallpaper__blurred');
+        wallpaperElement.classList.remove(blurredWallpaperClass, animationClass);
       }
     });
   }

@@ -1,3 +1,13 @@
+## 0.3.0 (2018-09-03)
+
+* Add marketing folder and update README with logo ([eead9ee](https://github.com/chadian/vorfreude/commit/eead9ee))
+* Add resizePhoto helper to resize photo blob dimensions ([fc64487](https://github.com/chadian/vorfreude/commit/fc64487))
+* Make photos go stale faster by lowering stale seen count to 2 ([d62a1ea](https://github.com/chadian/vorfreude/commit/d62a1ea))
+* Resize photos being saved to a max width or height of 2600px ([e499e14](https://github.com/chadian/vorfreude/commit/e499e14))
+* Turn off Settings transition animation for firefox ([e4a58ea](https://github.com/chadian/vorfreude/commit/e4a58ea))
+
+
+
 ## <small>0.2.1 (2018-09-01)</small>
 
 * Add built zip package to .gitignore ([4315ea9](https://github.com/chadian/vorfreude/commit/4315ea9))

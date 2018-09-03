@@ -1,7 +1,7 @@
 {
   "name": "Vorfreude",
   "description": "When you can't wait but have to",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "manifest_version": 2,
   "browser_action": {
     "default_title": "vorfreude",

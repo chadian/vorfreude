@@ -7,7 +7,7 @@ import {
 } from './photos';
 import resizePhotoBlob from './resizePhoto';
 
-const IMAGE_ENDPOINT_URL = 'https://vorfreude.now.sh/';
+const IMAGE_ENDPOINT_URL = 'https://vorfreude-server.herokuapp.com/';
 
 let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
 

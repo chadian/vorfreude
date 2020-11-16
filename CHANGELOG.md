@@ -1,3 +1,9 @@
+## <small>0.3.1 (2020-11-16)</small>
+
+* Update image fetching server url ([c53f4ba](https://github.com/chadian/vorfreude/commit/c53f4ba))
+
+
+
 ## 0.3.0 (2018-09-03)
 
 * Add marketing folder and update README with logo ([eead9ee](https://github.com/chadian/vorfreude/commit/eead9ee))

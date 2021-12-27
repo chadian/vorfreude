@@ -88,10 +88,10 @@ function setDefaultSettings(store) {
   let currentYear = new Date().getFullYear();
 
   let defaultDay = {
-    day: 19,
+    day: 1,
     hour: 0,
     minute: 0,
-    month: 9,
+    month: 1,
     year: currentYear
   };
 
@@ -102,7 +102,7 @@ function setDefaultSettings(store) {
   settings = {
     countdownMessage: 'Vorfreude',
     date: defaultDay,
-    searchTerms: 'new york city in the fall',
+    searchTerms: 'New York City',
     ...settings
   };
 

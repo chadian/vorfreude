@@ -259,14 +259,15 @@ html, body, #app, .Wallpaper {
   font-weight: bold;
 }
 
-.LoveCanada {
-  width: 4rem;
+.Love {
   bottom: 2rem;
   position: fixed;
 }
 
-.LoveCanada__image {
-  max-width: 100%;
+.Love a, .Love a:visited {
+  color: #fff;
+  font-size: 1.2rem;
+  text-underline-offset: 2px;
 }
 
 @keyframes show {

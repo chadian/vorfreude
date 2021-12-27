@@ -22,13 +22,15 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
-* `ember serve`
+* `yarn start`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-### Building
+### Building & Relasing
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+1. `yarn release` (create the release)
+2. `yarn build` (create build)
+3. `yarn package` (create zip package of build for stores)
+4. Upload zip to chrome and firefox stores
 
 ## Further Reading / Useful Links
 

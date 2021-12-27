@@ -1,3 +1,11 @@
+## <small>0.3.2 (2021-12-27)</small>
+
+* Swap Love Canada logo with love sticksnglue ([bc3d147](https://github.com/chadian/vorfreude/commit/bc3d147))
+* Update default store settings ([f34b66c](https://github.com/chadian/vorfreude/commit/f34b66c))
+* Update README with build and release steps ([1984fd8](https://github.com/chadian/vorfreude/commit/1984fd8))
+
+
+
 ## <small>0.3.1 (2020-11-16)</small>
 
 * Update image fetching server url ([c53f4ba](https://github.com/chadian/vorfreude/commit/c53f4ba))

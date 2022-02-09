@@ -1,0 +1,997 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A061F2C527B0C84B00498A69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061F2C427B0C84B00498A69 /* AppDelegate.swift */; };
+		A061F2C727B0C84B00498A69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061F2C627B0C84B00498A69 /* SceneDelegate.swift */; };
+		A061F2CA27B0C84B00498A69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A061F2C827B0C84B00498A69 /* LaunchScreen.storyboard */; };
+		A061F2CD27B0C84B00498A69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A061F2CB27B0C84B00498A69 /* Main.storyboard */; };
+		A061F2D627B0C84B00498A69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061F2D527B0C84B00498A69 /* AppDelegate.swift */; };
+		A061F2D927B0C84B00498A69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A061F2D727B0C84B00498A69 /* Main.storyboard */; };
+		A061F2E127B0C84B00498A69 /* Vorfreude Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A061F2E027B0C84B00498A69 /* Vorfreude Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A061F2EB27B0C84B00498A69 /* Vorfreude Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A061F2EA27B0C84B00498A69 /* Vorfreude Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A061F2F127B0C84B00498A69 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B427B0C84900498A69 /* Main.html */; };
+		A061F2F227B0C84B00498A69 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B427B0C84900498A69 /* Main.html */; };
+		A061F2F327B0C84B00498A69 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B627B0C84900498A69 /* Icon.png */; };
+		A061F2F427B0C84B00498A69 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B627B0C84900498A69 /* Icon.png */; };
+		A061F2F527B0C84B00498A69 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B727B0C84900498A69 /* Style.css */; };
+		A061F2F627B0C84B00498A69 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B727B0C84900498A69 /* Style.css */; };
+		A061F2F727B0C84B00498A69 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B827B0C84900498A69 /* Script.js */; };
+		A061F2F827B0C84B00498A69 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F2B827B0C84900498A69 /* Script.js */; };
+		A061F2F927B0C84B00498A69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061F2B927B0C84900498A69 /* ViewController.swift */; };
+		A061F2FA27B0C84B00498A69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061F2B927B0C84900498A69 /* ViewController.swift */; };
+		A061F2FB27B0C84B00498A69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A061F2BA27B0C84B00498A69 /* Assets.xcassets */; };
+		A061F2FC27B0C84B00498A69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A061F2BA27B0C84B00498A69 /* Assets.xcassets */; };
+		A061F2FD27B0C84B00498A69 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061F2BC27B0C84B00498A69 /* SafariWebExtensionHandler.swift */; };
+		A061F2FE27B0C84B00498A69 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A061F2BC27B0C84B00498A69 /* SafariWebExtensionHandler.swift */; };
+		A061F31C27B0C84D00498A69 /* window.html in Resources */ = {isa = PBXBuildFile; fileRef = A061F31027B0C84D00498A69 /* window.html */; };
+		A061F31D27B0C84D00498A69 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F31127B0C84D00498A69 /* background.js */; };
+		A061F31E27B0C84D00498A69 /* images in Resources */ = {isa = PBXBuildFile; fileRef = A061F31227B0C84D00498A69 /* images */; };
+		A061F31F27B0C84D00498A69 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A061F31327B0C84D00498A69 /* node_modules */; };
+		A061F32027B0C84D00498A69 /* app.css in Resources */ = {isa = PBXBuildFile; fileRef = A061F31427B0C84D00498A69 /* app.css */; };
+		A061F32127B0C84D00498A69 /* rollup.config.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F31527B0C84D00498A69 /* rollup.config.js */; };
+		A061F32227B0C84D00498A69 /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = A061F31627B0C84D00498A69 /* yarn.lock */; };
+		A061F32327B0C84D00498A69 /* background.ts in Resources */ = {isa = PBXBuildFile; fileRef = A061F31727B0C84D00498A69 /* background.ts */; };
+		A061F32427B0C84D00498A69 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A061F31827B0C84D00498A69 /* package.json */; };
+		A061F32527B0C84D00498A69 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = A061F31927B0C84D00498A69 /* manifest.json */; };
+		A061F32627B0C84D00498A69 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = A061F31A27B0C84D00498A69 /* fonts */; };
+		A061F32727B0C84D00498A69 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F31B27B0C84D00498A69 /* app.js */; };
+		A061F32827B0C84D00498A69 /* window.html in Resources */ = {isa = PBXBuildFile; fileRef = A061F31027B0C84D00498A69 /* window.html */; };
+		A061F32927B0C84D00498A69 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F31127B0C84D00498A69 /* background.js */; };
+		A061F32A27B0C84D00498A69 /* images in Resources */ = {isa = PBXBuildFile; fileRef = A061F31227B0C84D00498A69 /* images */; };
+		A061F32B27B0C84D00498A69 /* node_modules in Resources */ = {isa = PBXBuildFile; fileRef = A061F31327B0C84D00498A69 /* node_modules */; };
+		A061F32C27B0C84D00498A69 /* app.css in Resources */ = {isa = PBXBuildFile; fileRef = A061F31427B0C84D00498A69 /* app.css */; };
+		A061F32D27B0C84D00498A69 /* rollup.config.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F31527B0C84D00498A69 /* rollup.config.js */; };
+		A061F32E27B0C84D00498A69 /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = A061F31627B0C84D00498A69 /* yarn.lock */; };
+		A061F32F27B0C84D00498A69 /* background.ts in Resources */ = {isa = PBXBuildFile; fileRef = A061F31727B0C84D00498A69 /* background.ts */; };
+		A061F33027B0C84D00498A69 /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = A061F31827B0C84D00498A69 /* package.json */; };
+		A061F33127B0C84D00498A69 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = A061F31927B0C84D00498A69 /* manifest.json */; };
+		A061F33227B0C84D00498A69 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = A061F31A27B0C84D00498A69 /* fonts */; };
+		A061F33327B0C84D00498A69 /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = A061F31B27B0C84D00498A69 /* app.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A061F2E227B0C84B00498A69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A061F2AE27B0C84800498A69 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A061F2DF27B0C84B00498A69;
+			remoteInfo = "Vorfreude Extension (iOS)";
+		};
+		A061F2EC27B0C84B00498A69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A061F2AE27B0C84800498A69 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A061F2E927B0C84B00498A69;
+			remoteInfo = "Vorfreude Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A061F30427B0C84B00498A69 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A061F2E127B0C84B00498A69 /* Vorfreude Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F30B27B0C84B00498A69 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A061F2EB27B0C84B00498A69 /* Vorfreude Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A061F2B527B0C84900498A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		A061F2B627B0C84900498A69 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		A061F2B727B0C84900498A69 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		A061F2B827B0C84900498A69 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		A061F2B927B0C84900498A69 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A061F2BA27B0C84B00498A69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A061F2BC27B0C84B00498A69 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		A061F2C127B0C84B00498A69 /* Vorfreude.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vorfreude.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A061F2C427B0C84B00498A69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A061F2C627B0C84B00498A69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A061F2C927B0C84B00498A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A061F2CC27B0C84B00498A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A061F2CE27B0C84B00498A69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A061F2D327B0C84B00498A69 /* Vorfreude.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vorfreude.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A061F2D527B0C84B00498A69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A061F2D827B0C84B00498A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A061F2DA27B0C84B00498A69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A061F2DB27B0C84B00498A69 /* Vorfreude.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vorfreude.entitlements; sourceTree = "<group>"; };
+		A061F2E027B0C84B00498A69 /* Vorfreude Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Vorfreude Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A061F2E527B0C84B00498A69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A061F2EA27B0C84B00498A69 /* Vorfreude Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Vorfreude Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A061F2EF27B0C84B00498A69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A061F2F027B0C84B00498A69 /* Vorfreude.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vorfreude.entitlements; sourceTree = "<group>"; };
+		A061F31027B0C84D00498A69 /* window.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = window.html; path = ../../chrome/window.html; sourceTree = "<group>"; };
+		A061F31127B0C84D00498A69 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../chrome/background.js; sourceTree = "<group>"; };
+		A061F31227B0C84D00498A69 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../chrome/images; sourceTree = "<group>"; };
+		A061F31327B0C84D00498A69 /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; name = node_modules; path = ../../chrome/node_modules; sourceTree = "<group>"; };
+		A061F31427B0C84D00498A69 /* app.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = app.css; path = ../../chrome/app.css; sourceTree = "<group>"; };
+		A061F31527B0C84D00498A69 /* rollup.config.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = rollup.config.js; path = ../../chrome/rollup.config.js; sourceTree = "<group>"; };
+		A061F31627B0C84D00498A69 /* yarn.lock */ = {isa = PBXFileReference; lastKnownFileType = text; name = yarn.lock; path = ../../chrome/yarn.lock; sourceTree = "<group>"; };
+		A061F31727B0C84D00498A69 /* background.ts */ = {isa = PBXFileReference; lastKnownFileType = text; name = background.ts; path = ../../chrome/background.ts; sourceTree = "<group>"; };
+		A061F31827B0C84D00498A69 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = package.json; path = ../../chrome/package.json; sourceTree = "<group>"; };
+		A061F31927B0C84D00498A69 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../chrome/manifest.json; sourceTree = "<group>"; };
+		A061F31A27B0C84D00498A69 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../../chrome/fonts; sourceTree = "<group>"; };
+		A061F31B27B0C84D00498A69 /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = app.js; path = ../../chrome/app.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A061F2BE27B0C84B00498A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2D027B0C84B00498A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2DD27B0C84B00498A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2E727B0C84B00498A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A061F2AD27B0C84800498A69 = {
+			isa = PBXGroup;
+			children = (
+				A061F2B227B0C84900498A69 /* Shared (App) */,
+				A061F2BB27B0C84B00498A69 /* Shared (Extension) */,
+				A061F2C327B0C84B00498A69 /* iOS (App) */,
+				A061F2D427B0C84B00498A69 /* macOS (App) */,
+				A061F2E427B0C84B00498A69 /* iOS (Extension) */,
+				A061F2EE27B0C84B00498A69 /* macOS (Extension) */,
+				A061F2C227B0C84B00498A69 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A061F2B227B0C84900498A69 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				A061F2B927B0C84900498A69 /* ViewController.swift */,
+				A061F2BA27B0C84B00498A69 /* Assets.xcassets */,
+				A061F2B327B0C84900498A69 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		A061F2B327B0C84900498A69 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A061F2B427B0C84900498A69 /* Main.html */,
+				A061F2B627B0C84900498A69 /* Icon.png */,
+				A061F2B727B0C84900498A69 /* Style.css */,
+				A061F2B827B0C84900498A69 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A061F2BB27B0C84B00498A69 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				A061F30F27B0C84D00498A69 /* Resources */,
+				A061F2BC27B0C84B00498A69 /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		A061F2C227B0C84B00498A69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A061F2C127B0C84B00498A69 /* Vorfreude.app */,
+				A061F2D327B0C84B00498A69 /* Vorfreude.app */,
+				A061F2E027B0C84B00498A69 /* Vorfreude Extension.appex */,
+				A061F2EA27B0C84B00498A69 /* Vorfreude Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A061F2C327B0C84B00498A69 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				A061F2C427B0C84B00498A69 /* AppDelegate.swift */,
+				A061F2C627B0C84B00498A69 /* SceneDelegate.swift */,
+				A061F2C827B0C84B00498A69 /* LaunchScreen.storyboard */,
+				A061F2CB27B0C84B00498A69 /* Main.storyboard */,
+				A061F2CE27B0C84B00498A69 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		A061F2D427B0C84B00498A69 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				A061F2D527B0C84B00498A69 /* AppDelegate.swift */,
+				A061F2D727B0C84B00498A69 /* Main.storyboard */,
+				A061F2DA27B0C84B00498A69 /* Info.plist */,
+				A061F2DB27B0C84B00498A69 /* Vorfreude.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		A061F2E427B0C84B00498A69 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				A061F2E527B0C84B00498A69 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		A061F2EE27B0C84B00498A69 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				A061F2EF27B0C84B00498A69 /* Info.plist */,
+				A061F2F027B0C84B00498A69 /* Vorfreude.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		A061F30F27B0C84D00498A69 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A061F31027B0C84D00498A69 /* window.html */,
+				A061F31127B0C84D00498A69 /* background.js */,
+				A061F31227B0C84D00498A69 /* images */,
+				A061F31327B0C84D00498A69 /* node_modules */,
+				A061F31427B0C84D00498A69 /* app.css */,
+				A061F31527B0C84D00498A69 /* rollup.config.js */,
+				A061F31627B0C84D00498A69 /* yarn.lock */,
+				A061F31727B0C84D00498A69 /* background.ts */,
+				A061F31827B0C84D00498A69 /* package.json */,
+				A061F31927B0C84D00498A69 /* manifest.json */,
+				A061F31A27B0C84D00498A69 /* fonts */,
+				A061F31B27B0C84D00498A69 /* app.js */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A061F2C027B0C84B00498A69 /* Vorfreude (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A061F30527B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude (iOS)" */;
+			buildPhases = (
+				A061F2BD27B0C84B00498A69 /* Sources */,
+				A061F2BE27B0C84B00498A69 /* Frameworks */,
+				A061F2BF27B0C84B00498A69 /* Resources */,
+				A061F30427B0C84B00498A69 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A061F2E327B0C84B00498A69 /* PBXTargetDependency */,
+			);
+			name = "Vorfreude (iOS)";
+			productName = "Vorfreude (iOS)";
+			productReference = A061F2C127B0C84B00498A69 /* Vorfreude.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A061F2D227B0C84B00498A69 /* Vorfreude (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A061F30C27B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude (macOS)" */;
+			buildPhases = (
+				A061F2CF27B0C84B00498A69 /* Sources */,
+				A061F2D027B0C84B00498A69 /* Frameworks */,
+				A061F2D127B0C84B00498A69 /* Resources */,
+				A061F30B27B0C84B00498A69 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A061F2ED27B0C84B00498A69 /* PBXTargetDependency */,
+			);
+			name = "Vorfreude (macOS)";
+			productName = "Vorfreude (macOS)";
+			productReference = A061F2D327B0C84B00498A69 /* Vorfreude.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A061F2DF27B0C84B00498A69 /* Vorfreude Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A061F30127B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude Extension (iOS)" */;
+			buildPhases = (
+				A061F2DC27B0C84B00498A69 /* Sources */,
+				A061F2DD27B0C84B00498A69 /* Frameworks */,
+				A061F2DE27B0C84B00498A69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Vorfreude Extension (iOS)";
+			productName = "Vorfreude Extension (iOS)";
+			productReference = A061F2E027B0C84B00498A69 /* Vorfreude Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A061F2E927B0C84B00498A69 /* Vorfreude Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A061F30827B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude Extension (macOS)" */;
+			buildPhases = (
+				A061F2E627B0C84B00498A69 /* Sources */,
+				A061F2E727B0C84B00498A69 /* Frameworks */,
+				A061F2E827B0C84B00498A69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Vorfreude Extension (macOS)";
+			productName = "Vorfreude Extension (macOS)";
+			productReference = A061F2EA27B0C84B00498A69 /* Vorfreude Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A061F2AE27B0C84800498A69 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					A061F2C027B0C84B00498A69 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					A061F2D227B0C84B00498A69 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					A061F2DF27B0C84B00498A69 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					A061F2E927B0C84B00498A69 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = A061F2B127B0C84800498A69 /* Build configuration list for PBXProject "Vorfreude" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A061F2AD27B0C84800498A69;
+			productRefGroup = A061F2C227B0C84B00498A69 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A061F2C027B0C84B00498A69 /* Vorfreude (iOS) */,
+				A061F2D227B0C84B00498A69 /* Vorfreude (macOS) */,
+				A061F2DF27B0C84B00498A69 /* Vorfreude Extension (iOS) */,
+				A061F2E927B0C84B00498A69 /* Vorfreude Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A061F2BF27B0C84B00498A69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F2F327B0C84B00498A69 /* Icon.png in Resources */,
+				A061F2CA27B0C84B00498A69 /* LaunchScreen.storyboard in Resources */,
+				A061F2F127B0C84B00498A69 /* Main.html in Resources */,
+				A061F2F727B0C84B00498A69 /* Script.js in Resources */,
+				A061F2FB27B0C84B00498A69 /* Assets.xcassets in Resources */,
+				A061F2CD27B0C84B00498A69 /* Main.storyboard in Resources */,
+				A061F2F527B0C84B00498A69 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2D127B0C84B00498A69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F2F427B0C84B00498A69 /* Icon.png in Resources */,
+				A061F2F627B0C84B00498A69 /* Style.css in Resources */,
+				A061F2D927B0C84B00498A69 /* Main.storyboard in Resources */,
+				A061F2F827B0C84B00498A69 /* Script.js in Resources */,
+				A061F2FC27B0C84B00498A69 /* Assets.xcassets in Resources */,
+				A061F2F227B0C84B00498A69 /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2DE27B0C84B00498A69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F33227B0C84D00498A69 /* fonts in Resources */,
+				A061F32A27B0C84D00498A69 /* images in Resources */,
+				A061F32D27B0C84D00498A69 /* rollup.config.js in Resources */,
+				A061F33127B0C84D00498A69 /* manifest.json in Resources */,
+				A061F33027B0C84D00498A69 /* package.json in Resources */,
+				A061F32F27B0C84D00498A69 /* background.ts in Resources */,
+				A061F33327B0C84D00498A69 /* app.js in Resources */,
+				A061F32E27B0C84D00498A69 /* yarn.lock in Resources */,
+				A061F32927B0C84D00498A69 /* background.js in Resources */,
+				A061F32C27B0C84D00498A69 /* app.css in Resources */,
+				A061F32B27B0C84D00498A69 /* node_modules in Resources */,
+				A061F32827B0C84D00498A69 /* window.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2E827B0C84B00498A69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F32627B0C84D00498A69 /* fonts in Resources */,
+				A061F31E27B0C84D00498A69 /* images in Resources */,
+				A061F32127B0C84D00498A69 /* rollup.config.js in Resources */,
+				A061F32527B0C84D00498A69 /* manifest.json in Resources */,
+				A061F32427B0C84D00498A69 /* package.json in Resources */,
+				A061F32327B0C84D00498A69 /* background.ts in Resources */,
+				A061F32727B0C84D00498A69 /* app.js in Resources */,
+				A061F32227B0C84D00498A69 /* yarn.lock in Resources */,
+				A061F31D27B0C84D00498A69 /* background.js in Resources */,
+				A061F32027B0C84D00498A69 /* app.css in Resources */,
+				A061F31F27B0C84D00498A69 /* node_modules in Resources */,
+				A061F31C27B0C84D00498A69 /* window.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A061F2BD27B0C84B00498A69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F2F927B0C84B00498A69 /* ViewController.swift in Sources */,
+				A061F2C527B0C84B00498A69 /* AppDelegate.swift in Sources */,
+				A061F2C727B0C84B00498A69 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2CF27B0C84B00498A69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F2FA27B0C84B00498A69 /* ViewController.swift in Sources */,
+				A061F2D627B0C84B00498A69 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2DC27B0C84B00498A69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F2FD27B0C84B00498A69 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A061F2E627B0C84B00498A69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A061F2FE27B0C84B00498A69 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A061F2E327B0C84B00498A69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A061F2DF27B0C84B00498A69 /* Vorfreude Extension (iOS) */;
+			targetProxy = A061F2E227B0C84B00498A69 /* PBXContainerItemProxy */;
+		};
+		A061F2ED27B0C84B00498A69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A061F2E927B0C84B00498A69 /* Vorfreude Extension (macOS) */;
+			targetProxy = A061F2EC27B0C84B00498A69 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A061F2B427B0C84900498A69 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A061F2B527B0C84900498A69 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		A061F2C827B0C84B00498A69 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A061F2C927B0C84B00498A69 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A061F2CB27B0C84B00498A69 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A061F2CC27B0C84B00498A69 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A061F2D727B0C84B00498A69 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A061F2D827B0C84B00498A69 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A061F2FF27B0C84B00498A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A061F30027B0C84B00498A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		A061F30227B0C84B00498A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Vorfreude Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude.Extension;
+				PRODUCT_NAME = "Vorfreude Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A061F30327B0C84B00498A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Vorfreude Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude.Extension;
+				PRODUCT_NAME = "Vorfreude Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A061F30627B0C84B00498A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vorfreude;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude;
+				PRODUCT_NAME = Vorfreude;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A061F30727B0C84B00498A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vorfreude;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude;
+				PRODUCT_NAME = Vorfreude;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A061F30927B0C84B00498A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Vorfreude.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Vorfreude Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude.Extension;
+				PRODUCT_NAME = "Vorfreude Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A061F30A27B0C84B00498A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Vorfreude.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Vorfreude Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude.Extension;
+				PRODUCT_NAME = "Vorfreude Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A061F30D27B0C84B00498A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Vorfreude.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vorfreude;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude;
+				PRODUCT_NAME = Vorfreude;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A061F30E27B0C84B00498A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Vorfreude.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28F4Z7EKC8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Vorfreude;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sticksnglue.Vorfreude;
+				PRODUCT_NAME = Vorfreude;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A061F2B127B0C84800498A69 /* Build configuration list for PBXProject "Vorfreude" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A061F2FF27B0C84B00498A69 /* Debug */,
+				A061F30027B0C84B00498A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A061F30127B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A061F30227B0C84B00498A69 /* Debug */,
+				A061F30327B0C84B00498A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A061F30527B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A061F30627B0C84B00498A69 /* Debug */,
+				A061F30727B0C84B00498A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A061F30827B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A061F30927B0C84B00498A69 /* Debug */,
+				A061F30A27B0C84B00498A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A061F30C27B0C84B00498A69 /* Build configuration list for PBXNativeTarget "Vorfreude (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A061F30D27B0C84B00498A69 /* Debug */,
+				A061F30E27B0C84B00498A69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A061F2AE27B0C84800498A69 /* Project object */;
+}

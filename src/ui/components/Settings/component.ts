@@ -18,6 +18,7 @@ export default class Settings extends Component {
       ...this.internalSettings
     };
   }
+
   set settings(value) {
     this.internalSettings = value;
   }
@@ -41,27 +42,25 @@ export default class Settings extends Component {
       let minValue = target.getAttribute('min');
       let maxValue = target.getAttribute('max');
       value = Number(value);
-      value = capAtMax(value, maxValue);
-      value = capAtMin(value, minValue);
+      value = Math.max(value, maxValue);
+      value = Math.min(value, minValue);
     }
 
     const settings = set(lensPath(propPath), value, clone(this.settings));
     this.settings = settings;
   }
 
-  public saveSettings() {
+  async public saveSettings() {
     if (this.settingsNotification) {
       this.settingsNotification = '';
     }
 
-    dispatch({
+    await dispatch({
       action: SAVE_SETTINGS,
       settings: this.settings,
-    }).then(() =>
-      window.requestAnimationFrame(
-        () => this.settingsNotification = 'Your settings have been saved'
-      )
-    );
+    });
+
+    history.pushState({}, document.title, '/');
   }
 
   public handleKeyDown(event) {
@@ -78,16 +77,4 @@ export default class Settings extends Component {
   private willDestroy() {
     document.removeEventListener('keydown', this.handleKeyDown);
   }
-}
-
-function capAtMax(num, max) {
-  num = Number(num);
-  max = Number(max);
-  return num > max ? max : num;
-}
-
-function capAtMin(num, min) {
-  num = Number(num);
-  min = Number(min);
-  return num < min ? min : num;
 }

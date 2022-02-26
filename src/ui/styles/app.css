@@ -2,6 +2,8 @@
   --neutral-font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   --wacky-font-family: 'FredokaOne';
   --clean-font-family: 'Questrial';
+  --base-screen-proportional-font-size-desktop: 5vw;
+  --base-screen-proportional-font-size-mobile: 10vw;
 }
 
 @font-face {
@@ -98,18 +100,42 @@ html, body, #app, .Wallpaper {
   animation-timing-function: cubic-bezier(0.175, 0,4, 0.885);
 }
 
-.Vorfreude__countdown-message {
-  font-size: 5vw;
+.Vorfreude__countdown-message, .Vorfreude__all-done-message {
+  font-size: var(--base-screen-proportional-font-size-desktop);
   margin-top: 0.1em;
 }
 
-.Vorfreude__all-done-message {
-  font-size: 6vw;
-  margin-top: 0.1em;
+@media only screen and (max-width: 425px) {
+  .Vorfreude__countdown-message, .Vorfreude__all-done-message {
+    font-size: var(--base-screen-proportional-font-size-mobile);
+    margin-bottom: 0.75rem;
+  }
 }
 
 .CountdownTimer {
-  font-size: 4vw;
+  font-size: calc(var(--base-screen-proportional-font-size-desktop) * 0.8);
+}
+
+@media only screen and (max-width: 425px) {
+  .CountdownTimer {
+    font-size: calc(var(--base-screen-proportional-font-size-mobile) * 0.85);
+  }
+}
+
+.CountdownTimer__segment {
+  display: inline-block;
+}
+
+@media only screen and (max-width: 425px) {
+  .CountdownTimer__segment {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .CountdownTimer__segment {
+    display: block;
+  }
 }
 
 .Wallpaper {
@@ -117,7 +143,7 @@ html, body, #app, .Wallpaper {
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
-  position: absolute;
+  position: fixed;
 
   transition-duration: 375ms, 325ms;
   transition-property: transform, filter;
@@ -156,12 +182,18 @@ html, body, #app, .Wallpaper {
 
   display: block;
   position: fixed;
-}
-
-.Settings__close,
-.Vorfreude__show-settings {
   top: 1.2rem;
   right: 1.2rem;
+  width: 30px;
+  height: 30px;
+}
+
+@media only screen and (max-width: 425px) {
+  .Settings__close,
+  .Vorfreude__show-settings {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .Settings__close:hover,
@@ -178,6 +210,12 @@ html, body, #app, .Wallpaper {
 
 .Settings__form > *:not(:first-child) {
   margin-top: 2rem;
+}
+
+@media only screen and (max-width: 425px) {
+  .Settings__form > *:not(:first-child) {
+    margin-top: 1rem;
+  }
 }
 
 #Settings__notification {
@@ -229,9 +267,21 @@ html, body, #app, .Wallpaper {
   width: 100%;
 }
 
+@media only screen and (max-width: 425px) {
+  .Settings__input-wrapper {
+    margin-right: 2rem;
+  }
+}
+
 .Settings__input-wrapper--date {
   width: 8rem;
   margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 425px) {
+  .Settings__input-wrapper--date {
+    margin-bottom: 1rem;
+  }
 }
 
 .Settings__input-wrapper input {
@@ -243,6 +293,16 @@ html, body, #app, .Wallpaper {
   padding-bottom: 20px;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+@media only screen and (max-width: 425px) {
+  .Settings__input-wrapper input {
+    font-size: 1rem;
+    width: calc(100% - 0.5rem);
+    padding-bottom: 10px;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
 }
 
 .Settings__input-line {
@@ -259,9 +319,23 @@ html, body, #app, .Wallpaper {
   font-weight: bold;
 }
 
+@media only screen and (max-width: 425px) {
+  .Settings__input-under-label {
+    font-size: 0.75rem;
+    padding-top: 0.2rem;
+    padding-left: 0.2rem;
+  }
+}
+
 .Love {
   bottom: 2rem;
   position: fixed;
+}
+
+@media only screen and (max-width: 425px) {
+  .Love {
+    right: 2rem;
+  }
 }
 
 .Love a, .Love a:visited {

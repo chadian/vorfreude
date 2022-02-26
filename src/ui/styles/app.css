@@ -321,7 +321,7 @@ html, body, #app, .Wallpaper {
 
 @media only screen and (max-width: 425px) {
   .Settings__input-under-label {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     padding-top: 0.2rem;
     padding-left: 0.2rem;
   }

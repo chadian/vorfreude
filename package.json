@@ -4,7 +4,7 @@
   "version": "0.3.2",
   "dependencies": {
     "luxon": "^1.2.0",
-    "ramda": "^0.25.0"
+    "ramda": "^0.28.0"
   },
   "devDependencies": {
     "@glimmer/application": "^0.9.1",

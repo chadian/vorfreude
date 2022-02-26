@@ -18,15 +18,10 @@
 
 
 body {
+  background: linear-gradient(to top, #5d4157, #a8caba);
   font-family: var(--clean-font-family);
 }
 
-body {
-  background: linear-gradient(to top, #5d4157, #a8caba);
-
-  /* no scrollbars! */
-  overflow: hidden;
-}
 
 body *:focus {
   outline-color: rgb(145, 147, 255);
@@ -139,12 +134,20 @@ html, body, #app, .Wallpaper {
 }
 
 .Wallpaper {
+  z-index: -1;
+  position: fixed;
+  zoom: 1.1;
+}
+
+.Wallpaper__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: -1;
-  position: fixed;
-
   transition-duration: 375ms, 325ms;
   transition-property: transform, filter;
   transition-timing-function: cubic-bezier(0.35, 0.25, 0.21, 0.96);
@@ -152,12 +155,8 @@ html, body, #app, .Wallpaper {
   will-change: transform, filter;
 }
 
-.Wallpaper__blurred {
+.Wallpaper__blurred-img {
   filter: blur(8px) brightness(0.5);
-}
-
-.no-transition {
-  transition: none;
 }
 
 .Settings, .Settings input {

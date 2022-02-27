@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { clone, merge } from 'ramda';
+import { clone, mergeAll } from 'ramda';
 import { getEnvironmentStorage as storage } from './storage';
 
 const VORFRUEDE_STORE_NAME = 'vorfreude';
@@ -37,7 +37,7 @@ export function dispatch(actionObj) {
     return storage(VORFRUEDE_STORE_NAME)
       .set(SETTINGS_STORAGE_KEY, settings)
       .then((freshSettings) => {
-        INTERNAL_STORE.settings = merge(
+        INTERNAL_STORE.settings = mergeAll(
           clone(INTERNAL_STORE.settings),
           freshSettings
         );

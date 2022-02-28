@@ -34,14 +34,6 @@ html, body, #app, .Wallpaper {
   margin: 0;
 }
 
-* {
-  user-select: none;
-
-  /* add a generic transition to everything */
-  transition-property: all;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(0, 0.9, 0.36, 0.99);
-}
 
 .Button {
   border: 1px solid #fff;
@@ -81,6 +73,8 @@ html, body, #app, .Wallpaper {
 .Vorfreude__countdown-message,
 .Vorfreude__all-done-message,
 .CountdownTimer {
+  user-select: none;
+  -webkit-user-select: none;
   color: #fff;
   text-align: center;
   text-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px, rgba(0, 0, 0, 0.25) 0px 6px 20px;
@@ -165,6 +159,8 @@ html, body, #app, .Wallpaper {
 }
 
 .Settings {
+  user-select: none;
+  -webkit-user-select: none;
   overflow: hidden;
   color: #fff;
   margin-left: auto;

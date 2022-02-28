@@ -46,9 +46,9 @@
 
     <div class="Settings__row">
       <label class="Settings__input-wrapper Settings__input-wrapper--date">
-        <input type="number" min="1" max="31" onchange={{action setSettingByChangeEvent 'date.day'}} value={{pad-int settings.date.day 2}}/>
+        <input type="number" min="1" max="2100" onchange={{action setSettingByChangeEvent 'date.year'}} value={{pad-int settings.date.year 2}}/>
         <div class="Settings__input-line"></div>
-        <div class="Settings__input-under-label">Day (DD)</div>
+        <div class="Settings__input-under-label">Year (YYYY)</div>
       </label>
 
       <label class="Settings__input-wrapper Settings__input-wrapper--date">
@@ -58,9 +58,9 @@
       </label>
 
       <label class="Settings__input-wrapper Settings__input-wrapper--date">
-        <input type="number" min="1" max="2100" onchange={{action setSettingByChangeEvent 'date.year'}} value={{pad-int settings.date.year 2}}/>
+        <input type="number" min="1" max="31" onchange={{action setSettingByChangeEvent 'date.day'}} value={{pad-int settings.date.day 2}}/>
         <div class="Settings__input-line"></div>
-        <div class="Settings__input-under-label">Year (YYYY)</div>
+        <div class="Settings__input-under-label">Day (DD)</div>
       </label>
 
       <label class="Settings__input-wrapper Settings__input-wrapper--date">

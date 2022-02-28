@@ -42,8 +42,8 @@ export default class Settings extends Component {
       let minValue = target.getAttribute('min');
       let maxValue = target.getAttribute('max');
       value = Number(value);
-      value = Math.max(value, maxValue);
-      value = Math.min(value, minValue);
+      value = Math.min(value, Number(maxValue));
+      value = Math.max(value, Number(minValue));
     }
 
     const settings = set(lensPath(propPath), value, clone(this.settings));

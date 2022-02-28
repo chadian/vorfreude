@@ -1,19 +1,19 @@
 <div class="CountdownTimer">
   {{#if time}}
-    {{#unless (eq time.days undefined)}}
+    <div class="CountdownTimer__segment">
       {{time.days}} {{plural-rules time.days 'days'}}
-    {{/unless}}
-
-    {{#unless (eq time.hours undefined)}}
+    </div>
+  
+    <div class="CountdownTimer__segment">
       {{time.hours}} {{plural-rules time.hours 'hours'}}
-    {{/unless}}
+    </div>
 
-    {{#unless (eq time.minutes undefined)}}
+    <div class="CountdownTimer__segment">
       {{time.minutes}} {{plural-rules time.minutes 'minutes'}}
-    {{/unless}}
+    </div>
 
-    {{#unless (eq time.seconds undefined)}}
-      {{time.seconds}} {{plural-rules time.seconds 'seconds'}}
-    {{/unless}}
+    <div class="CountdownTimer__segment">
+        {{time.seconds}} {{plural-rules time.seconds 'seconds'}}
+    </div>
   {{/if}}
 </div>

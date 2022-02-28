@@ -1,28 +1,19 @@
 import Component, { tracked } from '@glimmer/component';
 
 export default class Wallpaper extends Component {
-  public didUpdate() {
-    this.setWallpaper();
-  }
-
-  public setWallpaper() {
+  @tracked('args')
+  get imageClasses() {
     const {
-      photoUrl,
       shouldBlur
     } = this.args;
 
-    const wallpaperElement = this.bounds.firstNode as HTMLElement;
-    let animationClass = navigator.userAgent.includes('Firefox') ? 'no-animation' : 'animation';
-    let blurredWallpaperClass = 'Wallpaper__blurred';
+    let blurredWallpaperClass = 'Wallpaper__blurred-img';
+    const classes = ['Wallpaper__img'];
 
-    requestAnimationFrame(() => {
-      wallpaperElement.style.backgroundImage = `url(${photoUrl})`;
+    if (shouldBlur) {
+      classes.push(blurredWallpaperClass);
+    }
 
-      if (shouldBlur === true) {
-        wallpaperElement.classList.add(blurredWallpaperClass, animationClass);
-      } else {
-        wallpaperElement.classList.remove(blurredWallpaperClass, animationClass);
-      }
-    });
+    return classes.join(' ');
   }
 }

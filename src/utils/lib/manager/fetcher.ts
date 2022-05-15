@@ -7,7 +7,7 @@ import {
 } from './photos';
 import resizePhotoBlob from './resizePhoto';
 
-const IMAGE_ENDPOINT_URL = 'https://vorfreude-server.herokuapp.com/';
+const IMAGE_ENDPOINT_URL = 'https://vorfreude-elixir.herokuapp.com/api/images';
 
 let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
 
@@ -47,7 +47,7 @@ export async function resizePhoto(photo) {
 
 export async function query(searchTerms) {
   let url = new URL(IMAGE_ENDPOINT_URL);
-  url.searchParams.append('searchTerms', searchTerms);
+  url.searchParams.append('search', searchTerms);
 
   let result = await window.fetch(url.toString());
   let photos = (await result.json()).photos.photo;

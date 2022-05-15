@@ -1,3 +1,39 @@
+## <small>0.3.3 (2022-05-15)</small>
+
+* Avoid scrollbars from Settings and better position .Love class on mobile ([70b9463](https://github.com/chadian/vorfreude/commit/70b9463))
+* Bump async from 3.2.0 to 3.2.3 in /chrome ([2b26cac](https://github.com/chadian/vorfreude/commit/2b26cac))
+* Bump bestzip from 1.1.4 to 2.1.7 in /chrome ([9e7d6fd](https://github.com/chadian/vorfreude/commit/9e7d6fd))
+* Bump chownr from 1.0.1 to 1.1.4 ([d2a3bc2](https://github.com/chadian/vorfreude/commit/d2a3bc2))
+* Bump dependencies ([461788f](https://github.com/chadian/vorfreude/commit/461788f))
+* Bump follow-redirects from 1.5.1 to 1.14.9 ([4a761b3](https://github.com/chadian/vorfreude/commit/4a761b3))
+* Bump handlebars from 4.0.11 to 4.7.7 ([8542b31](https://github.com/chadian/vorfreude/commit/8542b31))
+* Bump lodash from 4.17.10 to 4.17.21 ([c9ecce1](https://github.com/chadian/vorfreude/commit/c9ecce1))
+* Bump mout from 1.1.0 to 1.2.3 ([5ec8f59](https://github.com/chadian/vorfreude/commit/5ec8f59))
+* Bump path-parse from 1.0.5 to 1.0.7 ([4fc43e4](https://github.com/chadian/vorfreude/commit/4fc43e4))
+* Bump path-parse from 1.0.5 to 1.0.7 in /chrome ([5f5b7f9](https://github.com/chadian/vorfreude/commit/5f5b7f9))
+* Bump ramda ([06fc7c4](https://github.com/chadian/vorfreude/commit/06fc7c4))
+* Bump set-getter from 0.1.0 to 0.1.1 ([45099ab](https://github.com/chadian/vorfreude/commit/45099ab))
+* Bump tar from 4.4.4 to 4.4.19 ([f6a7808](https://github.com/chadian/vorfreude/commit/f6a7808))
+* Bump tmpl from 1.0.4 to 1.0.5 ([085fa81](https://github.com/chadian/vorfreude/commit/085fa81))
+* Change setting input orders to descending starting with year ([34d6225](https://github.com/chadian/vorfreude/commit/34d6225))
+* Fix min/max checking on setting inputs ([312ec66](https://github.com/chadian/vorfreude/commit/312ec66))
+* Improve styling and layout around smaller breakpoints ([5cd6b84](https://github.com/chadian/vorfreude/commit/5cd6b84))
+* Migrate to using vorfreude-elixir endpoint ([00f319b](https://github.com/chadian/vorfreude/commit/00f319b))
+* Prefer closing settings after saving instead of showing save notification ([2d7d089](https://github.com/chadian/vorfreude/commit/2d7d089))
+* Release 0.3.1 ([2b00c81](https://github.com/chadian/vorfreude/commit/2b00c81))
+* Release 0.3.2 ([703da68](https://github.com/chadian/vorfreude/commit/703da68))
+* Remove * selector and add specific user-select: none properties ([5df6118](https://github.com/chadian/vorfreude/commit/5df6118))
+* Remove package-lock.json ([1f9c958](https://github.com/chadian/vorfreude/commit/1f9c958))
+* Remove unused undefined checks on CountdownTimer ([444e1e8](https://github.com/chadian/vorfreude/commit/444e1e8))
+* Simplify background image setting and blurring ([39904d8](https://github.com/chadian/vorfreude/commit/39904d8))
+* Swap Love Canada logo with love sticksnglue ([bc3d147](https://github.com/chadian/vorfreude/commit/bc3d147))
+* Tweak settings menu labels on mobile ([ec7c0ff](https://github.com/chadian/vorfreude/commit/ec7c0ff))
+* Update default store settings ([f34b66c](https://github.com/chadian/vorfreude/commit/f34b66c))
+* Update image fetching server url ([c53f4ba](https://github.com/chadian/vorfreude/commit/c53f4ba))
+* Update README with build and release steps ([1984fd8](https://github.com/chadian/vorfreude/commit/1984fd8))
+
+
+
 ## <small>0.3.2 (2021-12-27)</small>
 
 * Swap Love Canada logo with love sticksnglue ([bc3d147](https://github.com/chadian/vorfreude/commit/bc3d147))

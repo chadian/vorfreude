@@ -7,6 +7,10 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess(),
 
+	transform: {
+		'^.+\\.svelte$': ['svelte-jester', { preprocess: true }]
+	},
+
 	kit: {
 		adapter: adapter()
 	}

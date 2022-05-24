@@ -5,20 +5,28 @@
 
 <div class="CountdownTimer">
   {#if time}
-    <div class="CountdownTimer__segment">
-      {time.days} {plural(time.days, 'days')}
-    </div>
+    {#if time.days}
+      <div class="CountdownTimer__segment">
+        {time.days} {plural(time.days, 'days')}
+      </div>
+    {/if}
   
-    <div class="CountdownTimer__segment">
-      {time.hours} {plural(time.hours, 'hours')}
-    </div>
+    {#if time.hours}
+      <div class="CountdownTimer__segment">
+        {time.hours} {plural(time.hours, 'hours')}
+      </div>
+    {/if}
 
-    <div class="CountdownTimer__segment">
-      {time.minutes} {plural(time.minutes, 'minutes')}
-    </div>
+    {#if time.minutes}
+      <div class="CountdownTimer__segment">
+        {time.minutes} {plural(time.minutes, 'minutes')}
+      </div>
+    {/if}
 
-    <div class="CountdownTimer__segment">
-        {time.seconds} {plural(time.seconds, 'seconds')}
-    </div>
+    {#if time.seconds}
+      <div class="CountdownTimer__segment">
+          {time.seconds} {plural(time.seconds, 'seconds')}
+      </div>
+    {/if}
   {/if}
 </div>

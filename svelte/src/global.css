@@ -1,0 +1,27 @@
+:root {
+	--neutral-font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica,
+		Arial, 'Lucida Grande', sans-serif;
+	--clean-font-family: 'Questrial';
+	--base-screen-proportional-font-size-desktop: 5vw;
+	--base-screen-proportional-font-size-mobile: 10vw;
+}
+
+@font-face {
+  font-family: 'Questrial';
+  src: url('fonts/Questrial-Regular.ttf') format('truetype');
+}
+
+body {
+  background: linear-gradient(to top, #5d4157, #a8caba);
+  font-family: var(--clean-font-family);
+}
+
+body *:focus {
+  outline-color: rgb(145, 147, 255);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}

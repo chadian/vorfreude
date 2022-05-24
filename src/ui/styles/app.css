@@ -1,39 +1,8 @@
-:root {
-  --neutral-font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  --wacky-font-family: 'FredokaOne';
-  --clean-font-family: 'Questrial';
-  --base-screen-proportional-font-size-desktop: 5vw;
-  --base-screen-proportional-font-size-mobile: 10vw;
-}
-
-@font-face {
-  font-family: 'Questrial';
-  src: url('./fonts/Questrial-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'FredokaOne';
-  src: url('./fonts/FredokaOne-Regular.ttf') format('truetype');
-}
-
-
-body {
-  background: linear-gradient(to top, #5d4157, #a8caba);
-  font-family: var(--clean-font-family);
-}
-
-
-body *:focus {
-  outline-color: rgb(145, 147, 255);
-}
-
-/* keep everything at full width and height */
-html, body, #app, .Wallpaper {
+/* keep everything at full width and height *html, body, #app, .Wallpaper {
   width: 100%;
   height: 100%;
   margin: 0;
 }
-
 
 .Button {
   border: 1px solid #fff;
@@ -98,32 +67,6 @@ html, body, #app, .Wallpaper {
   .Vorfreude__countdown-message, .Vorfreude__all-done-message {
     font-size: var(--base-screen-proportional-font-size-mobile);
     margin-bottom: 0.75rem;
-  }
-}
-
-.CountdownTimer {
-  font-size: calc(var(--base-screen-proportional-font-size-desktop) * 0.8);
-}
-
-@media only screen and (max-width: 425px) {
-  .CountdownTimer {
-    font-size: calc(var(--base-screen-proportional-font-size-mobile) * 0.85);
-  }
-}
-
-.CountdownTimer__segment {
-  display: inline-block;
-}
-
-@media only screen and (max-width: 425px) {
-  .CountdownTimer__segment {
-    display: block;
-  }
-}
-
-@media only screen and (max-width: 425px) {
-  .CountdownTimer__segment {
-    display: block;
   }
 }
 

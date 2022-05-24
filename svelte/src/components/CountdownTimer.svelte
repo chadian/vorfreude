@@ -1,6 +1,6 @@
 <script>
-	export let time;
 	import plural from '../helpers/plural-rules';
+	export let time;
 </script>
 
 <div class="CountdownTimer">

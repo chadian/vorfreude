@@ -30,6 +30,7 @@
     "eslint-plugin-svelte3": "^3.2.1",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
+    "luxon": "^2.4.0",
     "prettier": "^2.5.1",
     "prettier-plugin-svelte": "^2.5.0",
     "svelte": "^3.44.0",

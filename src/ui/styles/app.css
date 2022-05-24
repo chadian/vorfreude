@@ -1,4 +1,5 @@
-/* keep everything at full width and height *html, body, #app, .Wallpaper {
+/* keep everything at full width and height */
+html, body, #app, .Wallpaper {
   width: 100%;
   height: 100%;
   margin: 0;

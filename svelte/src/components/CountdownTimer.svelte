@@ -1,5 +1,5 @@
 <script lang="ts">
-  import plural from '../helpers/plural-rules';
+	import plural from '../helpers/plural-rules';
 	import { DateTime, Interval } from 'luxon';
 	import { onMount, onDestroy } from 'svelte';
 	import { skimDeadTime } from '../helpers/skim-dead-time';
@@ -13,11 +13,13 @@
 		if (endDate) {
 			const end = DateTime.fromObject(endDate);
 			const interval = Interval.fromDateTimes(DateTime.local(), end);
-			const updatedDuration: CountdownDuration = interval.toDuration(['days', 'hours', 'minutes', 'seconds']).toObject();
+			const updatedDuration: CountdownDuration = interval
+				.toDuration(['days', 'hours', 'minutes', 'seconds'])
+				.toObject();
 
-      if (updatedDuration.seconds) {
-        updatedDuration.seconds = Math.floor(updatedDuration.seconds);
-      }
+			if (updatedDuration.seconds) {
+				updatedDuration.seconds = Math.floor(updatedDuration.seconds);
+			}
 
 			duration = skimDeadTime(updatedDuration);
 		}
@@ -63,8 +65,52 @@
 </div>
 
 <style>
+	@keyframes show {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes hide {
+		from {
+			opacity: 1;
+		}
+
+		to {
+			opacity: 0;
+		}
+	}
+
+	@keyframes small-slide-up {
+		from {
+			transform: translateY(2rem);
+		}
+
+		to {
+			transform: translateY(0);
+		}
+	}
+
 	.CountdownTimer {
 		font-size: calc(var(--base-screen-proportional-font-size-desktop) * 0.8);
+		user-select: none;
+		-webkit-user-select: none;
+		color: #fff;
+		text-align: center;
+		text-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px, rgba(0, 0, 0, 0.25) 0px 6px 20px;
+		padding-left: 2vw;
+		padding-right: 2vw;
+
+    opacity: 0;
+		animation-name: show, small-slide-up;
+		animation-delay: 500ms;
+		animation-duration: 500ms;
+		animation-fill-mode: forwards;
+		animation-timing-function: cubic-bezier(0.175, 0, 4, 0.885);
 	}
 
 	@media only screen and (max-width: 425px) {

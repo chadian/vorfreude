@@ -3,4 +3,4 @@
   import '../global.css';
 </script>
 
-<CountdownTimer time={{ days: '1', hours: '1', minutes: '1', seconds: '1' }} />
+<CountdownTimer endDate={{ year: 2023, month: 5, day: 24, hour: 14, minute: 2 }} />

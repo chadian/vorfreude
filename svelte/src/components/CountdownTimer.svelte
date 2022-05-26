@@ -1,35 +1,62 @@
-<script>
-	import plural from '../helpers/plural-rules';
-	export let time;
+<script lang="ts">
+  import plural from '../helpers/plural-rules';
+	import { DateTime, Interval } from 'luxon';
+	import { onMount, onDestroy } from 'svelte';
+	import { skimDeadTime } from '../helpers/skim-dead-time';
+	import type { CountdownDuration, CountdownDateObject } from '../types';
+
+	export let endDate: CountdownDateObject | undefined;
+
+	$: duration = undefined;
+
+	function updateTime() {
+		if (endDate) {
+			const end = DateTime.fromObject(endDate);
+			const interval = Interval.fromDateTimes(DateTime.local(), end);
+			const updatedDuration: CountdownDuration = interval.toDuration(['days', 'hours', 'minutes', 'seconds']).toObject();
+
+      if (updatedDuration.seconds) {
+        updatedDuration.seconds = Math.floor(updatedDuration.seconds);
+      }
+
+			duration = skimDeadTime(updatedDuration);
+		}
+	}
+
+	const UPDATE_INTERVAL_IN_MS = 500;
+	const intervalId = setInterval(updateTime, UPDATE_INTERVAL_IN_MS);
+
+	onMount(() => updateTime());
+	onDestroy(() => clearInterval(intervalId));
 </script>
 
 <div class="CountdownTimer">
-	{#if time}
-		{#if time.days}
+	{#if duration}
+		{#if duration.days !== undefined}
 			<div class="CountdownTimer__segment">
-				{time.days}
-				{plural(time.days, 'days')}
+				{duration.days}
+				{plural(duration.days, 'days')}
 			</div>
 		{/if}
 
-		{#if time.hours}
+		{#if duration.hours !== undefined}
 			<div class="CountdownTimer__segment">
-				{time.hours}
-				{plural(time.hours, 'hours')}
+				{duration.hours}
+				{plural(duration.hours, 'hours')}
 			</div>
 		{/if}
 
-		{#if time.minutes}
+		{#if duration.minutes !== undefined}
 			<div class="CountdownTimer__segment">
-				{time.minutes}
-				{plural(time.minutes, 'minutes')}
+				{duration.minutes}
+				{plural(duration.minutes, 'minutes')}
 			</div>
 		{/if}
 
-		{#if time.seconds}
+		{#if duration.seconds !== undefined}
 			<div class="CountdownTimer__segment">
-				{time.seconds}
-				{plural(time.seconds, 'seconds')}
+				{duration.seconds}
+				{plural(duration.seconds, 'seconds')}
 			</div>
 		{/if}
 	{/if}

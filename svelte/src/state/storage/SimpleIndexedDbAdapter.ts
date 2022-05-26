@@ -1,6 +1,6 @@
-import IStorageAdapterInterface from './IStorageAdapterInterface';
+import type { StorageAdapter } from "src/types";
 
-export class SimpleIndexedDbAdapter implements IStorageAdapterInterface {
+export class SimpleIndexedDbAdapter implements StorageAdapter {
   public static DB_KEY = '__VORFREUDE';
   public db = null;
   public table = null;

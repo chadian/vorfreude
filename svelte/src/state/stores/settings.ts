@@ -21,21 +21,23 @@ function getDefaultSettings() {
 	const currentYear = new Date().getFullYear();
 
 	const defaultDay = {
-		day: 1,
-		hour: 0,
-		minute: 0,
+		year: currentYear,
 		month: 1,
-		year: currentYear
+		day: 1,
+		minute: 0,
+    hour: 0,
 	};
 
-	if (DateTime.fromObject(defaultDay).diffNow() < 0) {
+  // bump default year forward a year if the defaultDay has already passed
+	if (DateTime.fromObject(defaultDay).diffNow().seconds < 0) {
 		defaultDay.year = currentYear + 1;
 	}
 
   return {
     countdownMessage: 'Vorfreude',
-    date: defaultDay,
+    allDoneMessage: 'Countdown complete!',
     searchTerms: 'New York City',
+    date: defaultDay,
   };
 }
 

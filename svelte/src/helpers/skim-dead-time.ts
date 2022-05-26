@@ -1,17 +1,21 @@
 import type { CountdownDuration } from '../types';
 
-const durationKeys: Array<keyof CountdownDuration> = ['days', 'hours', 'minutes', 'seconds'];
+export function skimDeadTime(
+	duration: CountdownDuration,
+	skimKeys: Array<keyof CountdownDuration> = ['days', 'hours', 'minutes', 'seconds']
+) {
+	duration = { ...duration };
+	// console.log({ duration, skimKeys });
 
-export function skimDeadTime(interval, skimKeys = durationKeys) {
 	if (skimKeys.length === 0) {
-		return interval;
+		return duration;
 	}
 
-	if (interval[skimKeys[0]] > 0) {
-		return interval;
+	const currentKey = skimKeys.shift();
+	if (duration[currentKey] > 0) {
+		return duration;
 	}
 
-	interval = {...interval };
-	delete interval[skimKeys.shift()];
-	return skimDeadTime(interval, skimKeys);
+	delete duration[currentKey];
+	return skimDeadTime(duration, skimKeys);
 }

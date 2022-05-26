@@ -1,34 +1,21 @@
 <script lang="ts">
 	import plural from '../helpers/plural-rules';
-	import { DateTime, Interval } from 'luxon';
 	import { onMount, onDestroy } from 'svelte';
-	import { skimDeadTime } from '../helpers/skim-dead-time';
-	import type { CountdownDuration, CountdownDateObject } from '../types';
+	import type { CountdownDateObject } from '../types';
+	import { displayDuration } from '../helpers/display-duration';
 
-	export let endDate: CountdownDateObject | undefined;
+	export let endDate: CountdownDateObject;
 
 	$: duration = undefined;
 
-	function updateTime() {
-		if (endDate) {
-			const end = DateTime.fromObject(endDate);
-			const interval = Interval.fromDateTimes(DateTime.local(), end);
-			const updatedDuration: CountdownDuration = interval
-				.toDuration(['days', 'hours', 'minutes', 'seconds'])
-				.toObject();
-
-			if (updatedDuration.seconds) {
-				updatedDuration.seconds = Math.floor(updatedDuration.seconds);
-			}
-
-			duration = skimDeadTime(updatedDuration);
-		}
+  function updateDisplayDuration() {
+    duration = displayDuration(endDate);
 	}
 
 	const UPDATE_INTERVAL_IN_MS = 500;
-	const intervalId = setInterval(updateTime, UPDATE_INTERVAL_IN_MS);
+	const intervalId = setInterval(updateDisplayDuration, UPDATE_INTERVAL_IN_MS);
 
-	onMount(() => updateTime());
+	onMount(() => updateDisplayDuration());
 	onDestroy(() => clearInterval(intervalId));
 </script>
 
@@ -105,7 +92,7 @@
 		padding-left: 2vw;
 		padding-right: 2vw;
 
-    opacity: 0;
+		opacity: 0;
 		animation-name: show, small-slide-up;
 		animation-delay: 500ms;
 		animation-duration: 500ms;

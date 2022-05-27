@@ -3,6 +3,7 @@
 	import { DateTime } from 'luxon';
 	import { settings as store } from '../state/stores/settings';
 	import { get } from 'svelte/store';
+  import Button from './Button.svelte';
 	import type { CountdownDateObject } from './../types';
 
 	$: countdownMessage = '';
@@ -15,7 +16,8 @@
 		hour: undefined,
 		minute: undefined,
 	} as CountdownDateObject;
-  $: isValidDate = !DateTime.fromObject(date).isValid
+
+  $: isValidDate = DateTime.fromObject(date).isValid
 
 	function padInt(num, digits) {
 		const numberString = Number(num).toString();
@@ -92,7 +94,7 @@
 	</span>
 </a>
 <div class="Settings">
-	{#if isValidDate}
+	{#if !isValidDate}
 		<div class="Settings__validiation">
 			There's an issue with your date. You'll need to fix it before you can save.
 		</div>
@@ -138,7 +140,7 @@
 			<label class="Settings__input-wrapper Settings__input-wrapper--date">
 				<input
 					type="number"
-					min="1"
+					min="2000"
 					max="2100"
 					on:input={(e) => updateDate('year', e)}
 					value={padInt(date.year, 2)}
@@ -196,7 +198,7 @@
 			</label>
 		</div>
 
-		<button class="Button" type="submit">Save</button>
+		<Button type="submit">Save</Button>
 	</form>
 </div>
 

@@ -1,7 +1,7 @@
 {
   "name": "vorfreude",
   "description": "A countdown with a fresh wallpapered tab on every new tab",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "dependencies": {
     "luxon": "^1.2.0",
     "ramda": "^0.28.0"

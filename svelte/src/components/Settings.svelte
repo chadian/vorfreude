@@ -1,10 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 	import { DateTime } from 'luxon';
-	import { settings as store } from '../state/stores/settings';
+	import { getSettingsStore } from '../state/stores/settings';
 	import { get } from 'svelte/store';
   import Button from './Button.svelte';
+	import { padInt } from '../helpers/pad-int';
 	import type { CountdownDateObject } from './../types';
+
+	const store = getSettingsStore();
 
 	$: countdownMessage = '';
 	$: allDoneMessage = '';
@@ -18,13 +21,6 @@
 	} as CountdownDateObject;
 
   $: isValidDate = DateTime.fromObject(date).isValid
-
-	function padInt(num, digits) {
-		const numberString = Number(num).toString();
-		const fillAmount = digits - numberString.length;
-		const pad = fillAmount > 0 ? Array(fillAmount).fill('0').join('') : '';
-		return pad + numberString;
-	}
 
 	function handleEscapeKeyDown(event) {
 		// on escape go back to main route
@@ -132,7 +128,7 @@
 					value={imageSearchTerms}
 				/>
 				<div class="Settings__input-line" />
-				<div class="Settings__input-under-label">Image search terms</div>
+				<div class="Settings__input-under-label">Image Search Terms</div>
 			</label>
 		</div>
 

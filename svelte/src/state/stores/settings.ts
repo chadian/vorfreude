@@ -5,19 +5,11 @@ import { getStorage } from '../storage/storage';
 const storage = getStorage();
 const SETTINGS_STORAGE_KEY = 'vorfreude-settings';
 
-function createSettings() {
-  const defaultSettings = getDefaultSettings();
-	const storageSettings = storage.get(SETTINGS_STORAGE_KEY) ?? {};
-
-  const settings = {
-    ...defaultSettings,
-    ...storageSettings
-  };
-
-  return writable(settings);
+function getStorageSettings() {
+  return storage.get(SETTINGS_STORAGE_KEY) ?? {};
 }
 
-function getDefaultSettings() {
+export function getDefaultSettings() {
 	const currentYear = new Date().getFullYear();
 
 	const defaultDay = {
@@ -41,8 +33,34 @@ function getDefaultSettings() {
   };
 }
 
-export const settings = createSettings();
+function getSettings() {
+  const defaultSettings = getDefaultSettings();
+	const storageSettings = getStorageSettings();
 
-settings.subscribe((settings) => {
-  storage.set(SETTINGS_STORAGE_KEY, settings);
-});
+  const settings = {
+    ...defaultSettings,
+    ...storageSettings
+  };
+
+  return settings;
+}
+
+let settingsStore;
+
+export function getSettingsStore() {
+  if (!settingsStore) {
+    settingsStore = writable(getSettings());
+
+    settingsStore.subscribe((settings) => {
+      storage.set(SETTINGS_STORAGE_KEY, settings);
+    });
+  }
+
+  return settingsStore;
+}
+
+export function resetSettingsStore() {
+  if (settingsStore) {
+    settingsStore.set(getSettings());
+  }
+}

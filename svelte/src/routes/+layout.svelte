@@ -1,11 +1,9 @@
 <script>
-	import CountdownTimer from '../components/CountdownTimer.svelte';
-	import Settings from '../components/Settings.svelte';
 	import '../global.css';
 </script>
 
 <div class="shell">
-	<Settings />
+	<slot></slot>
 </div>
 
 <style>

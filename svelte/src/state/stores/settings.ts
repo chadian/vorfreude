@@ -21,7 +21,8 @@ export function getDefaultSettings() {
 	};
 
   // bump default year forward a year if the defaultDay has already passed
-	if (DateTime.fromObject(defaultDay).diffNow().seconds < 0) {
+  const defaultDayInPast = DateTime.fromObject(defaultDay).diffNow().seconds === 0;
+	if (defaultDayInPast) {
 		defaultDay.year = currentYear + 1;
 	}
 

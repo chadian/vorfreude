@@ -22,10 +22,14 @@
 
   $: isValidDate = DateTime.fromObject(date).isValid
 
+	function closeSettings() {
+		document.location = '/';
+	}
+
 	function handleEscapeKeyDown(event) {
-		// on escape go back to main route
-		if (event.keyCode === 27) {
-			// TODO: Routing Change: Close Settings
+		const escKeyCode = 27;
+		if (event.keyCode === escKeyCode) {
+			closeSettings();
 		}
 	}
 
@@ -47,7 +51,7 @@
       searchTerms: imageSearchTerms,
     })
 
-    // TODO: Routing Change: Close Settings
+    closeSettings();
   }
 
 	onMount(() => {
@@ -70,7 +74,7 @@
 	}
 </script>
 
-<a class="Settings__close" href="#">
+<button class="Settings__close" on:click={() => closeSettings()}>
 	<span class="Settings__close-symbol">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +92,7 @@
 			</g>
 		</svg>
 	</span>
-</a>
+</button>
 <div class="Settings">
 	{#if !isValidDate}
 		<div class="Settings__validiation">
@@ -222,35 +226,34 @@
 		flex-direction: column;
 	}
 
-	.Settings__close,
-	.Vorfreude__show-settings {
+	.Settings__close {
 		/* INITIAL OPACITY */
 		opacity: 0.75;
 
 		display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
 		position: fixed;
 		top: 1.2rem;
 		right: 1.2rem;
-		width: 30px;
-		height: 30px;
+		width: 40px;
+		height: 40px;
 	}
 
 	@media only screen and (max-width: 425px) {
-		.Settings__close,
-		.Vorfreude__show-settings {
+		.Settings__close {
 			width: 25px;
 			height: 25px;
 		}
 	}
 
-	.Settings__close:hover,
-	.Vorfreude__show-settings:hover {
+	.Settings__close:hover {
 		/* HOVER OPACITY */
 		opacity: 1;
 	}
 
-	.Settings__close-symbol,
-	.Vorfreude__show-settings-symbol {
+	.Settings__close-symbol {
 		position: relative;
 		bottom: -2px;
 	}

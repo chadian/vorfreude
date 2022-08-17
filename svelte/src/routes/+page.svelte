@@ -1,5 +1,7 @@
 <script>
-	import Settings from '../components/Settings.svelte';
+	import CountdownTimer from '../components/CountdownTimer.svelte';
+	import { getSettingsStore } from '../state/stores/settings';
+	const settingsStore = getSettingsStore();
 </script>
 
-<Settings />
+<CountdownTimer endDate={$settingsStore.date}/>

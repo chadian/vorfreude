@@ -10,7 +10,7 @@ export default class LocalStorageAdapter implements StorageAdapter {
   public get(key) {
     return new Promise((resolve, reject) => {
       try {
-        let store = JSON.parse(window.localStorage.getItem(this.storeName));
+        const store = JSON.parse(globalThis?.localStorage?.getItem(this.storeName) ?? null);
         resolve((store && store[key]) || undefined);
       } catch (e) {
         reject(e);
@@ -21,8 +21,8 @@ export default class LocalStorageAdapter implements StorageAdapter {
   public set(key, value) {
     return new Promise((resolve, reject) => {
       try {
-        let store = JSON.parse(window.localStorage.getItem(this.storeName));
-        window.localStorage.setItem(this.storeName, JSON.stringify({ ...store, [key]: value }));
+        const store = JSON.parse(globalThis?.localStorage?.getItem(this.storeName) ?? null);
+        globalThis?.localStorage?.setItem(this.storeName, JSON.stringify({ ...store, [key]: value }));
         resolve(value);
       } catch (e) {
         reject(e);

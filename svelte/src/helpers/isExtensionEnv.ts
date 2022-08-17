@@ -5,5 +5,5 @@ type ChromeExtensionWindow = typeof window & {
 };
 
 export default function() {
-  return Boolean((window as ChromeExtensionWindow)?.runtime?.id);
+  return Boolean((globalThis as ChromeExtensionWindow)?.runtime?.id);
 }

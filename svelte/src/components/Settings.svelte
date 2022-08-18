@@ -268,26 +268,6 @@
     }
   }
 
-  #Settings__notification {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 150px;
-    padding: 0.5em 0.75rem;
-    text-align: center;
-    border: 1px solid #fff;
-    font-family: var(--neutral-font-family);
-    font-size: 1.25rem;
-    border-radius: 2rem;
-    color: #fff;
-    animation-name: notification-in, hide;
-    animation-delay: 0ms, 3500ms;
-    animation-duration: 350ms, 150ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.375);
-  }
-
   .Settings__validiation {
     align-self: flex-start;
     text-align: left;
@@ -304,12 +284,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-  }
-
-  .Settings__label-text {
-    padding-right: 3rem;
-    width: 15rem;
-    font-size: 1.25rem;
   }
 
   .Settings__input-wrapper {

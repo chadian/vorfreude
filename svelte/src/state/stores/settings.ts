@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
-import { DateTime } from 'luxon';
 import { getStorage } from '../storage/storage';
+import { hasDatePast } from '../../helpers/has-date-past';
 
 const storage = getStorage();
 const SETTINGS_STORAGE_KEY = 'vorfreude-settings';
@@ -20,9 +20,8 @@ export function getDefaultSettings() {
     hour: 0,
 	};
 
-  // bump default year forward a year if the defaultDay has already passed
-  const defaultDayInPast = DateTime.fromObject(defaultDay).diffNow().seconds === 0;
-	if (defaultDayInPast) {
+	if (hasDatePast(defaultDay)) {
+    // bump default year forward a year if the defaultDay has already passed
 		defaultDay.year = currentYear + 1;
 	}
 

@@ -5,7 +5,6 @@ export function skimDeadTime(
   skimKeys: Array<keyof CountdownDuration> = ['days', 'hours', 'minutes', 'seconds']
 ) {
   duration = { ...duration };
-  // console.log({ duration, skimKeys });
 
   if (skimKeys.length === 0) {
     return duration;

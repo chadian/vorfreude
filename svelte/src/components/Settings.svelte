@@ -12,6 +12,7 @@
   $: countdownMessage = '';
   $: allDoneMessage = '';
   $: imageSearchTerms = '';
+
   $: date = {
     year: undefined,
     month: undefined,
@@ -71,6 +72,9 @@
     value = Math.max(value, Number(minValue));
 
     date[key] = Number(value);
+
+    // required for forcing reactivity changes
+    date=date;
   }
 </script>
 
@@ -104,7 +108,7 @@
       <label class="Settings__input-wrapper">
         <input
           type="text"
-          on:input={(e) => (countdownMessage = e.currentTarget.value)}
+          on:blur={(e) => (countdownMessage = e.currentTarget.value)}
           value={countdownMessage}
         />
         <div class="Settings__input-line" />
@@ -116,7 +120,7 @@
       <label class="Settings__input-wrapper">
         <input
           type="text"
-          on:input={(e) => (allDoneMessage = e.currentTarget.value)}
+          on:blur={(e) => (allDoneMessage = e.currentTarget.value)}
           value={allDoneMessage}
         />
         <div class="Settings__input-line" />
@@ -128,7 +132,7 @@
       <label class="Settings__input-wrapper">
         <input
           type="text"
-          on:input={(e) => (imageSearchTerms = e.currentTarget.value)}
+          on:blur={(e) => (imageSearchTerms = e.currentTarget.value)}
           value={imageSearchTerms}
         />
         <div class="Settings__input-line" />
@@ -140,9 +144,9 @@
       <label class="Settings__input-wrapper Settings__input-wrapper--date">
         <input
           type="number"
-          min="2000"
+          min={new Date().getFullYear()}
           max="2100"
-          on:input={(e) => updateDate('year', e)}
+          on:blur={(e) => updateDate('year', e)}
           value={padInt(date.year, 2)}
         />
         <div class="Settings__input-line" />
@@ -154,7 +158,7 @@
           type="number"
           min="1"
           max="12"
-          on:input={(e) => updateDate('month', e)}
+          on:blur={(e) => updateDate('month', e)}
           value={padInt(date.month, 2)}
         />
         <div class="Settings__input-line" />
@@ -166,7 +170,7 @@
           type="number"
           min="1"
           max="31"
-          on:input={(e) => updateDate('day', e)}
+          on:blur={(e) => updateDate('day', e)}
           value={padInt(date.day, 2)}
         />
         <div class="Settings__input-line" />
@@ -178,7 +182,7 @@
           type="number"
           min="0"
           max="23"
-          on:input={(e) => updateDate('hour', e)}
+          on:blur={(e) => updateDate('hour', e)}
           value={padInt(date.hour, 2)}
         />
         <div class="Settings__input-line" />
@@ -190,7 +194,7 @@
           type="number"
           min="0"
           max="59"
-          on:input={(e) => updateDate('minute', e)}
+          on:blur={(e) => updateDate('minute', e)}
           value={padInt(date.minute, 2)}
         />
         <div class="Settings__input-line" />

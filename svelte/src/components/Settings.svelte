@@ -7,7 +7,7 @@
   import { padInt } from '../helpers/pad-int';
   import type { CountdownDateObject } from './../types';
 
-  const store = getSettingsStore();
+  let store = null;
 
   $: countdownMessage = '';
   $: allDoneMessage = '';
@@ -38,24 +38,34 @@
     ({ countdownMessage, allDoneMessage, searchTerms: imageSearchTerms, date } = get(store));
   }
 
+  function flushInputs() {
+    // since the fields are updated on blur this forces
+    // the form to blur and set any values that need to be
+    // set on the store
+    const inputs = Array.from(document.querySelectorAll('input'));
+    inputs.forEach((form) => form.blur());
+  }
+
   function saveSettings() {
     if (!isValidDate) {
       return;
     }
 
-    store.update({
-      ...get(store),
-
-      allDoneMessage,
-      countdownMessage,
-      date,
-      searchTerms: imageSearchTerms,
+    store.update((s) => {
+      return {
+        ...s,
+        allDoneMessage,
+        countdownMessage,
+        date,
+        searchTerms: imageSearchTerms,
+      }
     })
 
     closeSettings();
   }
 
-  onMount(() => {
+  onMount(async () => {
+    store = await getSettingsStore();
     setInitialValues();
     document.addEventListener('keydown', handleEscapeKeyDown);
     return () => document.removeEventListener('keydown', handleEscapeKeyDown);
@@ -103,7 +113,7 @@
       There's an issue with your date. You'll need to fix it before you can save.
     </div>
   {/if}
-  <form class="Settings__form" on:submit|preventDefault={saveSettings}>
+  <form class="Settings__form" on:submit|preventDefault={() => (flushInputs(), saveSettings())}>
     <div class="Settings__row">
       <label class="Settings__input-wrapper">
         <input

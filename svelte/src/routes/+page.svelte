@@ -3,7 +3,15 @@
   import CountdownMessage from '../components/CountdownMessage.svelte';
   import SettingsButton from '../components/SettingsButton.svelte';
   import { getSettingsStore } from '../state/stores/settings';
-  const settingsStore = getSettingsStore();
+  import { onMount } from 'svelte';
+
+  let settingsStore;
+  $: storeLoaded = false;
+
+  onMount(async () => {
+    settingsStore = await getSettingsStore();
+    storeLoaded = true;
+  });
 
   function goToSettings() {
     document.location = '/settings';
@@ -14,13 +22,15 @@
   <SettingsButton onClick={goToSettings}/>
 </div>
 
-<CountdownMessage
-  endDate={$settingsStore.date}
-  countdownMessage={$settingsStore.countdownMessage}
-  allDoneMessage={$settingsStore.allDoneMessage}
-/>
+{#if storeLoaded}
+  <CountdownMessage
+    endDate={$settingsStore.date}
+    countdownMessage={$settingsStore.countdownMessage}
+    allDoneMessage={$settingsStore.allDoneMessage}
+  />
 
-<CountdownTimer endDate={$settingsStore.date}/>
+  <CountdownTimer endDate={$settingsStore.date}/>
+{/if}
 
 <style>
   .Index__SettingsButton {

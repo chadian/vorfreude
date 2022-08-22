@@ -1,75 +1,51 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { DateTime } from 'luxon';
-  import { getSettingsStore } from '../state/stores/settings';
-  import { get } from 'svelte/store';
   import Button from './Button.svelte';
   import { padInt } from '../helpers/pad-int';
   import type { CountdownDateObject } from './../types';
 
-  let store = null;
+  export let onClose;
+  export let onSubmit;
+  export let settings = {
+    countdownMessage: undefined,
+    allDoneMessage: undefined,
+    searchTerms: undefined,
+    date: {
+      year: undefined,
+      month: undefined,
+      day: undefined,
+      hour: undefined,
+      minute: undefined,
+    } as CountdownDateObject
+  };
 
-  $: countdownMessage = '';
-  $: allDoneMessage = '';
-  $: imageSearchTerms = '';
+  $: isValidDate = DateTime.fromObject(settings.date).isValid
 
-  $: date = {
-    year: undefined,
-    month: undefined,
-    day: undefined,
-    hour: undefined,
-    minute: undefined,
-  } as CountdownDateObject;
+  onMount(async () => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  });
 
-  $: isValidDate = DateTime.fromObject(date).isValid
-
-  function closeSettings() {
-    document.location = '/';
-  }
-
-  function handleEscapeKeyDown(event) {
+  function handleKeyDown(event) {
     const escKeyCode = 27;
     if (event.keyCode === escKeyCode) {
-      closeSettings();
+      onClose();
     }
-  }
-
-  function setInitialValues() {
-    ({ countdownMessage, allDoneMessage, searchTerms: imageSearchTerms, date } = get(store));
   }
 
   function flushInputs() {
     // since the fields are updated on blur this forces
-    // the form to blur and set any values that need to be
-    // set on the store
+    // the form to blur and set any values that need to be set
     const inputs = Array.from(document.querySelectorAll('input'));
     inputs.forEach((form) => form.blur());
   }
 
-  function saveSettings() {
-    if (!isValidDate) {
-      return;
+  function handleSubmit() {
+    if (isValidDate) {
+      onSubmit(settings);
     }
-
-    store.update((s) => {
-      return {
-        ...s,
-        allDoneMessage,
-        countdownMessage,
-        date,
-        searchTerms: imageSearchTerms,
-      }
-    })
-
-    closeSettings();
   }
-
-  onMount(async () => {
-    store = await getSettingsStore();
-    setInitialValues();
-    document.addEventListener('keydown', handleEscapeKeyDown);
-    return () => document.removeEventListener('keydown', handleEscapeKeyDown);
-  });
 
   function updateDate(key, e) {
     const target = e.currentTarget;
@@ -81,14 +57,14 @@
     value = Math.min(value, Number(maxValue));
     value = Math.max(value, Number(minValue));
 
-    date[key] = Number(value);
+    settings.date[key] = Number(value);
 
     // required for forcing reactivity changes
-    date=date;
+    settings = settings;
   }
 </script>
 
-<button class="Settings__close" on:click={() => closeSettings()}>
+<button class="Settings__close" on:click={() => onClose()}>
   <span class="Settings__close-symbol">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -113,13 +89,14 @@
       There's an issue with your date. You'll need to fix it before you can save.
     </div>
   {/if}
-  <form class="Settings__form" on:submit|preventDefault={() => (flushInputs(), saveSettings())}>
+
+  <form class="Settings__form" on:submit|preventDefault={() => (flushInputs(), handleSubmit())}>
     <div class="Settings__row">
       <label class="Settings__input-wrapper">
         <input
           type="text"
-          on:blur={(e) => (countdownMessage = e.currentTarget.value)}
-          value={countdownMessage}
+          on:blur={(e) => (settings.countdownMessage = e.currentTarget.value)}
+          value={settings.countdownMessage}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">Countdown Message</div>
@@ -130,8 +107,8 @@
       <label class="Settings__input-wrapper">
         <input
           type="text"
-          on:blur={(e) => (allDoneMessage = e.currentTarget.value)}
-          value={allDoneMessage}
+          on:blur={(e) => (settings.allDoneMessage = e.currentTarget.value)}
+          value={settings.allDoneMessage}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">All Done! Message</div>
@@ -142,8 +119,8 @@
       <label class="Settings__input-wrapper">
         <input
           type="text"
-          on:blur={(e) => (imageSearchTerms = e.currentTarget.value)}
-          value={imageSearchTerms}
+          on:blur={(e) => (settings.searchTerms = e.currentTarget.value)}
+          value={settings.searchTerms}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">Image Search Terms</div>
@@ -157,7 +134,7 @@
           min={new Date().getFullYear()}
           max="2100"
           on:blur={(e) => updateDate('year', e)}
-          value={padInt(date.year, 2)}
+          value={padInt(settings.date.year, 2)}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">Year (YYYY)</div>
@@ -169,7 +146,7 @@
           min="1"
           max="12"
           on:blur={(e) => updateDate('month', e)}
-          value={padInt(date.month, 2)}
+          value={padInt(settings.date.month, 2)}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">Month (MM)</div>
@@ -181,7 +158,7 @@
           min="1"
           max="31"
           on:blur={(e) => updateDate('day', e)}
-          value={padInt(date.day, 2)}
+          value={padInt(settings.date.day, 2)}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">Day (DD)</div>
@@ -193,7 +170,7 @@
           min="0"
           max="23"
           on:blur={(e) => updateDate('hour', e)}
-          value={padInt(date.hour, 2)}
+          value={padInt(settings.date.hour, 2)}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">Hour (HH)</div>
@@ -205,7 +182,7 @@
           min="0"
           max="59"
           on:blur={(e) => updateDate('minute', e)}
-          value={padInt(date.minute, 2)}
+          value={padInt(settings.date.minute, 2)}
         />
         <div class="Settings__input-line" />
         <div class="Settings__input-under-label">Minute (MM)</div>

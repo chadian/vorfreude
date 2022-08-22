@@ -94,8 +94,8 @@
 
     opacity: 0;
     animation-name: show, small-slide-up;
-    animation-delay: 100ms;
-    animation-duration: 350ms;
+    animation-delay: 150ms;
+    animation-duration: 500ms;
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.175, 0, 4, 0.885);
   }

@@ -5,8 +5,8 @@
   import { padInt } from '../helpers/pad-int';
   import type { CountdownDateObject } from './../types';
 
-  export let onClose;
-  export let onSubmit;
+  export let onClose = () => {};
+  export let onSubmit = () => {};
   export let settings = {
     countdownMessage: undefined,
     allDoneMessage: undefined,

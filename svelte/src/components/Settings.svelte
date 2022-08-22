@@ -6,7 +6,7 @@
   import type { CountdownDateObject } from './../types';
 
   export let onClose = () => {};
-  export let onSubmit = () => {};
+  export let onSubmit = (_settings) => {};
   export let settings = {
     countdownMessage: undefined,
     allDoneMessage: undefined,
@@ -22,14 +22,8 @@
 
   $: isValidDate = DateTime.fromObject(settings.date).isValid
 
-  onMount(async () => {
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  });
-
   function handleKeyDown(event) {
-    const escKeyCode = 27;
-    if (event.keyCode === escKeyCode) {
+    if (event.key === 'Escape') {
       onClose();
     }
   }
@@ -64,7 +58,9 @@
   }
 </script>
 
-<button class="Settings__close" on:click={() => onClose()}>
+<svelte:window on:keydown={handleKeyDown}/>
+
+<button aria-label="Close" class="Settings__close" on:click={() => onClose()}>
   <span class="Settings__close-symbol">
     <svg
       xmlns="http://www.w3.org/2000/svg"

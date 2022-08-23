@@ -1,9 +1,11 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
+
+const port = 3000;
 const config = {
-	webServer: {
-		command: 'npm run build && npm run preview',
-		port: 3000
-	}
+  webServer: {
+    port,
+    command: `yarn build && yarn preview --port ${port}`
+  }
 };
 
 export default config;

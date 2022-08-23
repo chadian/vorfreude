@@ -3,13 +3,13 @@
   import type { CountdownDateObject } from "src/types";
 
   export let endDate: CountdownDateObject;
-  export let countdownMessage;
-  export let allDoneMessage;
+  export let countdownMessage = '';
+  export let allDoneMessage = '';
 
-  const timeUp = hasDatePast(endDate);
+  $: endDateHasPast = hasDatePast(endDate);
 </script>
 
-{#if timeUp && allDoneMessage}
+{#if endDateHasPast && allDoneMessage}
   <div class="Vorfreude__all-done-message">
     {allDoneMessage}
   </div>

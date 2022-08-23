@@ -12,4 +12,5 @@ jobs:
           node-version: 16
       # fix --cwd after svelte migration
       - run: yarn --cwd ./svelte
+      - run: yarn --cwd ./svelte svelte-kit sync
       - run: yarn --cwd ./svelte test

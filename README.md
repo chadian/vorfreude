@@ -7,12 +7,11 @@
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+You will need the following things installed on your computer.
 
 * [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
+* [Node.js](https://nodejs.org/) (see package.json "engines" for required version)
 * [Yarn](https://yarnpkg.com/en/)
-* [Ember CLI](https://ember-cli.com/)
 
 ## Installation
 
@@ -20,10 +19,17 @@ You will need the following things properly installed on your computer.
 * `cd vorfreude`
 * `yarn`
 
-## Running / Development
+## Local Development
 
-* `yarn start`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* `yarn dev`
+* Visit the locally running app at the listed outputted in the terminal.
+
+## Tests
+
+* Unit and Component Tests (`yarn test:unit`) use [jest](https://jestjs.io/) and [Testing Library](https://testing-library.com/)
+* Acceptance Tests (`yarn test:acceptance`) use [Playwright](https://playwright.dev/)
+	* Playwright runs tests in the browser and these need to be installed first. This can be done by running `yarn playwright install`
+* Both unit/component and acceptance tests can be ran with `yarn test`
 
 ### Building & Relasing
 
@@ -34,5 +40,4 @@ You will need the following things properly installed on your computer.
 
 ## Further Reading / Useful Links
 
-* [glimmerjs](http://github.com/tildeio/glimmer/)
-* [ember-cli](https://ember-cli.com/)
+* This project is built using [Svelte](https://svelte.dev/) and [SvelteKit](https://kit.svelte.dev/)

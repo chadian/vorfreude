@@ -91,6 +91,7 @@
     text-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px, rgba(0, 0, 0, 0.25) 0px 6px 20px;
     padding-left: 2vw;
     padding-right: 2vw;
+    cursor: default;
 
     opacity: 0;
     animation-name: show, small-slide-up;

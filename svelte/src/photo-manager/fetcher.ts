@@ -1,22 +1,22 @@
 import { clone, take } from 'ramda';
-import shuffle from '../shuffle';
-import { SimpleIndexedDbAdapter } from '../storage/SimpleIndexedDbAdapter';
+import { SimpleIndexedDbAdapter } from '../state/storage/SimpleIndexedDbAdapter';
 import {
   filterForPreviousDownloadedPhotos,
   highQualityImageUrlForPhoto
 } from './photos';
 import resizePhotoBlob from './resizePhoto';
+import shuffle from './shuffle';
 
 const IMAGE_ENDPOINT_URL = 'https://vorfreude-elixir.herokuapp.com/api/images';
 
-let indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
+const indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
 
 export function fetchPhotos(photos) {
   photos = clone(photos);
 
   return Promise.all(
     photos.map((photo) => {
-      let url = highQualityImageUrlForPhoto(photo);
+      const url = highQualityImageUrlForPhoto(photo);
       return fetch(url)
         .then((response) => response.blob && response.blob())
         .then((blob) => ((photo.blob = blob), photo));
@@ -46,11 +46,11 @@ export async function resizePhoto(photo) {
 }
 
 export async function query(searchTerms) {
-  let url = new URL(IMAGE_ENDPOINT_URL);
+  const url = new URL(IMAGE_ENDPOINT_URL);
   url.searchParams.append('search', searchTerms);
 
-  let result = await window.fetch(url.toString());
-  let photos = (await result.json()).photos.photo;
+  const result = await window.fetch(url.toString());
+  const photos = (await result.json()).photos.photo;
 
   return photos
     .filter(highQualityImageUrlForPhoto)
@@ -58,17 +58,17 @@ export async function query(searchTerms) {
 }
 
 export async function filterOutPreviouslyDownloadedPhotos(freshPhotos, sourcePhotos) {
-  let previouslyDownloadedPhotos = filterForPreviousDownloadedPhotos(sourcePhotos)
+  const previouslyDownloadedPhotos = filterForPreviousDownloadedPhotos(sourcePhotos)
     .map((photo) => photo.id);
 
   return freshPhotos.filter((photo) => !previouslyDownloadedPhotos.includes(photo.id));
 }
 
-export let replenish = ((outstandingBatches = 0) =>
+export const replenish = ((outstandingBatches = 0) =>
   async function innerReplenish(searchTerms, downloadBatchSize = 3, maxDownloadBatches = 1) {
-    let adjustOutstanding = (adjustment) => (_) => (outstandingBatches = outstandingBatches + adjustment, _);
+    const adjustOutstanding = (adjustment) => (_) => (outstandingBatches = outstandingBatches + adjustment, _);
 
-    let capBatchDownlods = (_) => {
+    const capBatchDownlods = (_) => {
       if (outstandingBatches > maxDownloadBatches) {
         throw new Error(`max batches of ${maxDownloadBatches} reached`);
       } else {
@@ -93,8 +93,8 @@ export let replenish = ((outstandingBatches = 0) =>
 )();
 
 export async function fetchPopularPhotoUrl(searchTerms) {
-  let photos = await query(searchTerms);
-  let photoUrls = photos.map(highQualityImageUrlForPhoto);
+  const photos = await query(searchTerms);
+  const photoUrls = photos.map(highQualityImageUrlForPhoto);
 
   return take(50, shuffle(photoUrls)).pop();
 }

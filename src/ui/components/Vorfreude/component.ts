@@ -1,5 +1,5 @@
 import Component, { tracked } from '@glimmer/component';
-import Manager from '../../../utils/lib/manager';
+import Manager from '../../../../svelte/src/photo-manager/manager';
 import { addStoreUpdateHandler } from '../../../utils/lib/store';
 import { actions, dispatch } from '../../../utils/lib/store';
 

@@ -1,8 +1,20 @@
 <script>
   import '../global.css';
+  import Wallpaper from '../components/Wallpaper.svelte';
+  import { currentPhoto } from '../state/stores/photo';
+
+  export const ssr = false;
+
 </script>
 
 <div class="shell">
+  {#if $currentPhoto.url}
+    <Wallpaper
+      blur={$currentPhoto.blur}
+      photoUrl={$currentPhoto.url}
+    />
+  {/if}
+
   <slot></slot>
 </div>
 

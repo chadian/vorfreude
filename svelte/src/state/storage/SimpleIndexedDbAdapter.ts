@@ -9,11 +9,15 @@ export class SimpleIndexedDbAdapter implements StorageAdapter {
   constructor(tableName: string) {
     this.tableName = tableName;
 
-    let request = indexedDB.open(SimpleIndexedDbAdapter.DB_KEY);
+    if (!globalThis.indexedDB) {
+      return;
+    }
+
+    const request = indexedDB.open(SimpleIndexedDbAdapter.DB_KEY);
 
     this.db = new Promise((resolve, reject) => {
       request.onsuccess = () => {
-        let db = request.result;
+        const db = request.result;
         resolve(db);
       };
 
@@ -26,8 +30,8 @@ export class SimpleIndexedDbAdapter implements StorageAdapter {
   }
 
   public get(key) {
-    let dbRead = (db) => new Promise((resolve, reject) => {
-      let transaction = db.transaction(this.tableName, 'readwrite');
+    const dbRead = (db) => new Promise((resolve, reject) => {
+      const transaction = db.transaction(this.tableName, 'readwrite');
 
       transaction.onerror = reject;
       transaction.onabort = reject;
@@ -35,17 +39,17 @@ export class SimpleIndexedDbAdapter implements StorageAdapter {
         resolve(request.result);
       };
 
-      let request = transaction.objectStore(this.tableName).get(key);
+      const request = transaction.objectStore(this.tableName).get(key);
     });
 
     return this.db.then((db) => dbRead(db));
   }
 
   public set(key, value) {
-    let savedFormat = { __id: key, ...value };
+    const savedFormat = { __id: key, ...value };
 
-    let dbWrite = (db) => new Promise((resolve, reject) => {
-      let transaction = db.transaction(this.tableName, 'readwrite');
+    const dbWrite = (db) => new Promise((resolve, reject) => {
+      const transaction = db.transaction(this.tableName, 'readwrite');
 
       transaction.onerror = reject;
       transaction.onabort = reject;
@@ -60,8 +64,8 @@ export class SimpleIndexedDbAdapter implements StorageAdapter {
   }
 
   public remove(key) {
-    let remove = (db) => new Promise((resolve, reject) => {
-      let transaction = db.transaction(this.tableName, 'readwrite');
+    const remove = (db) => new Promise((resolve, reject) => {
+      const transaction = db.transaction(this.tableName, 'readwrite');
 
       transaction.onerror = reject;
       transaction.onabort = reject;
@@ -69,15 +73,15 @@ export class SimpleIndexedDbAdapter implements StorageAdapter {
         resolve(request.result);
       };
 
-      let request = transaction.objectStore(this.tableName).delete(key);
+      const request = transaction.objectStore(this.tableName).delete(key);
     });
 
     return this.db.then(remove);
   }
 
   public getAll() {
-    let dbGetAll = (db) => new Promise((resolve, reject) => {
-      let transaction = db.transaction(this.tableName, 'readwrite');
+    const dbGetAll = (db) => new Promise((resolve, reject) => {
+      const transaction = db.transaction(this.tableName, 'readwrite');
 
       transaction.onerror = reject;
       transaction.onabort = reject;
@@ -85,7 +89,7 @@ export class SimpleIndexedDbAdapter implements StorageAdapter {
         resolve(request.result);
       };
 
-      let request = transaction.objectStore(this.tableName).getAll();
+      const request = transaction.objectStore(this.tableName).getAll();
     });
 
     return this.db.then(dbGetAll);

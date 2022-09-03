@@ -1,17 +1,16 @@
 import { take } from 'ramda';
-import isExtensionEnv from './isExtensionEnv';
 import {
   filterForDownloadedPhotos,
   filterPhotosForSearchTerms,
   filterStalePhotos,
   markPhotoAsSeen,
   shouldDownloadPhotos,
-} from './manager/photos';
+} from './photos';
 
 import {
   cleanDownloadFromPhoto,
   cleanPhotosWithoutGivenSearchTerms
-} from './manager/cleaner';
+} from './cleaner';
 
 import shuffle from './shuffle';
 
@@ -20,50 +19,52 @@ import {
   replenish,
   retrieveAllPhotos,
   storePhoto
-} from './manager/fetcher';
+} from './fetcher';
+
+import isExtensionEnv from '../helpers/isExtensionEnv';
 
 const BATCH_SIZE = 3;
 
 export default class Manager {
   public static urlForBlob = (blob) => URL.createObjectURL(blob);
 
-  public searchTerms = '';
-  public photos = Promise.resolve([]);
+  private searchTerms = '';
 
-  constructor(searchTerms) {
+  setSearchTerms(searchTerms) {
     this.searchTerms = searchTerms;
-
-    this.photos = this.photos.then(async () => {
-      let photos = await retrieveAllPhotos();
-      return filterPhotosForSearchTerms(photos, this.searchTerms);
-    });
   }
 
-  public async getPhoto() {
-    let downloadedPhotos = filterForDownloadedPhotos(await this.photos);
+  async getPhotos() {
+    const allPhotos = await retrieveAllPhotos();
+    const filteredPhotos = filterPhotosForSearchTerms(allPhotos, this.searchTerms);
+    return filteredPhotos;
+  }
 
-    if (downloadedPhotos.length > 0) {
-      let photo = shuffle(downloadedPhotos).pop();
-      this.markPhotoAsSeen(photo);
-      return Manager.urlForBlob(photo.blob);
+  async getPhoto() {
+    const downloadedPhotos = filterForDownloadedPhotos(await this.getPhotos());
+
+    if (downloadedPhotos.length === 0) {
+      return fetchPopularPhotoUrl(this.searchTerms);
     }
 
-    return fetchPopularPhotoUrl(this.searchTerms);
+    const photo = shuffle(downloadedPhotos).pop();
+    this.markPhotoAsSeen(photo);
+    return Manager.urlForBlob(photo.blob);
   }
 
-  public async checkBacklog() {
-    let photos = await this.photos;
+  async checkBacklog() {
+    const photos = await this.getPhotos();
     if (shouldDownloadPhotos(photos)) {
       this.replenishBacklog();
     }
   }
 
-  public cleanPhotosFromPreviousSearchTerms() {
+  cleanPhotosFromPreviousSearchTerms() {
     cleanPhotosWithoutGivenSearchTerms(this.searchTerms);
   }
 
-  public async cleanBacklog() {
-    let photos = await this.photos;
+  async cleanBacklog() {
+    const photos = await this.getPhotos();
 
     // only clean when we shouldn't be getting more photos
     if (shouldDownloadPhotos(photos)) {

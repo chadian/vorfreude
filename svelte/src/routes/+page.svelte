@@ -4,6 +4,7 @@
   import SettingsButton from '../components/SettingsButton.svelte';
   import { getSettingsStore } from '../state/stores/settings';
   import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
 
   let settingsStore;
   $: storeLoaded = false;
@@ -14,7 +15,7 @@
   });
 
   function goToSettings() {
-    document.location = '/settings';
+    goto('/settings');
   }
 </script>
 

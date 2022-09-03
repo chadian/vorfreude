@@ -1,6 +1,15 @@
 import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
 import { getStorage } from '../storage/storage';
 import { hasDatePast } from '../../helpers/has-date-past'
+import type { CountdownDateObject } from 'src/types';
+
+type Settings = {
+  countdownMessage: string;
+  allDoneMessage: string;
+  searchTerms: string;
+  date: CountdownDateObject,
+};
 
 const storage = getStorage();
 const SETTINGS_STORAGE_KEY = 'vorfreude-settings';
@@ -33,7 +42,7 @@ export function getDefaultSettings() {
   };
 }
 
-async function getInitialSettings() {
+async function getInitialSettings(): Promise<Settings> {
   const defaultSettings = getDefaultSettings();
 	const storageSettings = await getStorageSettings();
 
@@ -45,9 +54,9 @@ async function getInitialSettings() {
   return settings;
 }
 
-let settingsStore;
+let settingsStore: Writable<Settings>;
 
-export async function getSettingsStore() {
+export async function getSettingsStore(): Promise<typeof settingsStore> {
   if (!settingsStore) {
     settingsStore = writable(await getInitialSettings());
 
@@ -59,8 +68,8 @@ export async function getSettingsStore() {
   return settingsStore;
 }
 
-export function resetSettingsStore() {
+export async function resetSettingsStore() {
   if (settingsStore) {
-    settingsStore.set(getInitialSettings());
+    settingsStore.set(await getInitialSettings());
   }
 }

@@ -28,9 +28,6 @@ async function load() {
   }
 
   const settingsStore = await getSettingsStore();
-  const initialSearchTerms = get(settingsStore).searchTerms;
-  await setPhoto(initialSearchTerms);
-
   settingsStore.subscribe((settings) => {
     const { searchTerms } = settings;
     setPhoto(searchTerms);

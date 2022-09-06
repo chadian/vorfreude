@@ -62,7 +62,7 @@
     cursor: default;
     opacity: 0;
     animation-name: show, small-slide-up;
-    animation-delay: 150ms;
+    animation-delay: 350ms;
     animation-duration: 550ms;
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.175, 0,4, 0.885);

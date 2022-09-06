@@ -10,8 +10,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      # fix --cwd after svelte migration
-      - run: yarn --cwd ./svelte
-      - run: yarn --cwd ./svelte svelte-kit sync
-      - run: yarn --cwd ./svelte playwright install
-      - run: yarn --cwd ./svelte test
+      - run: yarn
+      - run: yarn svelte-kit sync
+      - run: yarn playwright install
+      - run: yarn test

@@ -1,9 +1,18 @@
-import { get, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import Manager from '../../photo-manager/manager';
 import { getSettingsStore } from './settings';
 export const currentPhoto = writable({ blur: false, url: '' });
 
 const manager = new Manager();
+const isBrowser = typeof window !== 'undefined';
+
+export function performPhotoHouseKeeping() {
+  if (isBrowser) {
+    manager.checkBacklog();
+    manager.cleanBacklog();
+    manager.cleanPhotosFromPreviousSearchTerms();
+  }
+}
 
 async function setPhoto(searchTerms) {
   if (!searchTerms) {
@@ -22,7 +31,6 @@ async function setPhoto(searchTerms) {
 }
 
 async function load() {
-  const isBrowser = typeof window !== 'undefined';
   if (!isBrowser) {
     return;
   }

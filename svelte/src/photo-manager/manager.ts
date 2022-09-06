@@ -44,7 +44,8 @@ export default class Manager {
     const downloadedPhotos = filterForDownloadedPhotos(await this.getPhotos());
 
     if (downloadedPhotos.length === 0) {
-      return fetchPopularPhotoUrl(this.searchTerms);
+      const photoUrl = await fetchPopularPhotoUrl(this.searchTerms);
+      return photoUrl;
     }
 
     const photo = shuffle(downloadedPhotos).pop();
@@ -81,8 +82,8 @@ export default class Manager {
   private replenishBacklog() {
     if (isExtensionEnv()) {
       chrome.runtime.sendMessage({
-        downloadBatchSize: BATCH_SIZE,
         operation: 'replenishBacklog',
+        downloadBatchSize: BATCH_SIZE,
         searchTerms: this.searchTerms
       });
     } else {

@@ -1,10 +1,10 @@
 <script>
   import '../global.css';
   import Wallpaper from '../components/Wallpaper.svelte';
-  import { currentPhoto } from '../state/stores/photo';
+  import { currentPhoto, performPhotoHouseKeeping } from '../state/stores/photo';
 
   export const ssr = false;
-
+  performPhotoHouseKeeping();
 </script>
 
 <div class="shell">

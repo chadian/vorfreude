@@ -1,4 +1,4 @@
-import type { StorageAdapter } from "src/types";
+import type { StorageAdapter } from 'src/types';
 
 export default class ChromeStorageAdapter implements StorageAdapter {
   public storeName = '';
@@ -24,7 +24,9 @@ export default class ChromeStorageAdapter implements StorageAdapter {
       try {
         chrome.storage.local.get(this.storeName, (store) => {
           store = store || {};
-          chrome.storage.local.set({ [this.storeName]: { ...store, [key]: value } }, () => resolve(value));
+          chrome.storage.local.set({ [this.storeName]: { ...store, [key]: value } }, () =>
+            resolve(value)
+          );
         });
       } catch (e) {
         reject(e);

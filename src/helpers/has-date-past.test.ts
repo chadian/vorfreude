@@ -1,5 +1,5 @@
-import { DateTime } from "luxon";
-import { hasDatePast } from "./has-date-past";
+import { DateTime } from 'luxon';
+import { hasDatePast } from './has-date-past';
 
 const mockNow = DateTime.fromObject({
   year: 2022,

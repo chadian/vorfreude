@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { hasDatePast } from "../helpers/has-date-past";
-  import type { CountdownDateObject } from "src/types";
+  import { hasDatePast } from '../helpers/has-date-past';
+  import type { CountdownDateObject } from 'src/types';
 
   export let endDate: CountdownDateObject;
   export let countdownMessage = '';
@@ -65,16 +65,18 @@
     animation-delay: 350ms;
     animation-duration: 550ms;
     animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(0.175, 0,4, 0.885);
+    animation-timing-function: cubic-bezier(0.175, 0, 4, 0.885);
   }
 
-  .Vorfreude__countdown-message, .Vorfreude__all-done-message {
+  .Vorfreude__countdown-message,
+  .Vorfreude__all-done-message {
     font-size: var(--base-screen-proportional-font-size-desktop);
     margin-top: 0.1em;
   }
 
   @media only screen and (max-width: 425px) {
-    .Vorfreude__countdown-message, .Vorfreude__all-done-message {
+    .Vorfreude__countdown-message,
+    .Vorfreude__all-done-message {
       font-size: var(--base-screen-proportional-font-size-mobile);
       margin-bottom: 0.75rem;
     }

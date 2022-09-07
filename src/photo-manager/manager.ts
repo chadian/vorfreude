@@ -4,22 +4,14 @@ import {
   filterPhotosForSearchTerms,
   filterStalePhotos,
   markPhotoAsSeen,
-  shouldDownloadPhotos,
+  shouldDownloadPhotos
 } from './photos';
 
-import {
-  cleanDownloadFromPhoto,
-  cleanPhotosWithoutGivenSearchTerms
-} from './cleaner';
+import { cleanDownloadFromPhoto, cleanPhotosWithoutGivenSearchTerms } from './cleaner';
 
 import shuffle from './shuffle';
 
-import {
-  fetchPopularPhotoUrl,
-  replenish,
-  retrieveAllPhotos,
-  storePhoto
-} from './fetcher';
+import { fetchPopularPhotoUrl, replenish, retrieveAllPhotos, storePhoto } from './fetcher';
 
 import isExtensionEnv from '../helpers/isExtensionEnv';
 

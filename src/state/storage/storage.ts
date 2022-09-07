@@ -4,9 +4,8 @@ import LocalStorageAdapter from './LocalStorageAdapter';
 
 const VORFREUDE_STORAGE_NAME = 'vorfreude';
 
-const getEnvironmentStorage = (storeName) => isExtensionEnv() ?
-    new ChromeStorageAdapter(storeName)
-  : new LocalStorageAdapter(storeName);
+const getEnvironmentStorage = (storeName) =>
+  isExtensionEnv() ? new ChromeStorageAdapter(storeName) : new LocalStorageAdapter(storeName);
 
 let vorfreudeStorage;
 
@@ -16,4 +15,4 @@ export const getStorage = () => {
   }
 
   return vorfreudeStorage;
-}
+};

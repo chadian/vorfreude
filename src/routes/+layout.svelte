@@ -8,12 +8,9 @@
 </script>
 
 <div class="shell">
-  <slot></slot>
+  <slot />
   {#if $currentPhoto.url}
-    <Wallpaper
-      blur={$currentPhoto.blur}
-      photoUrl={$currentPhoto.url}
-    />
+    <Wallpaper blur={$currentPhoto.blur} photoUrl={$currentPhoto.url} />
   {/if}
 </div>
 

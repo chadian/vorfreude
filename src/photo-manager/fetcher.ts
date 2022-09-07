@@ -1,9 +1,6 @@
 import { clone, take } from 'ramda';
 import { SimpleIndexedDbAdapter } from '../state/storage/SimpleIndexedDbAdapter';
-import {
-  filterForPreviousDownloadedPhotos,
-  highQualityImageUrlForPhoto
-} from './photos';
+import { filterForPreviousDownloadedPhotos, highQualityImageUrlForPhoto } from './photos';
 import resizePhotoBlob from './resizePhoto';
 import shuffle from './shuffle';
 
@@ -54,19 +51,22 @@ export async function query(searchTerms) {
 
   return photos
     .filter(highQualityImageUrlForPhoto)
-    .map((photo) => (photo.searchTerms = searchTerms, photo));
+    .map((photo) => ((photo.searchTerms = searchTerms), photo));
 }
 
 export async function filterOutPreviouslyDownloadedPhotos(freshPhotos, sourcePhotos) {
-  const previouslyDownloadedPhotos = filterForPreviousDownloadedPhotos(sourcePhotos)
-    .map((photo) => photo.id);
+  const previouslyDownloadedPhotos = filterForPreviousDownloadedPhotos(sourcePhotos).map(
+    (photo) => photo.id
+  );
 
   return freshPhotos.filter((photo) => !previouslyDownloadedPhotos.includes(photo.id));
 }
 
 export const replenish = ((outstandingBatches = 0) =>
   async function innerReplenish(searchTerms, downloadBatchSize = 3, maxDownloadBatches = 1) {
-    const adjustOutstanding = (adjustment) => (_) => (outstandingBatches = outstandingBatches + adjustment, _);
+    const adjustOutstanding = (adjustment) => (_) => (
+      (outstandingBatches = outstandingBatches + adjustment), _
+    );
 
     const capBatchDownlods = (_) => {
       if (outstandingBatches > maxDownloadBatches) {
@@ -89,8 +89,7 @@ export const replenish = ((outstandingBatches = 0) =>
       .then((photos) => photos.forEach(storePhoto) || photos)
       .then(adjustOutstanding(-1))
       .catch((e) => adjustOutstanding(-1));
-  }
-)();
+  })();
 
 export async function fetchPopularPhotoUrl(searchTerms) {
   const photos = await query(searchTerms);

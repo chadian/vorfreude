@@ -21,13 +21,13 @@
     currentPhoto.update((cp) => {
       return {
         ...cp,
-        blur,
-      }
+        blur
+      };
     });
   }
 
   function closeSettings() {
-    goto('/')
+    goto('/');
   }
 
   function handleSubmit(settings) {
@@ -35,17 +35,13 @@
       return {
         ...previousSettings,
         ...settings
-      }
-    })
+      };
+    });
 
     closeSettings();
   }
 </script>
 
 {#if store}
-  <Settings
-    settings={get(store)}
-    onClose={closeSettings}
-    onSubmit={handleSubmit}
-  />
+  <Settings settings={get(store)} onClose={closeSettings} onSubmit={handleSubmit} />
 {/if}

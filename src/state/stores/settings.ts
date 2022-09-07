@@ -1,14 +1,14 @@
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import { getStorage } from '../storage/storage';
-import { hasDatePast } from '../../helpers/has-date-past'
+import { hasDatePast } from '../../helpers/has-date-past';
 import type { CountdownDateObject } from 'src/types';
 
 type Settings = {
   countdownMessage: string;
   allDoneMessage: string;
   searchTerms: string;
-  date: CountdownDateObject,
+  date: CountdownDateObject;
 };
 
 const storage = getStorage();
@@ -19,32 +19,32 @@ async function getStorageSettings() {
 }
 
 export function getDefaultSettings() {
-	const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
-	const defaultDay = {
-		year: currentYear,
-		month: 1,
-		day: 1,
-		minute: 0,
-    hour: 0,
-	};
+  const defaultDay = {
+    year: currentYear,
+    month: 1,
+    day: 1,
+    minute: 0,
+    hour: 0
+  };
 
-	if (hasDatePast(defaultDay)) {
+  if (hasDatePast(defaultDay)) {
     // bump default year forward a year if the defaultDay has already passed
-		defaultDay.year = currentYear + 1;
-	}
+    defaultDay.year = currentYear + 1;
+  }
 
   return {
     countdownMessage: 'Vorfreude',
     allDoneMessage: 'Countdown complete!',
     searchTerms: 'New York City',
-    date: defaultDay,
+    date: defaultDay
   };
 }
 
 async function getInitialSettings(): Promise<Settings> {
   const defaultSettings = getDefaultSettings();
-	const storageSettings = await getStorageSettings();
+  const storageSettings = await getStorageSettings();
 
   const settings = {
     ...defaultSettings,

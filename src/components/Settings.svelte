@@ -16,11 +16,11 @@
       month: undefined,
       day: undefined,
       hour: undefined,
-      minute: undefined,
+      minute: undefined
     } as CountdownDateObject
   };
 
-  $: isValidDate = DateTime.fromObject(settings.date).isValid
+  $: isValidDate = DateTime.fromObject(settings.date).isValid;
 
   function handleKeyDown(event) {
     if (event.key === 'Escape') {
@@ -58,7 +58,7 @@
   }
 </script>
 
-<svelte:window on:keydown={handleKeyDown}/>
+<svelte:window on:keydown={handleKeyDown} />
 
 <button aria-label="Close" class="Settings__close" on:click={() => onClose()}>
   <span class="Settings__close-symbol">

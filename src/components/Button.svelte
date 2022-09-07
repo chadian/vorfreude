@@ -2,7 +2,7 @@
   export let type = 'button';
 </script>
 
-<button type={type} on:click>
+<button {type} on:click>
   <slot />
 </button>
 

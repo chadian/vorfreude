@@ -1,9 +1,9 @@
 :root {
-	--neutral-font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica,
-		Arial, 'Lucida Grande', sans-serif;
-	--clean-font-family: 'Questrial';
-	--base-screen-proportional-font-size-desktop: 5vw;
-	--base-screen-proportional-font-size-mobile: 10vw;
+  --neutral-font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica,
+    Arial, 'Lucida Grande', sans-serif;
+  --clean-font-family: 'Questrial';
+  --base-screen-proportional-font-size-desktop: 5vw;
+  --base-screen-proportional-font-size-mobile: 10vw;
 }
 
 @font-face {
@@ -20,7 +20,8 @@ body *:focus {
   outline-color: rgb(145, 147, 255);
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0;

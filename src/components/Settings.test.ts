@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 import svelte from 'svelte-inline-compile';
 import { getDefaultSettings } from '../state/stores/settings';
 
@@ -12,7 +12,7 @@ const testSettings = getDefaultSettings();
 beforeEach(() => {
   onClose = jest.fn();
   user = userEvent.setup();
-	const rendered = render(svelte`
+  const rendered = render(svelte`
     <script>
       import Settings from './Settings.svelte';
     </script>
@@ -21,7 +21,7 @@ beforeEach(() => {
   `);
 
   getByLabelText = rendered.getByLabelText;
-})
+});
 
 test('it renders the settings prop', () => {
   expect(getByLabelText('Countdown Message')).toHaveValue(testSettings.countdownMessage);

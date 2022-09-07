@@ -14,7 +14,7 @@
 
       img.onload = () => {
         loaded = true;
-      }
+      };
 
       img.src = photoUrl;
     }

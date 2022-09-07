@@ -20,7 +20,7 @@
 </script>
 
 <div class="Index__SettingsButton">
-  <SettingsButton onClick={goToSettings}/>
+  <SettingsButton onClick={goToSettings} />
 </div>
 
 {#if storeLoaded}
@@ -30,7 +30,7 @@
     allDoneMessage={$settingsStore.allDoneMessage}
   />
 
-  <CountdownTimer endDate={$settingsStore.date}/>
+  <CountdownTimer endDate={$settingsStore.date} />
 {/if}
 
 <style>

@@ -23,8 +23,8 @@ afterEach(() => {
 
 test('shows countdownMessage for a future endDate', () => {
   const futureEndDate = mockNow.plus({ minutes: 1 }).toObject();
-  const allDoneMessage = 'All done!'
-  const countdownMessage = 'Still counting down...'
+  const allDoneMessage = 'All done!';
+  const countdownMessage = 'Still counting down...';
 
   const { getByText, queryByText } = render(svelte`
     <script>
@@ -44,8 +44,8 @@ test('shows countdownMessage for a future endDate', () => {
 
 test('shows countdownMessage for a past date', () => {
   const pastEndDate = mockNow.minus({ minutes: 1 }).toObject();
-  const allDoneMessage = 'All done!'
-  const countdownMessage = 'Still counting down...'
+  const allDoneMessage = 'All done!';
+  const countdownMessage = 'Still counting down...';
 
   const { getByText, queryByText } = render(svelte`
     <script>

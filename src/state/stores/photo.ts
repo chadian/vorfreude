@@ -26,7 +26,7 @@ async function setPhoto(searchTerms) {
     return {
       ...cp,
       url: photoUrl
-    }
+    };
   });
 }
 

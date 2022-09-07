@@ -1,4 +1,4 @@
-import type { StorageAdapter } from "src/types";
+import type { StorageAdapter } from 'src/types';
 
 export default class LocalStorageAdapter implements StorageAdapter {
   public storeName = '';
@@ -22,7 +22,10 @@ export default class LocalStorageAdapter implements StorageAdapter {
     return new Promise((resolve, reject) => {
       try {
         const store = JSON.parse(globalThis?.localStorage?.getItem(this.storeName) ?? null);
-        globalThis?.localStorage?.setItem(this.storeName, JSON.stringify({ ...store, [key]: value }));
+        globalThis?.localStorage?.setItem(
+          this.storeName,
+          JSON.stringify({ ...store, [key]: value })
+        );
         resolve(value);
       } catch (e) {
         reject(e);

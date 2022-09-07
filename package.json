@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build:extension": "yarn build && cd chrome && yarn build",
     "package": "svelte-kit package",
     "preview": "vite preview",
     "test": "yarn test:unit && yarn test:acceptance",

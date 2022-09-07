@@ -9,6 +9,12 @@ async function elementLocators(page, selector) {
   return settingInputs;
 }
 
+test('it has a wallpaper', async ({ page }) => {
+  await page.goto('/');
+  const wallpaper = await page.waitForSelector('.Wallpaper', { timeout: 10000 });
+  expect(await wallpaper.isVisible()).toStrictEqual(true);
+});
+
 test('it shows the default settings state', async ({ page }) => {
   await page.goto('/');
   const message = page.locator('.Vorfreude__countdown-message');

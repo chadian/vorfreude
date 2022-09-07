@@ -86,9 +86,9 @@ export const replenish = ((outstandingBatches = 0) =>
       .then(take(downloadBatchSize))
       .then(fetchPhotos)
       .then((photos) => Promise.all(photos.map(resizePhoto)))
-      .then((photos) => photos.forEach(storePhoto) || photos)
+      .then((photos) => (photos.forEach(storePhoto), photos))
       .then(adjustOutstanding(-1))
-      .catch((e) => adjustOutstanding(-1));
+      .catch(() => adjustOutstanding(-1));
   })();
 
 export async function fetchPopularPhotoUrl(searchTerms) {

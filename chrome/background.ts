@@ -1,15 +1,15 @@
-import { replenish } from '../src/utils/lib/manager/fetcher';
+import { replenish } from '../src/photo-manager/fetcher';
 
 chrome.runtime.onMessage.addListener(function(message) {
   if (message.operation === 'replenishBacklog') {
-    let { searchTerms, downloadBatchSize } = message;
+    const { searchTerms, downloadBatchSize } = message;
 
     return replenish(searchTerms, downloadBatchSize);
   }
 });
 
 function openVorfreudeTab() {
-  let vorfreudeUrl = chrome.extension.getURL('window.html');
+  const vorfreudeUrl = chrome.extension.getURL('window.html');
   chrome.tabs.create({ url: vorfreudeUrl });
 }
 

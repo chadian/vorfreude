@@ -23,7 +23,11 @@ const config = {
       }
     },
     appDir: 'app',
-    adapter: adapter({ fallback: 'index.html' })
+    adapter: adapter({ fallback: 'index.html' }),
+    prerender: {
+      enabled: true,
+      entries: ['/']
+    }
   }
 };
 

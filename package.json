@@ -6,7 +6,7 @@
     "build": "yarn build:app && yarn build:extension",
     "build:app": "vite build",
     "build:extension": "yarn --cwd chrome build",
-    "package": "svelte-kit package",
+    "package": "yarn --cwd chrome package",
     "preview": "vite preview",
     "test": "yarn test:unit && yarn test:acceptance",
     "test:acceptance": "playwright test tests/acceptance",

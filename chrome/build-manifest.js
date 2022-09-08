@@ -25,3 +25,5 @@ const blueprint = readManiestBluePrint();
 const csp = readHtmlCspMeta();
 const manifest = generateManifest(blueprint, { csp });
 writeManifest(manifest);
+
+console.log('🙌  Generated manifest.json');

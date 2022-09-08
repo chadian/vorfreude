@@ -13,7 +13,7 @@
     "128": "images/icon128.png"
   },
   "options_ui": {
-    "page": "index.html#settings",
+    "page": "settings.html",
     "open_in_tab": true
   },
   "content_security_policy": "{{ContentSecurityPolicy}}",

@@ -22,7 +22,7 @@ test('it shows the default settings state', async ({ page }) => {
 
   const timer = page.locator('.CountdownTimer');
   // :shrug: this might fail if this test is ran on the same day as the default date
-  expect(await timer.textContent()).toMatch(/\d+ days \d+ hours \d+ minutes \d+ seconds/);
+  expect(await timer.textContent()).toMatch(/\d+ day(|s) \d+ hour(|s) \d+ minute(|s) \d+ second(|s)/);
 });
 
 test('it has the default settings', async ({ page }) => {
@@ -62,7 +62,9 @@ test('it has the default settings', async ({ page }) => {
 });
 
 test('it saves settings', async ({ page }) => {
-  await page.goto('#settings');
+  await page.goto('/#settings');
+
+  await page.waitForSelector('.Settings__input-wrapper input');
   const settingInputs = await elementLocators(page, '.Settings__input-wrapper input');
 
   const [

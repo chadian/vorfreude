@@ -4,7 +4,7 @@ const port = 3000;
 const config = {
   webServer: {
     port,
-    command: `yarn build && yarn preview --port ${port}`
+    command: `yarn build:app && yarn preview --port ${port}`
   }
 };
 

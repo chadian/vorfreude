@@ -1,9 +1,7 @@
 type ChromeExtensionWindow = typeof window & {
-  runtime: {
-    id: string;
-  };
+  chrome: Record<string, any>;
 };
 
 export default function () {
-  return Boolean((globalThis as ChromeExtensionWindow)?.runtime?.id);
+  return Boolean((globalThis as ChromeExtensionWindow).chrome);
 }

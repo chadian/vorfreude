@@ -19,11 +19,7 @@ const config = {
       }
     },
     appDir: 'app',
-    adapter: adapter(),
-    prerender: {
-      enabled: true,
-      entries: ['*']
-    }
+    adapter: adapter()
   }
 };
 

@@ -2,11 +2,20 @@
   import '../global.css';
   import Wallpaper from '../components/Wallpaper.svelte';
   import { currentPhoto, performPhotoHouseKeeping } from '../state/stores/photo';
+  import { onMount } from 'svelte';
+  import { afterNavigate, goto } from '$app/navigation';
+  import { handleInitialHashRoute, handleRouteChange } from '../helpers/hash-routes';
 
-  // export const ssr = false;
   export const prerender = true
 
-  performPhotoHouseKeeping();
+  onMount(() => {
+    handleInitialHashRoute();
+    performPhotoHouseKeeping();
+  });
+
+  afterNavigate(() => {
+    handleRouteChange();
+  });
 </script>
 
 <div class="shell">

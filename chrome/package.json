@@ -9,7 +9,7 @@
     "build": "yarn build-js && yarn build-manifest",
     "build-js": "rollup -c rollup.config.js",
     "build-manifest": "node build-manifest.js",
-    "package": "bestzip vorfreude.zip window.html background.js manifest.json app fonts images"
+    "package": "bestzip vorfreude.zip index.html settings.html background.js manifest.json app fonts images"
   },
   "dependencies": {
     "bestzip": "^2.2.1",

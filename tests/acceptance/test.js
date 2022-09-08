@@ -28,7 +28,7 @@ test('it shows the default settings state', async ({ page }) => {
 test('it has the default settings', async ({ page }) => {
   await page.goto('/');
   await page.click('.Vorfreude__show-settings');
-  await expect(page).toHaveURL('/settings');
+  await expect(page).toHaveURL('#settings');
 
   const settingInputs = await elementLocators(page, '.Settings__input-wrapper input');
   const settingInputValues = await Promise.all(settingInputs.map(locator => locator.inputValue()));
@@ -62,7 +62,7 @@ test('it has the default settings', async ({ page }) => {
 });
 
 test('it saves settings', async ({ page }) => {
-  await page.goto('/settings');
+  await page.goto('#settings');
   const settingInputs = await elementLocators(page, '.Settings__input-wrapper input');
 
   const [

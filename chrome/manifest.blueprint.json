@@ -16,7 +16,7 @@
     "page": "settings.html",
     "open_in_tab": true
   },
-  "content_security_policy": "script-src 'self' 'sha256-XanULr5bSCinr5Ztk/x+/dZnCQknLuT2eo34dXhiTZ8='",
+  "content_security_policy": "{{ContentSecurityPolicy}}",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

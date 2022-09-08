@@ -6,8 +6,10 @@
   "author": "Chad Carbert",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c rollup.config.js",
-    "package": "bestzip vorfreude.zip app.css app.js background.js manifest.json fonts images window.html"
+    "build": "yarn build-js && yarn build-manifest",
+    "build-js": "rollup -c rollup.config.js",
+    "build-manifest": "node build-manifest.js",
+    "package": "bestzip vorfreude.zip window.html background.js manifest.json app fonts images"
   },
   "dependencies": {
     "bestzip": "^2.2.1",

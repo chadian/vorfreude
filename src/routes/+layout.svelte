@@ -3,7 +3,9 @@
   import Wallpaper from '../components/Wallpaper.svelte';
   import { currentPhoto, performPhotoHouseKeeping } from '../state/stores/photo';
 
-  export const ssr = false;
+  // export const ssr = false;
+  export const prerender = true
+
   performPhotoHouseKeeping();
 </script>
 

@@ -3,19 +3,28 @@ import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: preprocess(),
+  // Consult https://github.com/sveltejs/svelte-preprocess
+  // for more information about preprocessors
+  preprocess: preprocess(),
 
-	transform: {
-		'^.+\\.svelte$': ['svelte-jester', { preprocess: true }]
-	},
+  transform: {
+    '^.+\\.svelte$': ['svelte-jester', { preprocess: true }]
+  },
 
-	kit: {
-		adapter: adapter({
-			fallback: 'index.html'
-		})
-	}
+  kit: {
+    csp: {
+      mode: 'hash',
+      directives: {
+        'script-src': ['self']
+      }
+    },
+    appDir: 'app',
+    adapter: adapter(),
+    prerender: {
+      enabled: true,
+      entries: ['*']
+    }
+  }
 };
 
 export default config;

@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function(message) {
 });
 
 function openVorfreudeTab() {
-  const vorfreudeUrl = chrome.extension.getURL('window.html');
+  const vorfreudeUrl = chrome.extension.getURL('index.html');
   chrome.tabs.create({ url: vorfreudeUrl });
 }
 

@@ -31,11 +31,11 @@ You will need the following things installed on your computer.
 	* Playwright runs tests in the browser and these need to be installed first. This can be done by running `yarn playwright install`
 * Both unit/component and acceptance tests can be ran with `yarn test`
 
-### Building & Relasing
+### Building / Package / Release
 
-1. `yarn release` (create the release)
-2. `yarn build` (create build)
-3. `yarn package` (create zip package of build for stores)
+1. `yarn version` (bump version)
+2. `yarn build` (create build, both svelte and the extension)
+3. `yarn package` (create zip package for upload to extension/addon stores)
 4. Upload zip to chrome and firefox stores
 
 ## Further Reading / Useful Links

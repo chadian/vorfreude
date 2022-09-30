@@ -10,8 +10,8 @@ export default class ChromeStorageAdapter implements StorageAdapter {
   public get(key) {
     return new Promise((resolve, reject) => {
       try {
-        chrome.storage.local.get(this.storeName, (result) => {
-          resolve((result && result[this.storeName] && result[this.storeName][key]) || null);
+        chrome.storage.local.get(this.storeName, (storage) => {
+          resolve(storage?.[this.storeName]?.[key] ?? null);
         });
       } catch (e) {
         reject(e);
@@ -22,9 +22,16 @@ export default class ChromeStorageAdapter implements StorageAdapter {
   public set(key, value) {
     return new Promise((resolve, reject) => {
       try {
-        chrome.storage.local.get(this.storeName, (store) => {
-          store = store || {};
-          chrome.storage.local.set({ [this.storeName]: { ...store, [key]: value } }, () =>
+        chrome.storage.local.get(this.storeName, (storage) => {
+          const updated = {
+            ...storage,
+            [this.storeName] : {
+              ...(storage[this.storeName] ?? {}),
+              ...{ [key]: value }
+            }
+          };
+
+          chrome.storage.local.set(updated, () =>
             resolve(value)
           );
         });

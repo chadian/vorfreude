@@ -1,10 +1,12 @@
-import { replenish } from '../src/photo-manager/fetcher';
+import { Replenisher } from '../src/photo-manager/replenisher'
 
 chrome.runtime.onMessage.addListener(function(message) {
   if (message.operation === 'replenishBacklog') {
     const { searchTerms, downloadBatchSize } = message;
 
-    return replenish(searchTerms, downloadBatchSize);
+    const replenisher = new Replenisher(searchTerms);
+    replenisher.downloadBatchSize = downloadBatchSize;
+    replenisher.replenish();
   }
 });
 

@@ -6,11 +6,10 @@ export const currentPhoto = writable({ blur: false, url: '' });
 const manager = new Manager();
 const isBrowser = typeof window !== 'undefined';
 
-export function performPhotoHouseKeeping() {
+export async function performPhotoHouseKeeping() {
   if (isBrowser) {
-    manager.checkBacklog();
-    manager.cleanBacklog();
-    manager.cleanPhotosFromPreviousSearchTerms();
+    await manager.checkAndReplenishBacklog();
+    await Promise.all([manager.removeStalePhotoBlobs(), manager.removeOldPhotos()]);
   }
 }
 

@@ -1,30 +1,66 @@
-const STALE_SEEN_COUNT = 2;
-const ALLOWABLE_STALE_PERCENTAGE = 85;
-const TOTAL_DOWNLOADED = 20;
+import { SimpleIndexedDbAdapter } from '../state/storage/SimpleIndexedDbAdapter';
 
-export let filterForDownloadedPhotos = (photos) => photos.filter((photo) => Boolean(photo.blob));
-
-export let filterForPreviousDownloadedPhotos = (photos) =>
-  photos.filter((photo) => 'blob' in photo);
-
-export let filterStalePhotos = (photos) =>
-  photos.filter((photo) => photo.blob && photo.seenCount > STALE_SEEN_COUNT);
-
-export let shouldDownloadPhotos = (photos) => {
-  let stalePercentage =
-    100 * (filterStalePhotos(photos).length / filterForDownloadedPhotos(photos).length);
-  let pastStalePercentage = stalePercentage > ALLOWABLE_STALE_PERCENTAGE;
-  let isUnderTotalDownload = filterForDownloadedPhotos(photos).length <= TOTAL_DOWNLOADED;
-
-  return isUnderTotalDownload || pastStalePercentage;
+export type Photo = {
+  id: string;
+  url_o: string;
 };
 
-export let filterPhotosForSearchTerms = (photos, searchTerms) =>
+export type WithSearchTerms = {
+  searchTerms: string;
+}
+
+export type WithBlob = {
+  blob: Blob;
+}
+
+export type WithSeenCount = {
+  seenCount?: number;
+};
+
+const STALE_SEEN_COUNT = 3;
+const ALLOWABLE_STALE_PERCENTAGE = 75;
+const MAX_TOTAL_DOWNLOADED = 20;
+
+const indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
+
+export const photoHasDownload = (photo) => Boolean(photo.blob);
+export const isPhotoStale = (photo) => photo.blob && photo.seenCount > STALE_SEEN_COUNT;
+
+export const shouldDownloadPhotos = (photos) => {
+  const downloadedPhotos = photos.filter(photoHasDownload);
+  const stalePhotos = photos.filter(isPhotoStale);
+
+  const stalePercentage =
+    100 * (stalePhotos.length / downloadedPhotos.length);
+
+  const pastStalePercentage = stalePercentage > ALLOWABLE_STALE_PERCENTAGE;
+  const isUnderMaxTotalDownload = downloadedPhotos.length < MAX_TOTAL_DOWNLOADED;
+
+  return isUnderMaxTotalDownload || pastStalePercentage;
+};
+
+export const filterPhotosForSearchTerms = (photos, searchTerms) =>
   photos.filter((photo) => photo.searchTerms === searchTerms);
 
-export let markPhotoAsSeen = (photo) => {
-  photo.seenCount = photo.seenCount ? photo.seenCount + 1 : 1;
+export const markPhotoAsSeen = (photo: Photo & WithSeenCount) => {
+  photo.seenCount = (photo.seenCount || 0) + 1;
   return photo;
 };
 
-export let highQualityImageUrlForPhoto = (photo) => photo.url_o;
+export const highQualityImageUrlForPhoto = (photo) => photo.url_o;
+
+export function retrieveAllPhotos() {
+  return indexStorage.getAll();
+}
+
+export function retrievePhoto(photoId) {
+  return indexStorage.get(photoId);
+}
+
+export function storePhoto(photo) {
+  return indexStorage.set(photo.id, photo);
+}
+
+export function removePhoto(photo) {
+  indexStorage.remove(photo.id);
+}

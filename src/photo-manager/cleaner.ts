@@ -1,12 +1,12 @@
-import { removePhoto, retrieveAllPhotos, storePhoto } from './fetcher';
+import { storePhoto, retrieveAllPhotos, removePhoto } from "./photos";
 
-export let cleanDownloadFromPhoto = (photo) => {
+export const cleanDownloadFromPhoto = (photo) => {
   photo.blob = null;
   storePhoto(photo);
 };
 
-export let cleanPhotosWithoutGivenSearchTerms = async (searchTerms) => {
-  let photos = await retrieveAllPhotos();
-  let photosToRemove = photos.filter((photo) => photo.searchTerms !== searchTerms);
+export const cleanPhotosWithoutGivenSearchTerms = async (searchTerms) => {
+  const photos = await retrieveAllPhotos();
+  const photosToRemove = photos.filter((photo) => photo.searchTerms !== searchTerms);
   photosToRemove.forEach((photo) => removePhoto(photo));
 };

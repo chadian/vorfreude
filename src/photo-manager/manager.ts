@@ -1,19 +1,19 @@
 import { take } from 'ramda';
 import {
-  filterForDownloadedPhotos,
   filterPhotosForSearchTerms,
-  filterStalePhotos,
+  isPhotoStale,
   markPhotoAsSeen,
-  shouldDownloadPhotos
+  photoHasDownload,
+  retrieveAllPhotos,
+  shouldDownloadPhotos,
+  storePhoto
 } from './photos';
 
 import { cleanDownloadFromPhoto, cleanPhotosWithoutGivenSearchTerms } from './cleaner';
-
 import shuffle from './shuffle';
-
-import { fetchPopularPhotoUrl, replenish, retrieveAllPhotos, storePhoto } from './fetcher';
-
+import { fetchPopularPhotoUrl } from './fetch';
 import isExtensionEnv from '../helpers/isExtensionEnv';
+import { Replenisher } from './replenisher';
 
 const BATCH_SIZE = 3;
 
@@ -21,9 +21,14 @@ export default class Manager {
   public static urlForBlob = (blob) => URL.createObjectURL(blob);
 
   private searchTerms = '';
+  private replenisher: Replenisher;
 
-  setSearchTerms(searchTerms) {
-    this.searchTerms = searchTerms;
+  setSearchTerms(newSearchTerms) {
+    // set new
+    this.searchTerms = newSearchTerms;
+    this.replenisher = new Replenisher(newSearchTerms);
+
+    this.removeOldPhotos();
   }
 
   async getPhotos() {
@@ -33,8 +38,9 @@ export default class Manager {
   }
 
   async getPhoto() {
-    const downloadedPhotos = filterForDownloadedPhotos(await this.getPhotos());
+    const downloadedPhotos = (await this.getPhotos()).filter(photoHasDownload);
 
+    // no photos downloaded, go get one directly
     if (downloadedPhotos.length === 0) {
       const photoUrl = await fetchPopularPhotoUrl(this.searchTerms);
       return photoUrl;
@@ -45,26 +51,21 @@ export default class Manager {
     return Manager.urlForBlob(photo.blob);
   }
 
-  async checkBacklog() {
+  async checkAndReplenishBacklog() {
     const photos = await this.getPhotos();
     if (shouldDownloadPhotos(photos)) {
       this.replenishBacklog();
     }
   }
 
-  cleanPhotosFromPreviousSearchTerms() {
-    cleanPhotosWithoutGivenSearchTerms(this.searchTerms);
+  async removeStalePhotoBlobs() {
+    const photos = await this.getPhotos();
+    const stalePhotos = photos.filter(isPhotoStale);
+    take(BATCH_SIZE, stalePhotos).forEach(cleanDownloadFromPhoto);
   }
 
-  async cleanBacklog() {
-    const photos = await this.getPhotos();
-
-    // only clean when we shouldn't be getting more photos
-    if (shouldDownloadPhotos(photos)) {
-      return;
-    }
-
-    take(BATCH_SIZE, filterStalePhotos(photos)).forEach(cleanDownloadFromPhoto);
+  async removeOldPhotos() {
+    cleanPhotosWithoutGivenSearchTerms(this.searchTerms);
   }
 
   private markPhotoAsSeen(photo) {
@@ -79,7 +80,7 @@ export default class Manager {
         searchTerms: this.searchTerms
       });
     } else {
-      replenish(this.searchTerms);
+      this.replenisher?.replenish();
     }
   }
 }

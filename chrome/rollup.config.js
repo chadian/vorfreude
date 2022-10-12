@@ -11,12 +11,12 @@ export default {
   plugins: [
     commonjs(),
     typescript({
-      rollupCommonJSResolveHack: true,
       include: ['**/*.ts', '../src/**/*.ts'],
+      exclude: ['**/*.test.ts'],
       tsconfigOverride: {
         types: ["chrome"],
         compilerOptions: {
-          "lib": ["es2015", "DOM"],
+          "lib": ["ESNext", "DOM"],
           inlineSources: false
         }
       }

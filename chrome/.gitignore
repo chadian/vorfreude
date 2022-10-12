@@ -1,5 +1,6 @@
-# background.js is built an artifact by rollup in this directory
+# built artifacts
 background.js
+manifest.json
 
 # rollup typescript plugin build
 .rpt2_cache/

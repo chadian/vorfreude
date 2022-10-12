@@ -1,15 +1,17 @@
-import { replenish } from '../src/utils/lib/manager/fetcher';
+import { Replenisher } from '../src/photo-manager/replenisher'
 
 chrome.runtime.onMessage.addListener(function(message) {
   if (message.operation === 'replenishBacklog') {
-    let { searchTerms, downloadBatchSize } = message;
+    const { searchTerms, downloadBatchSize } = message;
 
-    return replenish(searchTerms, downloadBatchSize);
+    const replenisher = new Replenisher(searchTerms);
+    replenisher.downloadBatchSize = downloadBatchSize;
+    replenisher.replenish();
   }
 });
 
 function openVorfreudeTab() {
-  let vorfreudeUrl = chrome.extension.getURL('window.html');
+  const vorfreudeUrl = chrome.extension.getURL('index.html');
   chrome.tabs.create({ url: vorfreudeUrl });
 }
 

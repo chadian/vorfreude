@@ -1,9 +1,0 @@
-{
-  "name": "vorfreude-chrome",
-  "version": "0.3.4",
-  "description": "additional chrome-specific builds",
-  "main": "index.js",
-  "author": "Chad Carbert",
-  "license": "MIT",
-  "dependencies": {}
-}

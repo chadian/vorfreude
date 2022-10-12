@@ -9,6 +9,7 @@
     "build:app": "vite build",
     "build:extension": "yarn --cwd chrome build",
     "build:manifest": "node scripts/build-manifest.js",
+    "build:background-js": "rollup -c scripts/background-js.config.js",
     "package": "yarn --cwd chrome package && echo \"📦  Package created at chrome/vorfreude.zip\"",
     "preview": "vite preview",
     "test": "yarn test:unit && yarn test:acceptance",

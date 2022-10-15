@@ -1,7 +1,3 @@
 # built artifacts
 background.js
 manifest.json
-
-# rollup typescript plugin build
-.rpt2_cache/
-.rollup.config.js.swp

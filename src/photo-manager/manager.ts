@@ -51,10 +51,21 @@ export default class Manager {
     return Manager.urlForBlob(photo.blob);
   }
 
-  async checkAndReplenishBacklog() {
+  async replenishBacklog() {
     const photos = await this.getPhotos();
-    if (shouldDownloadPhotos(photos)) {
-      this.replenishBacklog();
+
+    if (!shouldDownloadPhotos(photos)) {
+      return;
+    }
+
+    if (isExtensionEnv()) {
+      chrome.runtime.sendMessage({
+        operation: 'replenishBacklog',
+        downloadBatchSize: BATCH_SIZE,
+        searchTerms: this.searchTerms
+      });
+    } else {
+      this.replenisher?.replenish();
     }
   }
 
@@ -70,17 +81,5 @@ export default class Manager {
 
   private markPhotoAsSeen(photo) {
     storePhoto(markPhotoAsSeen(photo));
-  }
-
-  private replenishBacklog() {
-    if (isExtensionEnv()) {
-      chrome.runtime.sendMessage({
-        operation: 'replenishBacklog',
-        downloadBatchSize: BATCH_SIZE,
-        searchTerms: this.searchTerms
-      });
-    } else {
-      this.replenisher?.replenish();
-    }
   }
 }

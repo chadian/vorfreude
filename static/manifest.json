@@ -1,7 +1,7 @@
 {
   "name": "Vorfreude",
   "description": "When you can't wait but have to",
-  "version": "{{packageVersion}}",
+  "version": "0.0.0",
   "manifest_version": 3,
   "action": {
     "default_title": "vorfreude",
@@ -15,9 +15,6 @@
   "options_ui": {
     "page": "settings.html",
     "open_in_tab": true
-  },
-  "content_security_policy": {
-    "extension_pages": "{{ContentSecurityPolicy}}"
   },
   "chrome_url_overrides": {
     "newtab": "index.html"

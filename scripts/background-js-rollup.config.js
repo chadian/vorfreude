@@ -4,7 +4,7 @@ import { terser } from "rollup-plugin-terser";
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
-  input: "./scripts/background.ts",
+  input: "./src/chrome/background.ts",
   output: {
     file: "./chrome/background.js",
     format: "iife"
@@ -13,7 +13,7 @@ export default {
     nodeResolve(),
     commonjs(),
     typescript({
-      include: ['./chrome/**/*.ts', './src/**/*.ts'],
+      include: ['./src/**/*.ts'],
       exclude: ['./src/**/*.test.ts'],
       tsconfigOverride: {
         types: ["chrome"],

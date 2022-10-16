@@ -1,16 +1,20 @@
 <script>
   import '../global.css';
   import Wallpaper from '../components/Wallpaper.svelte';
-  import { currentPhoto, performPhotoHouseKeeping } from '../state/stores/photo';
+  import { setup as setupPhotoStore, currentPhoto, performPhotoHouseKeeping } from '../state/stores/photo';
   import { onMount } from 'svelte';
-  import { afterNavigate, goto } from '$app/navigation';
+  import { afterNavigate } from '$app/navigation';
   import { handleInitialHashRoute, handleRouteChange } from '../helpers/hash-routes';
 
   export const prerender = true
 
-  onMount(() => {
-    handleInitialHashRoute();
-    performPhotoHouseKeeping();
+  onMount(async () => {
+    await Promise.all([
+      handleInitialHashRoute(),
+      setupPhotoStore()
+    ]);
+
+    await performPhotoHouseKeeping();
   });
 
   afterNavigate(() => {

@@ -15,4 +15,4 @@ function openVorfreudeTab() {
   chrome.tabs.create({ url: vorfreudeUrl });
 }
 
-chrome.browserAction.onClicked.addListener(() => openVorfreudeTab());
+chrome.action.onClicked.addListener(() => openVorfreudeTab());

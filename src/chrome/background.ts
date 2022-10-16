@@ -1,4 +1,4 @@
-import { Replenisher } from '../src/photo-manager/replenisher'
+import { Replenisher } from '../photo-manager/replenisher'
 
 chrome.runtime.onMessage.addListener(function(message) {
   if (message.operation === 'replenishBacklog') {

@@ -1,7 +1,5 @@
 files:
   - package.json
-  - chrome/package.json
-  - chrome/manifest.json
 plugins:
   prerelease:
     Detecting problems before publish:

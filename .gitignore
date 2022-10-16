@@ -11,5 +11,14 @@ node_modules
 /playwright-report/
 /playwright/.cache/
 
-# extension build artifact
-/chrome/vorfreude.zip
+
+## Chrome Extension Folder
+
+# ignore everything except explicit symlinks
+/chrome/*
+
+# symlinks and static files
+!/chrome/app
+!/chrome/fonts
+!/chrome/images
+!/chrome/settings.html

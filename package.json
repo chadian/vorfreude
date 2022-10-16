@@ -4,7 +4,6 @@
   "description": "A countdown with a fresh wallpapered tab on every new tab",
   "scripts": {
     "dev": "vite dev",
-    "version": "bumped release",
     "build": "yarn build:app && yarn build:extension",
     "build:app": "vite build",
     "build:extension": "yarn build:manifest && yarn build:background-js",

@@ -2,8 +2,8 @@
   "name": "Vorfreude",
   "description": "When you can't wait but have to",
   "version": "{{packageVersion}}",
-  "manifest_version": 2,
-  "browser_action": {
+  "manifest_version": 3,
+  "action": {
     "default_title": "vorfreude",
     "default_icon": {
       "32": "images/icon32.png"
@@ -16,15 +16,14 @@
     "page": "settings.html",
     "open_in_tab": true
   },
-  "content_security_policy": "{{ContentSecurityPolicy}}",
+  "content_security_policy": {
+    "extension_pages": "{{ContentSecurityPolicy}}"
+  },
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "service_worker": "background.js"
   },
   "permissions": [
     "storage",

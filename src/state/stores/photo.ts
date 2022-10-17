@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
 import Manager from '../../photo-manager/manager';
 import { getSettingsStore } from './settings';
-import { get } from 'svelte/store';
 
 export const currentPhoto = writable({ blur: false, url: '' });
 const isBrowser = typeof window !== 'undefined';
@@ -9,20 +8,22 @@ const isBrowser = typeof window !== 'undefined';
 let manager;
 
 export async function setup() {
-  manager = new Manager();
-
   if (!isBrowser) {
     return;
   }
 
-  const settingsStore = await getSettingsStore();
-  const { searchTerms: initialSearchTerms } = get(settingsStore);
-  await updateCurrentPhoto(initialSearchTerms);
+  if (!manager) {
+    manager = new Manager();
+  }
 
-  settingsStore.subscribe(async (settings) => {
+  const settingsStore = await getSettingsStore();
+
+  const unsubscribeSettingsStore = settingsStore.subscribe(async (settings) => {
     const { searchTerms } = settings;
     await updateCurrentPhoto(searchTerms);
   });
+
+  return () => unsubscribeSettingsStore();
 }
 
 export async function performPhotoHouseKeeping() {

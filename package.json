@@ -1,6 +1,6 @@
 {
   "name": "vorfreude",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A countdown with a fresh wallpapered tab on every new tab",
   "scripts": {
     "dev": "vite dev",

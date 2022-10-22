@@ -9,12 +9,14 @@
   export const prerender = true
 
   onMount(async () => {
-    await Promise.all([
-      handleInitialHashRoute(),
-      setupPhotoStore()
+    const [teardownPhotoStore] = await Promise.all([
+      setupPhotoStore(),
+      handleInitialHashRoute()
     ]);
 
     await performPhotoHouseKeeping();
+
+    return () => teardownPhotoStore();
   });
 
   afterNavigate(() => {

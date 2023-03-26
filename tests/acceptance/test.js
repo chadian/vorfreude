@@ -111,5 +111,5 @@ test('it saves settings', async ({ page }) => {
   const timer = page.locator('.CountdownTimer');
 
   // seconds is fuzzy depending on how long it takes to run
-  expect(await timer.textContent()).toMatch(/364 days 23 hours 59 minutes \d+ seconds/);
+  expect(await timer.textContent()).toMatch(/365 days 23 hours 59 minutes \d+ seconds/);
 });

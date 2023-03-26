@@ -3,7 +3,7 @@ import { highQualityImageUrlForPhoto, type Photo, type WithSearchTerms } from '.
 import resizePhotoBlob from './resizePhoto';
 import shuffle from './shuffle';
 
-export const IMAGE_ENDPOINT_API_URL = 'https://vorfreude-elixir.herokuapp.com/api/images';
+export const IMAGE_ENDPOINT_API_URL = 'https://public--api--vorfreude--chad-ffrl.code.run/api/images';
 
 export type ImageApiResponse = {
   photos: {

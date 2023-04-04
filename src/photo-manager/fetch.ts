@@ -3,7 +3,7 @@ import { highQualityImageUrlForPhoto, type Photo, type WithSearchTerms } from '.
 import resizePhotoBlob from './resizePhoto';
 import shuffle from './shuffle';
 
-export const IMAGE_ENDPOINT_API_URL = 'https://public--api--vorfreude--chad-ffrl.code.run/api/images';
+export const IMAGE_ENDPOINT_API_URL = 'https://web-production-be97.up.railway.app/api/images';
 
 export type ImageApiResponse = {
   photos: {

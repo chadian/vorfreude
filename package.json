@@ -34,6 +34,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/chrome": "^0.0.196",
     "@types/luxon": "^3.0.1",
+    "@types/ramda": "^0.29.0",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "babel-jest": "^29.0.2",

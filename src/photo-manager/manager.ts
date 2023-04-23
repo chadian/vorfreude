@@ -1,10 +1,11 @@
 import { take, pipe } from 'ramda';
 import {
-  filterBlockedPhotos,
   filterPhotosForSearchTerms,
+  isPhotoStale,
   markPhotoAsBlocked,
   markPhotoAsSeen,
   photoHasDownload,
+  photoIsBlocked,
   retrieveAllPhotos,
   shouldDownloadPhotos,
   storePhoto,
@@ -15,6 +16,7 @@ import shuffle from './shuffle';
 import isExtensionEnv from '../helpers/isExtensionEnv';
 import { Replenisher } from './replenisher';
 import type { Photo, WithBlob, WithSeenCount } from './types';
+import { BackgroundOperation } from '../chrome/background';
 
 const DOWNLOAD_BATCH_SIZE = 3;
 const DELETE_STALE_BATCH_SIZE = 3;
@@ -27,7 +29,6 @@ export default class Manager {
   }
 
   setSearchTerms(newSearchTerms) {
-    // set new
     this._searchTerms = newSearchTerms;
     this.removeOldPhotos();
   }
@@ -45,77 +46,92 @@ export default class Manager {
     const candidates = await pipe(
       async () => this.getSearchTermPhotos(),
       async (photos) => (await photos).filter(photoHasDownload),
-      async (photos) => filterBlockedPhotos(await photos)
+      async (photos) => (await photos).filter(photo => !photoIsBlocked(photo))
     )();
 
     return candidates;
   }
 
   async getDisplayablePhoto() {
-    // no photos available
+    let displayablePhotos = await this.getDisplayablePhotoCandidates();
+    console.log({ displayablePhotos });
+
     // we rely on the backlog to be replenished in the future, but it's possible:
     // 1. The photo has just changed the search terms
     // 2. The user has just blocked all photos
     // 3. The manager has cleaned old photos and is in the process of getting new ones
-    await this.waitForBacklog();
+    if (!displayablePhotos?.length) {
+      // kick off at least one backlog replenish to wait for
+      await this.startReplenishBacklog();
 
-    const displayablePhotos = await this.getDisplayablePhotoCandidates();
+      // wait for a suitable photo to be downloaded
+      await this.waitForBacklog();
+
+      // use the new photos
+      displayablePhotos = await this.getDisplayablePhotoCandidates();
+    }
+
     const photo = shuffle(displayablePhotos).pop();
-    this.markPhotoAsSeen(photo);
-
     return photo;
   }
 
-  async waitForBacklog(retries = 10) {
-    const retryTimeout = 500;
-    console.log('waiting for backlog', retries);
+  async waitForBacklog(retries = 40) {
+    const retryTimeoutMs = 250;
+    console.log(`waitForBacklog: waiting for backlog, ${retries} retries remaining`);
 
     if (retries === 0) {
       throw new Error('Unable to replenish backlog');
     }
 
-    await this.replenishBacklog();
     const candidates = await this.getDisplayablePhotoCandidates();
 
     if (candidates.length > 0) {
+      console.log('found candidates, we are good to go', candidates);
       return;
     }
 
-    const wait = new Promise((resolve) => setTimeout(resolve, retryTimeout));
+    const wait = new Promise((resolve) => setTimeout(resolve, retryTimeoutMs));
     await wait;
 
-    await this.waitForBacklog(retries--);
+    await this.waitForBacklog(--retries);
   }
 
-  async replenishBacklog() {
+  async startReplenishBacklog() {
+    console.log('replenishBacklog: kicking off backlog replenish');
     const photos = await this.getSearchTermPhotos();
 
     if (!shouldDownloadPhotos(photos)) {
+      console.log('startReplenishBacklog: should not download photos');
       return;
     }
 
     if (isExtensionEnv()) {
       chrome.runtime.sendMessage({
-        operation: 'replenishBacklog',
+        operation: BackgroundOperation.REPLENISH_BACKLOG,
         downloadBatchSize: DOWNLOAD_BATCH_SIZE,
         searchTerms: this.searchTerms
       });
     } else {
       const replenisher = new Replenisher(this.searchTerms);
+
+      // kick off in background to have parity with the chrome extension
+      // `sendMessage` implementation
       replenisher.replenish();
     }
   }
 
   async removeStalePhotoBlobs() {
-    const photos = (await this.getSearchTermPhotos());
-    const stalePhotos = photos.filter(photoHasDownload);
+    const photos = await this.getSearchTermPhotos();
+    const stalePhotos = photos.filter(photoHasDownload).filter(isPhotoStale);
     take(DELETE_STALE_BATCH_SIZE, stalePhotos).forEach(cleanDownloadFromPhoto);
   }
 
   async blockPhoto(photo: Photo) {
     markPhotoAsBlocked(photo);
     storePhoto(photo);
-    await this.removeBlockedPhotoBlobs();
+
+    // not awaiting, letting this happen in the background
+    this.removeBlockedPhotoBlobs();
   }
 
   async removeOldPhotos() {
@@ -124,11 +140,11 @@ export default class Manager {
 
   private async removeBlockedPhotoBlobs() {
     const photos = await this.getSearchTermPhotos();
-    const blockedPhotosWithBlobs = filterBlockedPhotos(photos).filter(photoHasDownload);
+    const blockedPhotosWithBlobs = photos.filter(photoIsBlocked).filter(photoHasDownload);
     blockedPhotosWithBlobs.forEach(cleanDownloadFromPhoto);
   }
 
-  private markPhotoAsSeen(photo) {
+  public markPhotoAsSeen(photo) {
     storePhoto(markPhotoAsSeen(photo));
   }
 }

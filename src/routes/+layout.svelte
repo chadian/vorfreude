@@ -18,10 +18,6 @@
     return () => teardownPhotoStore();
   });
 
-  $: {
-    console.log('currentPhoto', $currentPhoto);
-  }
-
   afterNavigate(() => {
     handleRouteChange();
   });
@@ -29,7 +25,8 @@
 
 <div class="shell">
   <slot />
-  {#if $currentPhoto.photo?.blob}
+
+  {#if $currentPhoto.photo?.blob && !$currentPhoto.photo.isBlocked}
     <Wallpaper blur={$currentPhoto.blur} photoUrl={URL.createObjectURL($currentPhoto.photo.blob)} />
   {/if}
 </div>

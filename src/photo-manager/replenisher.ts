@@ -6,7 +6,7 @@ import { take } from 'ramda';
 export class Replenisher {
   batchesFetched = 0;
   downloadBatchSize = 2;
-  maxBatches = 2;
+  maxBatches = 4;
 
   searchTerms: string;
 

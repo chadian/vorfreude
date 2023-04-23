@@ -36,12 +36,22 @@ export async function performPhotoHouseKeeping() {
   }
 
   if (isBrowser) {
-    await manager.replenishBacklog();
+    await manager.startReplenishBacklog();
     await Promise.all([manager.removeStalePhotoBlobs(), manager.removeOldPhotos()]);
   }
 }
 
+function clearCurrentPhoto() {
+  currentPhoto.update((cp) => {
+    return {
+      ...cp,
+      photo: undefined,
+    };
+  });
+}
+
 export async function blockPhoto(photo: Photo) {
+  clearCurrentPhoto();
   await manager.blockPhoto(photo);
   await refreshCurrentPhoto();
 }
@@ -50,8 +60,12 @@ async function refreshCurrentPhoto() {
   const photo = await manager.getDisplayablePhoto();
 
   if (!photo) {
-    throw new Error('refreshCurrentPhoto: could not get photo from manager');
+    const errorMessage = 'refreshCurrentPhoto: could not get photo from manager';
+    console.error(errorMessage, photo)
+    throw new Error(errorMessage);
   }
+
+  manager.markPhotoAsSeen(photo);
 
   currentPhoto.update((cp) => {
     return {

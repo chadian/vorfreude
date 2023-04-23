@@ -1,7 +1,7 @@
-import { clone, take } from 'ramda';
-import { highQualityImageUrlForPhoto, type Photo, type WithSearchTerms } from './photos';
+import { clone } from 'ramda';
+import { highQualityImageUrlForPhoto } from './photos';
 import resizePhotoBlob from './resizePhoto';
-import shuffle from './shuffle';
+import type { Photo, WithSearchTerms } from './types';
 
 export const IMAGE_ENDPOINT_API_URL = 'https://web-production-be97.up.railway.app/api/images';
 
@@ -11,7 +11,7 @@ export type ImageApiResponse = {
   }
 };
 
-export function fetchPhotos(photos: Photo[]) {
+export function fetchPhotosBlobs(photos: Photo[]) {
   photos = clone(photos);
 
   return Promise.all(
@@ -51,11 +51,4 @@ export async function query(searchTerms): Promise<(Photo & WithSearchTerms)[]> {
         searchTerms: searchTerms
       };
     });
-}
-
-export async function fetchPopularPhotoUrl(searchTerms) {
-  const photos = await query(searchTerms);
-  const photoUrls = photos.map(highQualityImageUrlForPhoto);
-
-  return take(50, shuffle(photoUrls)).pop();
 }

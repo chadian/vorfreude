@@ -1,11 +1,14 @@
+import type { Photo, WithBlob } from 'src/photo-manager/types';
 import { writable } from 'svelte/store';
 import Manager from '../../photo-manager/manager';
 import { getSettingsStore } from './settings';
 
-export const currentPhoto = writable({ blur: false, url: '' });
 const isBrowser = typeof window !== 'undefined';
+let manager: Manager;
 
-let manager;
+export const currentPhoto = writable<{ blur: boolean; photo?: Photo & WithBlob }>(
+  { blur: false, photo: undefined }
+);
 
 export async function setup() {
   if (!isBrowser) {
@@ -20,7 +23,8 @@ export async function setup() {
 
   const unsubscribeSettingsStore = settingsStore.subscribe(async (settings) => {
     const { searchTerms } = settings;
-    await updateCurrentPhoto(searchTerms);
+    manager.setSearchTerms(searchTerms);
+    await refreshCurrentPhoto();
   });
 
   return () => unsubscribeSettingsStore();
@@ -37,18 +41,22 @@ export async function performPhotoHouseKeeping() {
   }
 }
 
-async function updateCurrentPhoto(searchTerms) {
-  if (!searchTerms) {
-    return;
-  }
+export async function blockPhoto(photo: Photo) {
+  await manager.blockPhoto(photo);
+  await refreshCurrentPhoto();
+}
 
-  manager.setSearchTerms(searchTerms);
-  const photoUrl = await manager.getPhoto();
+async function refreshCurrentPhoto() {
+  const photo = await manager.getDisplayablePhoto();
+
+  if (!photo) {
+    throw new Error('refreshCurrentPhoto: could not get photo from manager');
+  }
 
   currentPhoto.update((cp) => {
     return {
       ...cp,
-      url: photoUrl
+      photo,
     };
   });
 }

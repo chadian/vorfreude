@@ -1,66 +1,67 @@
-import { SimpleIndexedDbAdapter } from '../state/storage/SimpleIndexedDbAdapter';
-
-export type Photo = {
-  id: string;
-  url_o: string;
-};
-
-export type WithSearchTerms = {
-  searchTerms: string;
-}
-
-export type WithBlob = {
-  blob: Blob;
-}
-
-export type WithSeenCount = {
-  seenCount?: number;
-};
+import { photoStorage } from "../state/storage/photo";
+import type { Photo, WithBlob, WithSearchTerms, WithSeenCount } from "./types";
 
 const STALE_SEEN_COUNT = 3;
-const ALLOWABLE_STALE_PERCENTAGE = 75;
+const MINIMINUM_FRESH_PERCENTAGE = 25;
 const MAX_TOTAL_DOWNLOADED = 20;
 
-const indexStorage = new SimpleIndexedDbAdapter('VORFREUDE_PHOTO_STORAGE');
+export function photoHasDownload<T>(photo: T): photo is T & WithBlob {
+  if (typeof photo === 'object' && photo && 'blob' in photo && photo.blob instanceof Blob) {
+    return true;
+  }
 
-export const photoHasDownload = (photo) => Boolean(photo.blob);
-export const isPhotoStale = (photo) => photo.blob && photo.seenCount > STALE_SEEN_COUNT;
+  return false;
+}
+
+// export const photoHasDownload = (photo: T)<T>: photo is T & WithBlob  => Boolean(photo?.blob);
+export const isPhotoStale = (photo: Photo & WithBlob & WithSeenCount) => photo.blob && photo.seenCount > STALE_SEEN_COUNT;
 
 export const shouldDownloadPhotos = (photos) => {
   const downloadedPhotos = photos.filter(photoHasDownload);
   const stalePhotos = photos.filter(isPhotoStale);
+  const blockedPhotos = filterBlockedPhotos(photos);
 
-  const stalePercentage =
-    100 * (stalePhotos.length / downloadedPhotos.length);
+  const freshPercentage =
+    100 * (downloadedPhotos.length - blockedPhotos.length - stalePhotos.length) / downloadedPhotos.length;
 
-  const pastStalePercentage = stalePercentage > ALLOWABLE_STALE_PERCENTAGE;
+  const needsFreshPhotos = freshPercentage < MINIMINUM_FRESH_PERCENTAGE;
   const isUnderMaxTotalDownload = downloadedPhotos.length < MAX_TOTAL_DOWNLOADED;
 
-  return isUnderMaxTotalDownload || pastStalePercentage;
+  return needsFreshPhotos || isUnderMaxTotalDownload;
 };
 
-export const filterPhotosForSearchTerms = (photos, searchTerms) =>
-  photos.filter((photo) => photo.searchTerms === searchTerms);
+export const filterPhotosForSearchTerms = (photos: (Photo & WithSearchTerms)[], searchTerms: string) => {
+  return photos.filter((photo) => photo.searchTerms === searchTerms);
+}
 
 export const markPhotoAsSeen = (photo: Photo & WithSeenCount) => {
   photo.seenCount = (photo.seenCount || 0) + 1;
   return photo;
 };
 
+export function filterBlockedPhotos<T extends Photo>(photos: T[]) {
+  return photos.filter((photo) => !photo.isBlocked);
+}
+
+export const markPhotoAsBlocked = (photo: Photo) => {
+  photo.isBlocked = true;
+  return photo;
+}
+
 export const highQualityImageUrlForPhoto = (photo) => photo.url_o;
 
-export function retrieveAllPhotos() {
-  return indexStorage.getAll();
+export function retrieveAllPhotos(): Promise<(Photo & WithSearchTerms)[]> {
+  return photoStorage.getAll();
 }
 
 export function retrievePhoto(photoId) {
-  return indexStorage.get(photoId);
+  return photoStorage.get(photoId);
 }
 
 export function storePhoto(photo) {
-  return indexStorage.set(photo.id, photo);
+  return photoStorage.set(photo.id, photo);
 }
 
 export function removePhoto(photo) {
-  indexStorage.remove(photo.id);
+  photoStorage.remove(photo.id);
 }

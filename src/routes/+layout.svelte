@@ -15,9 +15,12 @@
     ]);
 
     await performPhotoHouseKeeping();
-
     return () => teardownPhotoStore();
   });
+
+  $: {
+    console.log('currentPhoto', $currentPhoto);
+  }
 
   afterNavigate(() => {
     handleRouteChange();
@@ -26,8 +29,8 @@
 
 <div class="shell">
   <slot />
-  {#if $currentPhoto.url}
-    <Wallpaper blur={$currentPhoto.blur} photoUrl={$currentPhoto.url} />
+  {#if $currentPhoto.photo?.blob}
+    <Wallpaper blur={$currentPhoto.blur} photoUrl={URL.createObjectURL($currentPhoto.photo.blob)} />
   {/if}
 </div>
 

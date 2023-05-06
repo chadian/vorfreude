@@ -54,7 +54,7 @@ export default class Manager {
 
   async getDisplayablePhoto() {
     let displayablePhotos = await this.getDisplayablePhotoCandidates();
-    console.log({ displayablePhotos });
+    console.log(`getDisplayablePhoto: found ${displayablePhotos.length} photos to display`);
 
     // we rely on the backlog to be replenished in the future, but it's possible:
     // 1. The photo has just changed the search terms
@@ -86,7 +86,7 @@ export default class Manager {
     const candidates = await this.getDisplayablePhotoCandidates();
 
     if (candidates.length > 0) {
-      console.log('found candidates, we are good to go', candidates);
+      console.log('waitForBacklog: found candidates, exiting', candidates);
       return;
     }
 
@@ -97,13 +97,12 @@ export default class Manager {
   }
 
   async startReplenishBacklog() {
-    console.log('replenishBacklog: kicking off backlog replenish');
     const photos = await this.getSearchTermPhotos();
 
     if (!shouldDownloadPhotos(photos)) {
-      console.log('startReplenishBacklog: should not download photos');
       return;
     }
+    console.log('replenishBacklog: kicking off backlog replenish');
 
     if (isExtensionEnv()) {
       chrome.runtime.sendMessage({
@@ -118,6 +117,8 @@ export default class Manager {
       // `sendMessage` implementation
       replenisher.replenish();
     }
+
+    console.log('replenishBacklog: finished backlog replenish');
   }
 
   async removeStalePhotoBlobs() {

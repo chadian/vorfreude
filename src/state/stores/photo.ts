@@ -35,7 +35,7 @@ export async function performPhotoHouseKeeping() {
     throw new Error('Store must be setup first, ensure `setup` has been called');
   }
 
-  if (isBrowser) {
+  if (isBrowser && await manager.shouldReplenishBacklog()) {
     await manager.startReplenishBacklog();
     await Promise.all([manager.removeStalePhotoBlobs(), manager.removeOldPhotos()]);
   }

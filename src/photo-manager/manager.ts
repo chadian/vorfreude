@@ -60,7 +60,7 @@ export default class Manager {
     // 1. The photo has just changed the search terms
     // 2. The user has just blocked all photos
     // 3. The manager has cleaned old photos and is in the process of getting new ones
-    if (!displayablePhotos?.length) {
+    if (!displayablePhotos?.length && await this.shouldReplenishBacklog()) {
       // kick off at least one backlog replenish to wait for
       await this.startReplenishBacklog();
 
@@ -96,12 +96,12 @@ export default class Manager {
     await this.waitForBacklog(--retries);
   }
 
-  async startReplenishBacklog() {
+  async shouldReplenishBacklog() {
     const photos = await this.getSearchTermPhotos();
+    return shouldDownloadPhotos(photos);
+  }
 
-    if (!shouldDownloadPhotos(photos)) {
-      return;
-    }
+  async startReplenishBacklog() {
     console.log('replenishBacklog: kicking off backlog replenish');
 
     if (isExtensionEnv()) {

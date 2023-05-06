@@ -1,9 +1,6 @@
+import { BackgroundOperation } from '../background-operation';
 import isExtensionEnv from '../helpers/isExtensionEnv';
 import { Replenisher } from '../photo-manager/replenisher'
-
-export const BackgroundOperation = {
-  REPLENISH_BACKLOG: 'replenishBacklog',
-};
 
 function openVorfreudeTab() {
   const vorfreudeUrl = chrome.extension.getURL('index.html');

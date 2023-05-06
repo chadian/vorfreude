@@ -16,7 +16,8 @@ import shuffle from './shuffle';
 import isExtensionEnv from '../helpers/isExtensionEnv';
 import { Replenisher } from './replenisher';
 import type { Photo, WithBlob, WithSeenCount } from './types';
-import { BackgroundOperation } from '../chrome/background';
+import { BackgroundOperation } from 'src/background-operation';
+import { BackgroundOperation } from '../background-operation';
 
 const DOWNLOAD_BATCH_SIZE = 3;
 const DELETE_STALE_BATCH_SIZE = 3;

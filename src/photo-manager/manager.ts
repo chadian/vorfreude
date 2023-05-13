@@ -56,9 +56,9 @@ export default class Manager {
     let displayablePhotos = await this.getDisplayablePhotoCandidates();
     console.log(`getDisplayablePhoto: found ${displayablePhotos.length} photos to display`);
 
-    // we rely on the backlog to be replenished in the future, but it's possible:
+    // we rely on the backlog to be replenished but it's possible:
     // 1. The photo has just changed the search terms
-    // 2. The user has just blocked all photos
+    // 2. The user has blocked the remaining photos
     // 3. The manager has cleaned old photos and is in the process of getting new ones
     if (!displayablePhotos?.length && await this.shouldReplenishBacklog()) {
       // kick off at least one backlog replenish to wait for

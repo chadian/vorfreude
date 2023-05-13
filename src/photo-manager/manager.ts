@@ -17,9 +17,11 @@ import isExtensionEnv from '../helpers/isExtensionEnv';
 import { Replenisher } from './replenisher';
 import type { Photo, WithOptionalBlob, WithSeenCount } from './types';
 import { BackgroundOperation } from '../background-operation';
+import Debug from 'debug';
 
 const DOWNLOAD_BATCH_SIZE = 3;
 const DELETE_STALE_BATCH_SIZE = 3;
+const debug = Debug('manager');
 
 export default class Manager {
   private _searchTerms = '';
@@ -54,7 +56,7 @@ export default class Manager {
 
   async getDisplayablePhoto() {
     let displayablePhotos = await this.getDisplayablePhotoCandidates();
-    console.log(`getDisplayablePhoto: found ${displayablePhotos.length} photos to display`);
+    debug(`getDisplayablePhoto: found ${displayablePhotos.length} photos to display`);
 
     // we rely on the backlog to be replenished but it's possible:
     // 1. The photo has just changed the search terms
@@ -77,7 +79,7 @@ export default class Manager {
 
   async waitForBacklog(retries = 40) {
     const retryTimeoutMs = 250;
-    console.log(`waitForBacklog: waiting for backlog, ${retries} retries remaining`);
+    debug(`waitForBacklog: waiting for backlog, ${retries} retries remaining`);
 
     if (retries === 0) {
       throw new Error('Unable to replenish backlog');
@@ -86,7 +88,7 @@ export default class Manager {
     const candidates = await this.getDisplayablePhotoCandidates();
 
     if (candidates.length > 0) {
-      console.log('waitForBacklog: found candidates, exiting', candidates);
+      debug('waitForBacklog: found candidates, exiting', candidates);
       return;
     }
 
@@ -102,7 +104,7 @@ export default class Manager {
   }
 
   async startReplenishBacklog() {
-    console.log('replenishBacklog: kicking off backlog replenish');
+    debug('replenishBacklog: kicking off backlog replenish');
 
     if (isExtensionEnv()) {
       chrome.runtime.sendMessage({
@@ -118,7 +120,7 @@ export default class Manager {
       replenisher.replenish();
     }
 
-    console.log('replenishBacklog: finished backlog replenish');
+    debug('replenishBacklog: finished backlog replenish');
   }
 
   async removeStalePhotoBlobs() {

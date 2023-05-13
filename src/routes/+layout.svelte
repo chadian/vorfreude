@@ -5,8 +5,14 @@
   import { onMount } from 'svelte';
   import { afterNavigate } from '$app/navigation';
   import { handleInitialHashRoute, handleRouteChange } from '../helpers/hash-routes';
+  import Debug from 'debug';
 
   export const prerender = true
+
+  // Enable all debug logging for the entire app
+  if (globalThis?.localStorage) {
+    window.localStorage.debug = '*'
+  }
 
   onMount(async () => {
     const [teardownPhotoStore] = await Promise.all([

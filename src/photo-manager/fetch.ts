@@ -1,7 +1,7 @@
 import { clone } from 'ramda';
 import { highQualityImageUrlForPhoto } from './photos';
 import resizePhotoBlob from './resizePhoto';
-import type { Photo, WithBlob, WithSearchTerms } from './types';
+import type { Photo, WithOptionalBlob, WithSearchTerms } from './types';
 
 export const IMAGE_ENDPOINT_API_URL = 'https://web-production-be97.up.railway.app/api/images';
 
@@ -11,7 +11,7 @@ export type ImageApiResponse = {
   }
 };
 
-export function fetchPhotosBlobs<T extends Photo>(photos: T[]): Promise<(Photo & WithBlob)[]> {
+export function fetchPhotosBlobs<T extends Photo>(photos: T[]): Promise<(Photo & WithOptionalBlob)[]> {
   photos = clone(photos);
 
   return Promise.all(

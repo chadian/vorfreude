@@ -1,11 +1,11 @@
 import { photoStorage } from "../state/storage/photo";
-import type { Photo, WithBlob, WithSearchTerms, WithSeenCount } from "./types";
+import type { Photo, WithOptionalBlob, WithSearchTerms, WithSeenCount } from "./types";
 
 const STALE_SEEN_COUNT = 3;
 const MAX_TOTAL_DOWNLOADED = 20;
 const MIN_FRESH_PERCENTAGE = 25;
 
-export function photoHasDownload<T>(photo: T): photo is T & WithBlob {
+export function photoHasDownload<T>(photo: T): photo is T & WithOptionalBlob {
   if (typeof photo === 'object' && photo && 'blob' in photo && photo.blob instanceof Blob) {
     return true;
   }
@@ -13,7 +13,7 @@ export function photoHasDownload<T>(photo: T): photo is T & WithBlob {
   return false;
 }
 
-export const isPhotoStale = (photo: Photo & WithBlob & WithSeenCount) => photo.blob && photo.seenCount > STALE_SEEN_COUNT;
+export const isPhotoStale = (photo: Photo & WithOptionalBlob & WithSeenCount) => photo.blob && photo.seenCount > STALE_SEEN_COUNT;
 export const photoIsBlocked = (photo: Photo) => Boolean(photo.isBlocked);
 
 export const shouldDownloadPhotos = (photos) => {

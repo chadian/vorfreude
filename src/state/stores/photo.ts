@@ -1,4 +1,4 @@
-import type { Photo, WithBlob } from 'src/photo-manager/types';
+import type { Photo, WithOptionalBlob } from 'src/photo-manager/types';
 import { writable } from 'svelte/store';
 import Manager from '../../photo-manager/manager';
 import { getSettingsStore } from './settings';
@@ -6,7 +6,7 @@ import { getSettingsStore } from './settings';
 const isBrowser = typeof window !== 'undefined';
 let manager: Manager;
 
-export const currentPhoto = writable<{ blur: boolean; photo?: Photo & WithBlob }>(
+export const currentPhoto = writable<{ blur: boolean; photo?: Photo & WithOptionalBlob }>(
   { blur: false, photo: undefined }
 );
 

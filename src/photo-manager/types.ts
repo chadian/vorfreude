@@ -8,8 +8,8 @@ export type WithSearchTerms = {
   searchTerms: string;
 }
 
-export type WithBlob = {
-  blob: Blob;
+export type WithOptionalBlob = {
+  blob: Blob | undefined;
 }
 
 export type WithSeenCount = {

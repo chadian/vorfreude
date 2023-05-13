@@ -15,8 +15,7 @@ import { cleanDownloadFromPhoto, cleanUnblockedPhotosWithoutGivenSearchTerms } f
 import shuffle from './shuffle';
 import isExtensionEnv from '../helpers/isExtensionEnv';
 import { Replenisher } from './replenisher';
-import type { Photo, WithBlob, WithSeenCount } from './types';
-import { BackgroundOperation } from 'src/background-operation';
+import type { Photo, WithOptionalBlob, WithSeenCount } from './types';
 import { BackgroundOperation } from '../background-operation';
 
 const DOWNLOAD_BATCH_SIZE = 3;
@@ -43,7 +42,7 @@ export default class Manager {
     return (await filteredPhotos()) ?? [];
   }
 
-  async getDisplayablePhotoCandidates(): Promise<(Photo & WithSeenCount & WithBlob)[]> {
+  async getDisplayablePhotoCandidates(): Promise<(Photo & WithSeenCount & WithOptionalBlob)[]> {
     const candidates = await pipe(
       async () => this.getSearchTermPhotos(),
       async (photos) => (await photos).filter(photoHasDownload),

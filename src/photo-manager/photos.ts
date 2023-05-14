@@ -6,8 +6,10 @@ const MAX_TOTAL_DOWNLOADED = 20;
 const MIN_FRESH_PERCENTAGE = 25;
 
 export function photoHasDownload<T>(photo: T): photo is T & WithOptionalBlob {
-  if (typeof photo === 'object' && photo && 'blob' in photo && photo.blob instanceof Blob) {
-    return true;
+  if (typeof photo === 'object' && 'blob' in photo) {
+    // once `typescript` is updated this eslint ignore can be removed
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (photo as any).blob instanceof Blob;
   }
 
   return false;

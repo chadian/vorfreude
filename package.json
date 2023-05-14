@@ -41,7 +41,7 @@
     "bestzip": "^2.2.1",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-svelte3": "^4.0.0",
+    "eslint-plugin-svelte": "^2.28.0",
     "jest": "^29.0.2",
     "jest-environment-jsdom": "^29.0.2",
     "luxon": "^3.2.1",

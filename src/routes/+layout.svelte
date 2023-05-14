@@ -7,8 +7,6 @@
   import { handleInitialHashRoute, handleRouteChange } from '../helpers/hash-routes';
   import Debug from 'debug';
 
-  export const prerender = true
-
   // Enable all debug logging for the entire app
   if (globalThis?.localStorage) {
     window.localStorage.debug = '*'

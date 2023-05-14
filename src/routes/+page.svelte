@@ -25,7 +25,7 @@
 
 {#if $currentPhoto.photo}
   <div class="Index__BlockButton">
-    <BlockButton onClick={() => blockPhoto($currentPhoto.photo)}/>
+    <BlockButton onClick={() => blockPhoto($currentPhoto.photo)} />
   </div>
 {/if}
 

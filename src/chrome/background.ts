@@ -1,6 +1,6 @@
 import { BackgroundOperation } from '../background-operation';
 import isExtensionEnv from '../helpers/isExtensionEnv';
-import { Replenisher } from '../photo-manager/replenisher'
+import { Replenisher } from '../photo-manager/replenisher';
 
 function openVorfreudeTab() {
   const vorfreudeUrl = chrome.extension.getURL('index.html');
@@ -8,7 +8,7 @@ function openVorfreudeTab() {
 }
 
 if (isExtensionEnv()) {
-  chrome.runtime.onMessage.addListener(function(message) {
+  chrome.runtime.onMessage.addListener(function (message) {
     if (message.operation === BackgroundOperation.REPLENISH_BACKLOG) {
       const { searchTerms, downloadBatchSize } = message;
       const replenisher = new Replenisher(searchTerms);
@@ -16,6 +16,6 @@ if (isExtensionEnv()) {
       replenisher.replenish();
     }
   });
-  
+
   chrome.browserAction.onClicked.addListener(() => openVorfreudeTab());
 }

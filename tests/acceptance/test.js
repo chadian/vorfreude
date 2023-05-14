@@ -2,9 +2,11 @@ import { expect, test } from '@playwright/test';
 
 async function elementLocators(page, selector) {
   const inputs = page.locator(selector);
-  const settingInputs = await Promise.all(Array((await inputs.count()))
-    .fill(null)
-    .map((_, i) => inputs.nth(i)));
+  const settingInputs = await Promise.all(
+    Array(await inputs.count())
+      .fill(null)
+      .map((_, i) => inputs.nth(i))
+  );
 
   return settingInputs;
 }
@@ -22,7 +24,9 @@ test('it shows the default settings state', async ({ page }) => {
 
   const timer = page.locator('.CountdownTimer');
   // :shrug: this might fail if this test is ran on the same day as the default date
-  expect(await timer.textContent()).toMatch(/\d+ day(|s) \d+ hour(|s) \d+ minute(|s) \d+ second(|s)/);
+  expect(await timer.textContent()).toMatch(
+    /\d+ day(|s) \d+ hour(|s) \d+ minute(|s) \d+ second(|s)/
+  );
 });
 
 test('it has the default settings', async ({ page }) => {
@@ -31,7 +35,9 @@ test('it has the default settings', async ({ page }) => {
   await expect(page).toHaveURL('#settings');
 
   const settingInputs = await elementLocators(page, '.Settings__input-wrapper input');
-  const settingInputValues = await Promise.all(settingInputs.map(locator => locator.inputValue()));
+  const settingInputValues = await Promise.all(
+    settingInputs.map((locator) => locator.inputValue())
+  );
 
   const [
     countdownMessage,
@@ -75,7 +81,7 @@ test('it saves settings', async ({ page }) => {
     countdownMonthInput,
     countdownDayInput,
     countdownHourInput,
-    countdownMinuteInput,
+    countdownMinuteInput
   ] = settingInputs;
 
   const today = new Date();
@@ -90,8 +96,8 @@ test('it saves settings', async ({ page }) => {
     countdownMonth: (today.getMonth() + 1).toString(),
     countdownDay: today.getDate().toString(),
     countdownHour: today.getHours().toString(),
-    countdownMinute: today.getMinutes().toString(),
-  }
+    countdownMinute: today.getMinutes().toString()
+  };
 
   await countdownMessageInput.fill(newSettings.countdownMessage);
   await allDoneMessageInput.fill(newSettings.allDoneMessage);
@@ -103,7 +109,7 @@ test('it saves settings', async ({ page }) => {
   await countdownMinuteInput.fill(newSettings.countdownMinute);
 
   // save!
-  await page.click('button[type=submit]')
+  await page.click('button[type=submit]');
 
   const message = page.locator('.Vorfreude__countdown-message');
   expect(await message.textContent()).toContain(newSettings.countdownMessage);

@@ -8,6 +8,6 @@
     at the default route.
   */
 
-  import { goto } from "$app/navigation";
+  import { goto } from '$app/navigation';
   goto('/');
 </script>

@@ -19,14 +19,14 @@ const config = {
       mode: 'hash',
       directives: {
         'script-src': ['self', settingsHtmlSHA],
-        'object-src': ['self'],
+        'object-src': ['self']
       }
     },
     appDir: 'app',
     adapter: adapter({ fallback: 'index.html' }),
     prerender: {
       entries: ['/'],
-      crawl: false,
+      crawl: false
     }
   }
 };

@@ -6,9 +6,10 @@ import { getSettingsStore } from './settings';
 const isBrowser = typeof window !== 'undefined';
 let manager: Manager;
 
-export const currentPhoto = writable<{ blur: boolean; photo?: Photo & WithOptionalBlob }>(
-  { blur: false, photo: undefined }
-);
+export const currentPhoto = writable<{ blur: boolean; photo?: Photo & WithOptionalBlob }>({
+  blur: false,
+  photo: undefined
+});
 
 export async function setup() {
   if (!isBrowser) {
@@ -35,7 +36,7 @@ export async function performPhotoHouseKeeping() {
     throw new Error('Store must be setup first, ensure `setup` has been called');
   }
 
-  if (isBrowser && await manager.shouldReplenishBacklog()) {
+  if (isBrowser && (await manager.shouldReplenishBacklog())) {
     await manager.startReplenishBacklog();
     await Promise.all([manager.removeStalePhotoBlobs(), manager.removeOldPhotos()]);
   }
@@ -45,7 +46,7 @@ function clearCurrentPhoto() {
   currentPhoto.update((cp) => {
     return {
       ...cp,
-      photo: undefined,
+      photo: undefined
     };
   });
 }
@@ -61,7 +62,7 @@ async function refreshCurrentPhoto() {
 
   if (!photo) {
     const errorMessage = 'refreshCurrentPhoto: could not get photo from manager';
-    console.error(errorMessage, photo)
+    console.error(errorMessage, photo);
     throw new Error(errorMessage);
   }
 
@@ -70,7 +71,7 @@ async function refreshCurrentPhoto() {
   currentPhoto.update((cp) => {
     return {
       ...cp,
-      photo,
+      photo
     };
   });
 }

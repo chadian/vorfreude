@@ -1,13 +1,13 @@
 import typescript from 'rollup-plugin-typescript2';
-import commonjs from "rollup-plugin-commonjs";
-import { terser } from "rollup-plugin-terser";
+import commonjs from 'rollup-plugin-commonjs';
+import { terser } from 'rollup-plugin-terser';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
-  input: "./src/chrome/background.ts",
+  input: './src/chrome/background.ts',
   output: {
-    file: "./chrome/background.js",
-    format: "iife"
+    file: './chrome/background.js',
+    format: 'iife'
   },
   plugins: [
     nodeResolve(),
@@ -16,9 +16,9 @@ export default {
       include: ['./src/**/*.ts'],
       exclude: ['./src/**/*.test.ts'],
       tsconfigOverride: {
-        types: ["chrome"],
+        types: ['chrome'],
         compilerOptions: {
-          "lib": ["ESNext", "DOM"],
+          lib: ['ESNext', 'DOM'],
           inlineSources: false
         }
       }

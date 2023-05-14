@@ -5,7 +5,7 @@ import { goto } from '$app/navigation';
 
 const hashRoutes = {
   '/': 'index',
-  '/settings': 'settings',
+  '/settings': 'settings'
 };
 
 export function handleRouteChange() {
@@ -16,7 +16,7 @@ export function handleRouteChange() {
 }
 
 export function handleInitialHashRoute() {
-  const hash = window.location.hash.replace('#', '');  
+  const hash = window.location.hash.replace('#', '');
   const [route] = Object.entries(hashRoutes).find(([, h]) => h === hash) ?? [];
   return goto(route || '/');
 }

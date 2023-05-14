@@ -1,7 +1,11 @@
 <script>
   import '../global.css';
   import Wallpaper from '../components/Wallpaper.svelte';
-  import { setup as setupPhotoStore, currentPhoto, performPhotoHouseKeeping } from '../state/stores/photo';
+  import {
+    setup as setupPhotoStore,
+    currentPhoto,
+    performPhotoHouseKeeping
+  } from '../state/stores/photo';
   import { onMount } from 'svelte';
   import { afterNavigate } from '$app/navigation';
   import { handleInitialHashRoute, handleRouteChange } from '../helpers/hash-routes';
@@ -9,14 +13,11 @@
 
   // Enable all debug logging for the entire app
   if (globalThis?.localStorage) {
-    window.localStorage.debug = '*'
+    window.localStorage.debug = '*';
   }
 
   onMount(async () => {
-    const [teardownPhotoStore] = await Promise.all([
-      setupPhotoStore(),
-      handleInitialHashRoute()
-    ]);
+    const [teardownPhotoStore] = await Promise.all([setupPhotoStore(), handleInitialHashRoute()]);
 
     await performPhotoHouseKeeping();
     return () => teardownPhotoStore();

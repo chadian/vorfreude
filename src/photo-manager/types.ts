@@ -6,11 +6,11 @@ export type Photo = {
 
 export type WithSearchTerms = {
   searchTerms: string;
-}
+};
 
 export type WithOptionalBlob = {
   blob: Blob | undefined;
-}
+};
 
 export type WithSeenCount = {
   seenCount?: number;

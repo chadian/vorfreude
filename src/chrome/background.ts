@@ -11,8 +11,8 @@ chrome.runtime.onMessage.addListener(function(message) {
 });
 
 function openVorfreudeTab() {
-  const vorfreudeUrl = chrome.extension.getURL('index.html');
+  const vorfreudeUrl = chrome.runtime.getURL('index.html');
   chrome.tabs.create({ url: vorfreudeUrl });
 }
 
-chrome.browserAction.onClicked.addListener(() => openVorfreudeTab());
+chrome.action.onClicked.addListener(() => openVorfreudeTab());

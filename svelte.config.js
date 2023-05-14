@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from "sveltekit-adapter-chrome-extension";
 import preprocess from 'svelte-preprocess';
 
 // this is used for static settings.html page in the `chrome` folder
@@ -23,7 +23,11 @@ const config = {
       }
     },
     appDir: 'app',
-    adapter: adapter({ fallback: 'index.html' }),
+    adapter: adapter({
+      pages: 'chrome',
+      assets: 'chrome',
+      fallback: 'index.html'
+    }),
     prerender: {
       enabled: true,
       entries: ['/']

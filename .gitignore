@@ -1,7 +1,6 @@
 # svelte defaults
 .DS_Store
 node_modules
-/build
 /.svelte-kit
 /package
 .env
@@ -11,14 +10,6 @@ node_modules
 /playwright-report/
 /playwright/.cache/
 
-
-## Chrome Extension Folder
-
-# ignore everything except explicit symlinks
+# output folder from build
 /chrome/*
-
-# symlinks and static files
-!/chrome/app
-!/chrome/fonts
-!/chrome/images
-!/chrome/settings.html
+/vorfreude.zip

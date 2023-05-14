@@ -7,11 +7,13 @@ export const IMAGE_ENDPOINT_API_URL = 'https://web-production-be97.up.railway.ap
 
 export type ImageApiResponse = {
   photos: {
-    photo: Photo[]
-  }
+    photo: Photo[];
+  };
 };
 
-export function fetchPhotosBlobs<T extends Photo>(photos: T[]): Promise<(Photo & WithOptionalBlob)[]> {
+export function fetchPhotosBlobs<T extends Photo>(
+  photos: T[]
+): Promise<(Photo & WithOptionalBlob)[]> {
   photos = clone(photos);
 
   return Promise.all(
@@ -44,12 +46,10 @@ export async function query(searchTerms): Promise<(Photo & WithSearchTerms)[]> {
   const result: ImageApiResponse = await response.json();
   const photos = result.photos.photo;
 
-  return photos
-    .filter(highQualityImageUrlForPhoto)
-    .map((photo) => {
-      return {
-        ...photo,
-        searchTerms: searchTerms
-      };
-    });
+  return photos.filter(highQualityImageUrlForPhoto).map((photo) => {
+    return {
+      ...photo,
+      searchTerms: searchTerms
+    };
+  });
 }

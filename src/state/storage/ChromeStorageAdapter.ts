@@ -25,15 +25,13 @@ export default class ChromeStorageAdapter implements StorageAdapter {
         chrome.storage.local.get(this.storeName, (storage) => {
           const updated = {
             ...storage,
-            [this.storeName] : {
+            [this.storeName]: {
               ...(storage[this.storeName] ?? {}),
               ...{ [key]: value }
             }
           };
 
-          chrome.storage.local.set(updated, () =>
-            resolve(value)
-          );
+          chrome.storage.local.set(updated, () => resolve(value));
         });
       } catch (e) {
         reject(e);

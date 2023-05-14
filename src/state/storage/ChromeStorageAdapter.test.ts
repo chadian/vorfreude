@@ -21,7 +21,7 @@ describe('ChromeStorageAdapter', function () {
           mockStore = {
             ...mockStore,
             ...obj
-          }
+          };
 
           cb();
         })
@@ -45,7 +45,7 @@ describe('ChromeStorageAdapter', function () {
     expect(result).toEqual(null);
   });
 
-  test('adapter get resolves with value', async function() {
+  test('adapter get resolves with value', async function () {
     mockStore = { [TEST_STORE_NAME]: { meow: 'hello' } };
     const result = await adapter.get('meow');
     expect(result).toEqual('hello');
@@ -58,12 +58,12 @@ describe('ChromeStorageAdapter', function () {
     expect(mockStore).toEqual({ [TEST_STORE_NAME]: { meow: 'hello' } });
   });
 
-  test('subsequent set and get with nested object', async function() {
+  test('subsequent set and get with nested object', async function () {
     expect(mockStore).toEqual({});
-    
+
     const result = await adapter.set('meow', { hello: 'bonjour' });
     expect(result).toEqual({ hello: 'bonjour' });
-    expect(mockStore).toEqual({ [TEST_STORE_NAME]: { meow: { hello: 'bonjour' } }});
+    expect(mockStore).toEqual({ [TEST_STORE_NAME]: { meow: { hello: 'bonjour' } } });
 
     expect(await adapter.get('meow')).toEqual({ hello: 'bonjour' });
   });

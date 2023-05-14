@@ -8,8 +8,6 @@
     at the default route.
   */
 
-  import { goto } from "$app/navigation";
-  export const prerender = false;
-  export const ssr = false;
+  import { goto } from '$app/navigation';
   goto('/');
 </script>

@@ -1,6 +1,5 @@
 <script lang="ts">
-  type onSettingsButtonClick = () => void;
-  export let onClick: onSettingsButtonClick = () => {};
+  export let onClick: () => void;
 </script>
 
 <button class="Vorfreude__show-settings" on:click={() => onClick()}>

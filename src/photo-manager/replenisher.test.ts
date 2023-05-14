@@ -56,14 +56,12 @@ describe('Replenisher', () => {
             return apiResponse;
           }
         };
-      }
-
-      else if (url.includes('http://images/')) {
+      } else if (url.includes('http://images/')) {
         return {
           async blob() {
             return new Blob();
           }
-        }
+        };
       }
 
       throw new Error(`No matching url found for ${url} to mock`);
@@ -80,16 +78,20 @@ describe('Replenisher', () => {
 
     // the blob is not a real image blob so nothing to resize,
     // skip this step
-    resizeBatchSpy = jest.spyOn(replenisher, 'resizeBatch').mockImplementation(async (batch) => batch);
+    resizeBatchSpy = jest
+      .spyOn(replenisher, 'resizeBatch')
+      .mockImplementation(async (batch) => batch);
 
     // don't have an implementation of IndexedDB for this test,
     // skip this step
-    storeBatchSpy = jest.spyOn(replenisher, 'storeBatch').mockImplementation(async (batch) => batch);
+    storeBatchSpy = jest
+      .spyOn(replenisher, 'storeBatch')
+      .mockImplementation(async (batch) => batch);
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
-  })
+  });
 
   test('#fetchBatch', async () => {
     const batch = await replenisher.fetchBatch();
@@ -97,8 +99,8 @@ describe('Replenisher', () => {
     expect(fetchSpy).toHaveBeenCalledTimes(calcFetchCount(1, TEST_DOWNLOAD_BATCH_SIZE));
     expect(fetchSpy).toBeCalledWith(expect.stringContaining(IMAGE_ENDPOINT_API_URL));
 
-    batch.forEach(photo => {
-      const matchingApiPhoto = apiResponse.photos.photo.find(p => p.id === photo.id);
+    batch.forEach((photo) => {
+      const matchingApiPhoto = apiResponse.photos.photo.find((p) => p.id === photo.id);
       expect(photo.id).toEqual(matchingApiPhoto.id);
       expect(photo.url_o).toEqual(matchingApiPhoto.url_o);
       expect(photo.blob).toBeInstanceOf(Blob);
@@ -106,7 +108,7 @@ describe('Replenisher', () => {
   });
 
   test('#fetchBatch to ignore already downloaded images', async () => {
-    const allPhotoIds = apiResponse.photos.photo.map(({id}) => id);
+    const allPhotoIds = apiResponse.photos.photo.map(({ id }) => id);
     const remainingPhotoId = allPhotoIds.pop();
 
     // due to shuffling downloads and picking random photos

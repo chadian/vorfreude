@@ -1,3 +1,3 @@
 export const BackgroundOperation = {
-  REPLENISH_BACKLOG: 'replenishBacklog',
+  REPLENISH_BACKLOG: 'replenishBacklog'
 };

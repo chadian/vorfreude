@@ -4,19 +4,19 @@ import isExtensionEnv from './isExtensionEnv';
 import { goto } from '$app/navigation';
 
 const hashRoutes = {
-  '': 'index',
-  'settings': 'settings',
+  '/': 'index',
+  '/settings': 'settings'
 };
 
 export function handleRouteChange() {
-  const { routeId } = get(page);
-  const hashPath = hashRoutes[routeId];
+  const { route } = get(page);
+  const hashPath = hashRoutes[route.id];
   const rootPath = isExtensionEnv() ? `/index.html` : `/`;
   window.history.replaceState({}, '', `${rootPath}#${hashPath}`);
 }
 
 export function handleInitialHashRoute() {
-  const hash = window.location.hash.replace('#', '');  
+  const hash = window.location.hash.replace('#', '');
   const [route] = Object.entries(hashRoutes).find(([, h]) => h === hash) ?? [];
   return goto(route || '/');
 }

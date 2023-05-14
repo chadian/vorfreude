@@ -21,13 +21,8 @@
     "newtab": "index.html"
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
+    "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": [
-    "storage",
-    "unlimitedStorage"
-  ]
+  "permissions": ["storage", "unlimitedStorage"]
 }

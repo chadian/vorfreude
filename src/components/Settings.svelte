@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { DateTime } from 'luxon';
   import Button from './Button.svelte';
   import { padInt } from '../helpers/pad-int';
   import type { CountdownDateObject } from './../types';
 
-  export let onClose = () => {};
-  export let onSubmit = (_settings) => {};
+  export let onClose: () => void;
+  export let onSubmit: (s: typeof settings) => void;
   export let settings = {
     countdownMessage: undefined,
     allDoneMessage: undefined,

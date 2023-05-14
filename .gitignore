@@ -19,6 +19,12 @@ node_modules
 
 # symlinks and static files
 !/chrome/app
+/chrome/app/*
+
 !/chrome/fonts
+/chrome/fonts/*
+
 !/chrome/images
+/chrome/images/*
+
 !/chrome/settings.html

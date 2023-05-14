@@ -1,5 +1,5 @@
-import { photoStorage } from "../state/storage/photo";
-import type { Photo, WithOptionalBlob, WithSearchTerms, WithSeenCount } from "./types";
+import { photoStorage } from '../state/storage/photo';
+import type { Photo, WithOptionalBlob, WithSearchTerms, WithSeenCount } from './types';
 
 const STALE_SEEN_COUNT = 3;
 const MAX_TOTAL_DOWNLOADED = 20;
@@ -7,15 +7,14 @@ const MIN_FRESH_PERCENTAGE = 25;
 
 export function photoHasDownload<T>(photo: T): photo is T & WithOptionalBlob {
   if (typeof photo === 'object' && 'blob' in photo) {
-    // once `typescript` is updated this eslint ignore can be removed
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (photo as any).blob instanceof Blob;
+    return photo.blob instanceof Blob;
   }
 
   return false;
 }
 
-export const isPhotoStale = (photo: Photo & WithOptionalBlob & WithSeenCount) => photo.blob && photo.seenCount > STALE_SEEN_COUNT;
+export const isPhotoStale = (photo: Photo & WithOptionalBlob & WithSeenCount) =>
+  photo.blob && photo.seenCount > STALE_SEEN_COUNT;
 export const photoIsBlocked = (photo: Photo) => Boolean(photo.isBlocked);
 
 export const shouldDownloadPhotos = (photos) => {
@@ -24,7 +23,9 @@ export const shouldDownloadPhotos = (photos) => {
   const blockedPhotos = photos.filter(photoIsBlocked);
 
   const freshPercentage =
-    100 * ((downloadedPhotos.length - blockedPhotos.length - stalePhotos.length) / downloadedPhotos.length);
+    100 *
+    ((downloadedPhotos.length - blockedPhotos.length - stalePhotos.length) /
+      downloadedPhotos.length);
 
   const needsFreshPhotos = freshPercentage < MIN_FRESH_PERCENTAGE;
   const isUnderMaxTotalDownload = downloadedPhotos.length < MAX_TOTAL_DOWNLOADED;
@@ -32,9 +33,12 @@ export const shouldDownloadPhotos = (photos) => {
   return needsFreshPhotos || isUnderMaxTotalDownload;
 };
 
-export const filterPhotosForSearchTerms = (photos: (Photo & WithSearchTerms)[], searchTerms: string) => {
+export const filterPhotosForSearchTerms = (
+  photos: (Photo & WithSearchTerms)[],
+  searchTerms: string
+) => {
   return photos.filter((photo) => photo.searchTerms === searchTerms);
-}
+};
 
 export const markPhotoAsSeen = (photo: Photo & WithSeenCount) => {
   photo.seenCount = (photo.seenCount || 0) + 1;
@@ -44,7 +48,7 @@ export const markPhotoAsSeen = (photo: Photo & WithSeenCount) => {
 export const markPhotoAsBlocked = (photo: Photo) => {
   photo.isBlocked = true;
   return photo;
-}
+};
 
 export const highQualityImageUrlForPhoto = (photo) => photo.url_o;
 

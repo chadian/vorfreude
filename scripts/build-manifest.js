@@ -6,13 +6,17 @@ const CURRENT_DIR_PATH = fileURLToPath(new URL('.', import.meta.url));
 const ROOT_PATH = resolve(CURRENT_DIR_PATH, '..');
 
 function readManiestBluePrint() {
-  const manifestBlueprint = readFileSync(resolve(CURRENT_DIR_PATH, 'manifest.blueprint.json')).toString();
+  const manifestBlueprint = readFileSync(
+    resolve(CURRENT_DIR_PATH, 'manifest.blueprint.json')
+  ).toString();
   return manifestBlueprint;
 }
 
 function readHtmlCspMeta() {
   const htmlContents = readFileSync(resolve(ROOT_PATH, 'chrome/index.html')).toString();
-  const [, cspDirectives] = htmlContents.match(/<meta http-equiv="content-security-policy" content="(.+)">/);
+  const [, cspDirectives] = htmlContents.match(
+    /<meta http-equiv="content-security-policy" content="(.+)">/
+  );
   return cspDirectives;
 }
 

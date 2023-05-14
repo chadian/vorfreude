@@ -1,6 +1,6 @@
-import { fetchPhotosBlobs, query, resizePhoto } from "./fetch";
-import { retrieveAllPhotos as retrieveStoredPhotos, storePhoto } from "./photos";
-import shuffle from "./shuffle";
+import { fetchPhotosBlobs, query, resizePhoto } from './fetch';
+import { retrieveAllPhotos as retrieveStoredPhotos, storePhoto } from './photos';
+import shuffle from './shuffle';
 import { take } from 'ramda';
 
 export class Replenisher {
@@ -24,8 +24,11 @@ export class Replenisher {
   async fetchBatch() {
     const photoResults = await query(this.searchTerms);
     const storedPhotos = await this.getStoredPhotos();
-    const ineligiblePhotoIds = [...storedPhotos.map(photo => photo.id), ...this.downloadedPhotoIds];
-    const eligiblePhotos = photoResults.filter(photo => !ineligiblePhotoIds.includes(photo.id));
+    const ineligiblePhotoIds = [
+      ...storedPhotos.map((photo) => photo.id),
+      ...this.downloadedPhotoIds
+    ];
+    const eligiblePhotos = photoResults.filter((photo) => !ineligiblePhotoIds.includes(photo.id));
     const downloadBatch = take(this.downloadBatchSize)(shuffle(eligiblePhotos));
     return fetchPhotosBlobs(downloadBatch);
   }
@@ -35,11 +38,11 @@ export class Replenisher {
   }
 
   async storeBatch(batch) {
-    batch.forEach(photo => storePhoto(photo));
+    batch.forEach((photo) => storePhoto(photo));
   }
 
   async trackBatchPhotos(batch) {
-    const photoIds = batch.map(photo => photo.id);
+    const photoIds = batch.map((photo) => photo.id);
     this.downloadedPhotoIds.push(...photoIds);
   }
 

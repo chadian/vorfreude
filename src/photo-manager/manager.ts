@@ -8,7 +8,7 @@ import {
   photoIsBlocked,
   retrieveAllPhotos,
   shouldDownloadPhotos,
-  storePhoto,
+  storePhoto
 } from './photos';
 
 import { cleanDownloadFromPhoto, cleanUnblockedPhotosWithoutGivenSearchTerms } from './cleaner';
@@ -38,7 +38,7 @@ export default class Manager {
   async getSearchTermPhotos() {
     const filteredPhotos = pipe(
       async () => retrieveAllPhotos(),
-      async (photos) => filterPhotosForSearchTerms(await photos, this.searchTerms),
+      async (photos) => filterPhotosForSearchTerms(await photos, this.searchTerms)
     );
 
     return (await filteredPhotos()) ?? [];
@@ -48,7 +48,7 @@ export default class Manager {
     const candidates = await pipe(
       async () => this.getSearchTermPhotos(),
       async (photos) => (await photos).filter(photoHasDownload),
-      async (photos) => (await photos).filter(photo => !photoIsBlocked(photo))
+      async (photos) => (await photos).filter((photo) => !photoIsBlocked(photo))
     )();
 
     return candidates;
@@ -62,7 +62,7 @@ export default class Manager {
     // 1. The photo has just changed the search terms
     // 2. The user has blocked the remaining photos
     // 3. The manager has cleaned old photos and is in the process of getting new ones
-    if (!displayablePhotos?.length && await this.shouldReplenishBacklog()) {
+    if (!displayablePhotos?.length && (await this.shouldReplenishBacklog())) {
       // kick off at least one backlog replenish to wait for
       await this.startReplenishBacklog();
 

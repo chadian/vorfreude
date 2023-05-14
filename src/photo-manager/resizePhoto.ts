@@ -34,7 +34,7 @@ function canvasToBlob(canvas, quality = 1) {
   return new Promise((resolve, reject) => {
     try {
       canvas.toBlob((blob) => resolve(blob), 'image/jpeg', quality);
-    } catch(e) {
+    } catch (e) {
       reject(e);
     }
   });

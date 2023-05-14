@@ -1,8 +1,8 @@
 export default function shuffle(list) {
   let idx = -1;
-  let len = list.length;
+  const len = list.length;
   let position;
-  let result = [];
+  const result = [];
   while (++idx < len) {
     position = Math.floor((idx + 1) * Math.random());
     result[idx] = result[position];

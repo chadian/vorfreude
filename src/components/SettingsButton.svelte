@@ -17,10 +17,11 @@
 <style>
   .Vorfreude__show-settings {
     cursor: pointer;
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     background: none;
     border: none;
+    padding: 0;
   }
 
   @media only screen and (max-width: 425px) {

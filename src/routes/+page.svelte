@@ -23,6 +23,10 @@
 
 <div class="Index__BottomRightContainer">
   {#if photo}
+    <div class="Index__BlockButton">
+      <BlockButton onClick={() => blockPhoto(photo)} />
+    </div>
+
     <a
       class="Index__PhotoSourceLink"
       href="https://www.flickr.com/photos/{photo.owner}/{photo.id}"
@@ -30,10 +34,6 @@
     >
       <PhotoSourceIcon />
     </a>
-
-    <div class="Index__BlockButton">
-      <BlockButton onClick={() => blockPhoto(photo)} />
-    </div>
   {/if}
 </div>
 

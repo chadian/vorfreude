@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let photoUrl: string;
+  import type { Photo, WithOptionalBlob } from "src/state/stores/photo";
+
+  export let photo: Photo & WithOptionalBlob;
   export let blur = false;
 
   const baseClass = 'Wallpaper__img';
@@ -7,6 +9,8 @@
 
   $: loaded = false;
   $: imageClasses = blur ? [baseClass, blurClass] : [baseClass];
+
+  let photoUrl = photo.blob ? URL.createObjectURL(photo.blob) : null;
 
   $: {
     if (photoUrl) {

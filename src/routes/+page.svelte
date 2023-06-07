@@ -23,7 +23,11 @@
 
 <div class="Index__BottomRightContainer">
   {#if photo}
-    <a class="Index__PhotoInfoLink" href="https://www.flickr.com/photos/{photo.owner}/{photo.id}" target="_blank">
+    <a
+      class="Index__PhotoInfoLink"
+      href="https://www.flickr.com/photos/{photo.owner}/{photo.id}"
+      target="_blank"
+    >
       <PhotoSourceIcon />
     </a>
 
@@ -79,7 +83,8 @@
     margin-left: 1rem;
   }
 
-  .Index__BlockButton, .Index__PhotoInfoLink {
+  .Index__BlockButton,
+  .Index__PhotoInfoLink {
     /* INITIAL OPACITY */
     opacity: 0.75;
 

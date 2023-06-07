@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Photo, WithOptionalBlob } from "src/state/stores/photo";
+  import type { Photo, WithOptionalBlob } from 'src/state/stores/photo';
 
   export let photo: Photo & WithOptionalBlob;
   export let blur = false;

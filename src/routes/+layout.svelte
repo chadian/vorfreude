@@ -31,10 +31,7 @@
   <slot />
 
   {#if $currentPhoto.photo?.blob && !$currentPhoto.photo.isBlocked}
-    <Wallpaper
-      blur={$currentPhoto.blur}
-      photo={$currentPhoto.photo}
-    />
+    <Wallpaper blur={$currentPhoto.blur} photo={$currentPhoto.photo} />
   {/if}
 </div>
 

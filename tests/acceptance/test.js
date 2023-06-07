@@ -119,3 +119,9 @@ test('it saves settings', async ({ page }) => {
   // seconds is fuzzy depending on how long it takes to run
   expect(await timer.textContent()).toMatch(/365 days 23 hours 59 minutes \d+ seconds/);
 });
+
+test(`it has an a link to the wallpaper photo's source`, async ({ page }) => {
+  await page.goto('/');
+  const photoSourceLink = await page.waitForSelector('.Index__PhotoSourceLink', { timeout: 10000 });
+  expect(await photoSourceLink.getAttribute('href')).toMatch(/https:\/\/www.flickr.com\/photos\/.*?\/.*/);
+});

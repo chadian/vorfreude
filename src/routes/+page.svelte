@@ -24,7 +24,7 @@
 <div class="Index__BottomRightContainer">
   {#if photo}
     <a
-      class="Index__PhotoInfoLink"
+      class="Index__PhotoSourceLink"
       href="https://www.flickr.com/photos/{photo.owner}/{photo.id}"
       target="_blank"
     >
@@ -64,7 +64,7 @@
   }
 
   .Index__BlockButton:hover,
-  .Index__PhotoInfoLink:hover,
+  .Index__PhotoSourceLink:hover,
   .Index__SettingsButton:hover {
     /* HOVER OPACITY */
     opacity: 1;
@@ -84,7 +84,7 @@
   }
 
   .Index__BlockButton,
-  .Index__PhotoInfoLink {
+  .Index__PhotoSourceLink {
     /* INITIAL OPACITY */
     opacity: 0.75;
 

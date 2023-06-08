@@ -1,4 +1,9 @@
-import type { WithOptionalBlob, Photo, WithSeenCount, WithSearchTerms } from 'src/state/stores/photo';
+import type {
+  WithOptionalBlob,
+  Photo,
+  WithSeenCount,
+  WithSearchTerms
+} from 'src/state/stores/photo';
 import { photoStorage } from '../state/storage/photo';
 
 const STALE_SEEN_COUNT = 3;

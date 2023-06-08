@@ -17,7 +17,7 @@ beforeEach(() => {
       import Settings from './Settings.svelte';
     </script>
 
-    <Settings settings={testSettings} onClose={onClose}/>
+    <Settings settings={testSettings} onClose={onClose} onSubmit={() => {}}/>
   `);
 
   getByLabelText = rendered.getByLabelText;

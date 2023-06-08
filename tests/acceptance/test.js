@@ -15,6 +15,10 @@ test('it has a wallpaper', async ({ page }) => {
   await page.goto('/');
   const wallpaper = await page.waitForSelector('.Wallpaper', { timeout: 10000 });
   expect(await wallpaper.isVisible()).toStrictEqual(true);
+
+  const wallpaperImage = await page.waitForSelector('.Wallpaper img', { timeout: 10000 });
+  const alt = await wallpaperImage.getAttribute('alt');
+  expect(alt).toBeTruthy();
 });
 
 test('it shows the default settings state', async ({ page }) => {
@@ -118,4 +122,11 @@ test('it saves settings', async ({ page }) => {
 
   // seconds is fuzzy depending on how long it takes to run
   expect(await timer.textContent()).toMatch(/365 days 23 hours 59 minutes \d+ seconds/);
+});
+
+test(`it has an a link to the wallpaper photo's source`, async ({ page }) => {
+  await page.goto('/');
+  const photoSourceLink = await page.waitForSelector('.Index__PhotoSourceLink', { timeout: 10000 });
+  const href = await photoSourceLink.getAttribute('href');
+  expect(href).toMatch(/https:\/\/www.flickr.com\/photos\/.*?\/.*/);
 });

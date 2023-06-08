@@ -1,7 +1,29 @@
-import type { Photo, WithOptionalBlob } from 'src/photo-manager/types';
 import { writable } from 'svelte/store';
 import Manager from '../../photo-manager/manager';
 import { getSettingsStore } from './settings';
+
+export type Photo = {
+  // properties provided by the Flickr API
+  id: string;
+  url_o: string;
+  owner: string;
+  title: string;
+
+  // properties not part of the Flickr API
+  isBlocked: boolean;
+};
+
+export type WithSearchTerms = {
+  searchTerms: string;
+};
+
+export type WithOptionalBlob = {
+  blob: Blob | undefined;
+};
+
+export type WithSeenCount = {
+  seenCount?: number;
+};
 
 const isBrowser = typeof window !== 'undefined';
 let manager: Manager;

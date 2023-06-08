@@ -9,7 +9,6 @@
   import { onMount } from 'svelte';
   import { afterNavigate } from '$app/navigation';
   import { handleInitialHashRoute, handleRouteChange } from '../helpers/hash-routes';
-  import Debug from 'debug';
 
   // Enable all debug logging for the entire app
   if (globalThis?.localStorage) {
@@ -32,7 +31,7 @@
   <slot />
 
   {#if $currentPhoto.photo?.blob && !$currentPhoto.photo.isBlocked}
-    <Wallpaper blur={$currentPhoto.blur} photoUrl={URL.createObjectURL($currentPhoto.photo.blob)} />
+    <Wallpaper blur={$currentPhoto.blur} photo={$currentPhoto.photo} />
   {/if}
 </div>
 

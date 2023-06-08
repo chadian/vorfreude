@@ -1,5 +1,10 @@
+import type {
+  WithOptionalBlob,
+  Photo,
+  WithSeenCount,
+  WithSearchTerms
+} from 'src/state/stores/photo';
 import { photoStorage } from '../state/storage/photo';
-import type { Photo, WithOptionalBlob, WithSearchTerms, WithSeenCount } from './types';
 
 const STALE_SEEN_COUNT = 3;
 const MAX_TOTAL_DOWNLOADED = 20;

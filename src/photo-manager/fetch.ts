@@ -1,7 +1,7 @@
 import { clone } from 'ramda';
 import { highQualityImageUrlForPhoto } from './photos';
 import resizePhotoBlob from './resizePhoto';
-import type { Photo, WithOptionalBlob, WithSearchTerms } from './types';
+import type { Photo, WithOptionalBlob, WithSearchTerms } from 'src/state/stores/photo';
 
 export const IMAGE_ENDPOINT_API_URL = 'https://web-production-be97.up.railway.app/api/images';
 

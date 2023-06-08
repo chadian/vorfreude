@@ -15,9 +15,9 @@ import { cleanDownloadFromPhoto, cleanUnblockedPhotosWithoutGivenSearchTerms } f
 import shuffle from './shuffle';
 import isExtensionEnv from '../helpers/isExtensionEnv';
 import { Replenisher } from './replenisher';
-import type { Photo, WithOptionalBlob, WithSeenCount } from './types';
 import { BackgroundOperation } from '../background-operation';
 import Debug from 'debug';
+import type { Photo, WithSeenCount, WithOptionalBlob } from 'src/state/stores/photo';
 
 const DOWNLOAD_BATCH_SIZE = 3;
 const DELETE_STALE_BATCH_SIZE = 3;

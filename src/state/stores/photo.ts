@@ -7,6 +7,7 @@ export type Photo = {
   id: string;
   url_o: string;
   owner: string;
+  title: string;
 
   // properties not part of the Flickr API
   isBlocked: boolean;

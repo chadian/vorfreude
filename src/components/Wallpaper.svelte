@@ -27,7 +27,7 @@
 
 {#if loaded}
   <div class="Wallpaper">
-    <img src={photoUrl} class={imageClasses.join(' ')} alt="Vorfreude wallpaper background" />
+    <img src={photoUrl} class={imageClasses.join(' ')} alt={photo.title} />
   </div>
 {/if}
 
